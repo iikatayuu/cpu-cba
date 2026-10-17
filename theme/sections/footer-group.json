@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "programs": { "type": "menu", "settings": { "heading": "Programs", "menu": "footer-programs" } },
+        "college": { "type": "menu", "settings": { "heading": "The College", "menu": "footer" } }
+      },
+      "block_order": ["programs", "college"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}

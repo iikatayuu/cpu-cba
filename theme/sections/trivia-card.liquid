@@ -1,0 +1,49 @@
+{%- comment -%}
+  "Did you know?" card. Facts come from the cba_trivia metaobject; section blocks are a fallback.
+  A random fact is picked client-side on every page load; the button cycles through the shuffled list.
+{%- endcomment -%}
+{%- capture facts_json -%}
+  [
+  {%- assign first = true -%}
+  {%- for t in shop.metaobjects.cba_trivia.values -%}
+    {%- unless first -%},{%- endunless -%}{%- assign first = false -%}
+    {"fact": {{ t.fact.value | json }}, "source": {{ t.source.value | json }}}
+  {%- endfor -%}
+  {%- if first -%}
+    {%- for block in section.blocks -%}
+      {%- unless forloop.first -%},{%- endunless -%}
+      {"fact": {{ block.settings.fact | json }}, "source": {{ block.settings.source | json }}}
+    {%- endfor -%}
+  {%- endif -%}
+  ]
+{%- endcapture -%}
+<section class="section section--tight" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="trivia reveal" data-trivia aria-live="polite">
+      <script type="application/json">{{ facts_json | strip_newlines }}</script>
+      <div class="trivia__icon" aria-hidden="true">{% render 'icon', name: 'bulb' %}</div>
+      <div>
+        <p class="trivia__label">{{ section.settings.label }}</p>
+        <p class="trivia__fact" data-trivia-fact>{{ section.blocks.first.settings.fact | default: 'The College of Business and Accountancy opened in 1935 as the College of Commerce, with just 20 students.' }}</p>
+        <p class="trivia__source" data-trivia-source></p>
+      </div>
+      <button type="button" class="button button--outline button--small" data-trivia-next>{% render 'icon', name: 'shuffle' %} {{ section.settings.button }}</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Random trivia",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Did you know?" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Another fact" },
+    { "type": "paragraph", "content": "Facts are pulled from Content › Metaobjects › Trivia. Blocks below are only used when no trivia entries exist." }
+  ],
+  "blocks": [ { "type": "fact", "name": "Fallback fact", "settings": [
+    { "type": "textarea", "id": "fact", "label": "Fact" },
+    { "type": "text", "id": "source", "label": "Source" }
+  ] } ],
+  "presets": [{ "name": "Random trivia" }]
+}
+{% endschema %}

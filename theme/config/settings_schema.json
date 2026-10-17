@@ -1,0 +1,50 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "CPU CBA",
+    "theme_version": "1.0.0",
+    "theme_author": "CPU CBA",
+    "theme_documentation_url": "https://cpu.edu.ph/college-of-business-accountancy/",
+    "theme_support_url": "https://cpu.edu.ph/college-of-business-accountancy/"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "text", "id": "college_name", "label": "College name", "default": "College of Business and Accountancy" },
+      { "type": "image_picker", "id": "logo", "label": "Seal / logo (high resolution)", "info": "Defaults to the bundled 150 px CPU seal. Upload an official high-resolution file for sharper display." },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "image_picker", "id": "share_image", "label": "Social sharing image" },
+      { "type": "textarea", "id": "seo_fallback_description", "label": "Fallback meta description", "default": "Explore BSBA and BS programs at Central Philippine University's College of Business and Accountancy, a CHED Center of Excellence in Iloilo City." }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_navy", "label": "Central Blue (primary)", "default": "#0B2A5B" },
+      { "type": "color", "id": "color_blue", "label": "Link blue", "default": "#1D4FA8" },
+      { "type": "color", "id": "color_gold", "label": "Centralian Gold (accent)", "default": "#F2B705" },
+      { "type": "color", "id": "color_gold_text", "label": "Gold text on light backgrounds", "default": "#B98800" },
+      { "type": "color", "id": "color_background", "label": "Page background", "default": "#FBF7EE" },
+      { "type": "color", "id": "color_text", "label": "Body text", "default": "#14182A" }
+    ]
+  },
+  {
+    "name": "Contact details",
+    "settings": [
+      { "type": "text", "id": "contact_email", "label": "Email", "default": "cba@cpu.edu.ph" },
+      { "type": "text", "id": "contact_phone", "label": "Phone", "default": "+63 (33) 329-1971" },
+      { "type": "text", "id": "contact_phone_2", "label": "Phone 2", "default": "+63 (33) 330-7200 local 2129" },
+      { "type": "text", "id": "contact_mobile", "label": "Mobile", "default": "+63 921 760 2647" },
+      { "type": "textarea", "id": "contact_address", "label": "Address", "default": "New Valentine Hall, Central Philippine University, Lopez Jaena St., Jaro, Iloilo City 5000" },
+      { "type": "text", "id": "contact_hours", "label": "Office hours", "default": "Monday to Friday, 8:00 AM – 5:00 PM" }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" },
+      { "type": "url", "id": "social_instagram", "label": "Instagram" }
+    ]
+  }
+]

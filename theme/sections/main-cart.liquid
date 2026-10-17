@@ -1,0 +1,12 @@
+{%- comment -%} This site has no checkout. The cart page redirects visitors to the inquiry form. {%- endcomment -%}
+<section class="section">
+  <div class="page-width page-width--narrow" style="text-align:center">
+    <h1>No cart needed</h1>
+    <p class="lede" style="margin-inline:auto">Programs aren't purchased online. Send us an inquiry and our office will guide you through admission.</p>
+    <a class="button button--primary" href="/pages/contact">Go to the inquiry form</a>
+  </div>
+</section>
+<script>window.location.replace('/pages/contact');</script>
+{% schema %}
+{ "name": "Cart redirect" }
+{% endschema %}

@@ -1,0 +1,103 @@
+{%- comment -%}
+  Policies page: academic rules from the CBA Student Handbook (rendered from blocks) plus the page body and Shopify legal policies.
+{%- endcomment -%}
+<section class="section">
+  <div class="page-width faq-layout">
+    <nav class="faq-layout__nav" aria-label="Policy sections" data-scrollspy>
+      <ul class="toc">
+        {%- for block in section.blocks -%}<li><a href="#{{ block.settings.title | handleize }}">{{ block.settings.title }}</a></li>{%- endfor -%}
+        {%- if page.content != blank -%}<li><a href="#more">More policies</a></li>{%- endif -%}
+        <li><a href="#privacy">Privacy &amp; terms</a></li>
+      </ul>
+    </nav>
+    <div>
+      {%- for block in section.blocks -%}
+        <div class="policy-section" id="{{ block.settings.title | handleize }}" {{ block.shopify_attributes }}>
+          <h2>{{ block.settings.title }}</h2>
+          {%- if block.settings.source != blank -%}<span class="source-note">{% render 'icon', name: 'book' %} Source: {{ block.settings.source }}</span>{%- endif -%}
+          {%- case block.type -%}
+            {%- when 'rules' -%}
+              {%- if block.settings.intro != blank -%}<p>{{ block.settings.intro }}</p>{%- endif -%}
+              <ol class="rules">
+                {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+                {%- for item in items -%}{%- assign t = item | strip -%}{%- if t != blank -%}<li><span>{{ t }}</span></li>{%- endif -%}{%- endfor -%}
+              </ol>
+              {%- if block.settings.footer != blank -%}<p class="note" style="margin-top: var(--space-5)">{{ block.settings.footer }}</p>{%- endif -%}
+            {%- when 'grading' -%}
+              {%- if block.settings.intro != blank -%}<p>{{ block.settings.intro }}</p>{%- endif -%}
+              <div class="table-wrap" style="max-width: 560px">
+                <table class="grade-table">
+                  <thead><tr><th scope="col">Letter</th><th scope="col">Grade</th><th scope="col">Percentage</th></tr></thead>
+                  <tbody>
+                    {%- assign rows = block.settings.items | newline_to_br | split: '<br />' -%}
+                    {%- for row in rows -%}
+                      {%- assign cells = row | strip | split: '|' -%}
+                      {%- if cells.size == 3 -%}<tr><td><strong>{{ cells[0] | strip }}</strong></td><td>{{ cells[1] | strip }}</td><td>{{ cells[2] | strip }}</td></tr>{%- endif -%}
+                    {%- endfor -%}
+                  </tbody>
+                </table>
+              </div>
+            {%- when 'honors' -%}
+              <div class="rte">{{ block.settings.body }}</div>
+              {%- assign bands = block.settings.items | newline_to_br | split: '<br />' -%}
+              <div class="latin">
+                {%- for band in bands -%}{%- assign cells = band | strip | split: '|' -%}{%- if cells.size == 2 -%}<div><strong>{{ cells[0] | strip }}</strong>HPA {{ cells[1] | strip }}</div>{%- endif -%}{%- endfor -%}
+              </div>
+              <p class="formula">HPA = Σ (Grade × Credit units) ÷ Total units</p>
+              <div class="rte" style="margin-top: var(--space-5)">{{ block.settings.footer_rte }}</div>
+            {%- else -%}
+              <div class="rte">{{ block.settings.body }}</div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if page.content != blank -%}
+        <div class="policy-section rte" id="more">{{ page.content }}</div>
+      {%- endif -%}
+
+      <div class="policy-section" id="privacy">
+        <h2>Privacy &amp; terms</h2>
+        <p>{{ section.settings.privacy_text }}</p>
+        <ul class="footer-links" style="gap: var(--space-2)">
+          {%- for policy in shop.policies -%}<li><a class="link-arrow" href="{{ policy.url }}">{{ policy.title }}</a></li>{%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Policies",
+  "settings": [
+    { "type": "textarea", "id": "privacy_text", "label": "Privacy intro", "default": "Information you send through our inquiry, contact and review forms is used only to respond to you and to improve our programs. Reviews are published with your display name only, never your email. See the full policies below." }
+  ],
+  "blocks": [
+    { "type": "rules", "name": "Numbered rules", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "source", "label": "Source" },
+      { "type": "textarea", "id": "intro", "label": "Intro" },
+      { "type": "textarea", "id": "items", "label": "Rules (one per line)" },
+      { "type": "textarea", "id": "footer", "label": "Footnote" }
+    ] },
+    { "type": "grading", "name": "Grading table", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "source", "label": "Source" },
+      { "type": "textarea", "id": "intro", "label": "Intro" },
+      { "type": "textarea", "id": "items", "label": "Rows (Letter | Grade | Percentage, one per line)" }
+    ] },
+    { "type": "honors", "name": "Honors policy", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "source", "label": "Source" },
+      { "type": "richtext", "id": "body", "label": "Policy text" },
+      { "type": "textarea", "id": "items", "label": "Latin honor bands (Name | HPA range, one per line)" },
+      { "type": "richtext", "id": "footer_rte", "label": "Text after bands" }
+    ] },
+    { "type": "text", "name": "Rich text", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "source", "label": "Source" },
+      { "type": "richtext", "id": "body", "label": "Text" }
+    ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+<section class="section section--paper" {{ section.shopify_attributes }}>
+  <div class="page-width dean">
+    <div class="dean__photo reveal">
+      {% render 'placeholder-media', image: section.settings.image, label: 'Official portrait of the Dean', ratio: '4 / 5', light: true, sizes: '340px' %}
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="rte dean__body">{{ section.settings.body }}</div>
+      <p class="dean__sig">{{ section.settings.name }}</p>
+      <p class="dean__role">{{ section.settings.role }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Dean's message",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Message from the Dean" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Welcome to the CBA family" },
+    { "type": "richtext", "id": "body", "label": "Message" },
+    { "type": "image_picker", "id": "image", "label": "Portrait" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Dr. Lorna T. Grande" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Dean, College of Business and Accountancy" }
+  ],
+  "presets": [{ "name": "Dean's message" }]
+}
+{% endschema %}

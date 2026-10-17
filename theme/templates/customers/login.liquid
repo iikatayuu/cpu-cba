@@ -1,0 +1,9 @@
+<section class="section"><div class="page-width page-width--narrow">
+  <h1>Log in</h1>
+  {%- form 'customer_login', class: 'stack' -%}
+    {{ form.errors | default_errors }}
+    <div class="field"><label for="LoginEmail">Email</label><input id="LoginEmail" type="email" name="customer[email]" autocomplete="email" required></div>
+    <div class="field"><label for="LoginPassword">Password</label><input id="LoginPassword" type="password" name="customer[password]" autocomplete="current-password" required></div>
+    <button class="button button--primary" type="submit">Sign in</button>
+  {%- endform -%}
+</div></section>

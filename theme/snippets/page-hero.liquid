@@ -1,0 +1,10 @@
+{%- comment -%} Params: eyebrow, title, text, current {%- endcomment -%}
+{%- assign crumb = current | default: title -%}
+<section class="page-hero on-dark">
+  <div class="page-width">
+    {% render 'breadcrumbs', current: crumb %}
+    {%- if eyebrow != blank -%}<p class="eyebrow">{{ eyebrow }}</p>{%- endif -%}
+    <h1>{{ title }}</h1>
+    {%- if text != blank -%}<p class="lede">{{ text }}</p>{%- endif -%}
+  </div>
+</section>

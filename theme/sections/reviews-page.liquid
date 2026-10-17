@@ -1,0 +1,113 @@
+{%- comment -%} Ratings & reviews from cba_review metaobjects, plus a moderated submission form. {%- endcomment -%}
+{%- liquid
+  assign count = 0
+  assign sum = 0
+  assign c5 = 0
+  assign c4 = 0
+  assign c3 = 0
+  assign c2 = 0
+  assign c1 = 0
+  for r in shop.metaobjects.cba_review.values
+    if r.published.value == false
+      continue
+    endif
+    assign v = r.rating.value | plus: 0
+    assign count = count | plus: 1
+    assign sum = sum | plus: v
+    case v
+      when 5
+        assign c5 = c5 | plus: 1
+      when 4
+        assign c4 = c4 | plus: 1
+      when 3
+        assign c3 = c3 | plus: 1
+      when 2
+        assign c2 = c2 | plus: 1
+      else
+        assign c1 = c1 | plus: 1
+    endcase
+  endfor
+  if count > 0
+    assign avg = sum | times: 1.0 | divided_by: count | round: 1
+  else
+    assign avg = 0
+  endif
+  assign programs = collections['programs'].products
+-%}
+<section class="section" id="reviews-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="review-summary reveal">
+      <div class="review-summary__score">
+        <strong>{{ avg }}</strong>
+        {% render 'stars', rating: avg, size: 24 %}
+        <span>Based on {{ count }} review{% unless count == 1 %}s{% endunless %}</span>
+      </div>
+      <div class="bars" aria-label="Rating distribution">
+        {%- for star in (1..5) reversed -%}
+          {%- case star -%}{%- when 5 -%}{%- assign n = c5 -%}{%- when 4 -%}{%- assign n = c4 -%}{%- when 3 -%}{%- assign n = c3 -%}{%- when 2 -%}{%- assign n = c2 -%}{%- else -%}{%- assign n = c1 -%}{%- endcase -%}
+          {%- if count > 0 -%}{%- assign pct = n | times: 100 | divided_by: count -%}{%- else -%}{%- assign pct = 0 -%}{%- endif -%}
+          <div class="bar"><span>{{ star }} star</span><span class="bar__track"><span class="bar__fill" style="width: {{ pct }}%"></span></span><span>{{ n }}</span></div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="filter-chips" data-filter-group="reviews-{{ section.id }}" role="group" aria-label="Filter reviews by program" style="margin-top: var(--space-7)">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">All programs</button>
+      {%- for p in programs -%}<button type="button" class="chip" data-filter="{{ p.handle }}" aria-pressed="false">{{ p.metafields.cba.abbreviation.value | default: p.title }}</button>{%- endfor -%}
+    </div>
+
+    {%- if count > 0 -%}
+      <div class="grid grid--3">
+        {%- for r in shop.metaobjects.cba_review.values -%}
+          {%- unless r.published.value == false -%}{% render 'review-card', review: r, show_program: true %}{%- endunless -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty"><h3>No reviews yet</h3><p>Be the first to share your experience.</p></div>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="section section--paper" id="write">
+  <div class="page-width page-width--narrow">
+    <div class="section-head">
+      <p class="eyebrow">Share your experience</p>
+      <h2>{{ section.settings.form_heading }}</h2>
+      <p class="lede">{{ section.settings.form_text }}</p>
+    </div>
+    {%- form 'contact', id: 'ReviewForm', class: 'stack' -%}
+      {% render 'form-status', form: form, success_message: 'Thank you! Your review was sent to our team for moderation.' %}
+      <input type="hidden" name="contact[Form]" value="Review submission">
+      <fieldset class="field" style="border:0; padding:0; margin:0">
+        <legend style="font-weight:600; font-size: var(--step--1); color: var(--navy-900); margin-bottom: var(--space-2)">Your rating</legend>
+        <div class="rating-input">
+          {%- for i in (1..5) reversed -%}
+            <input type="radio" id="rate-{{ i }}" name="contact[Rating]" value="{{ i }} / 5" {% if i == 5 %}required{% endif %}>
+            <label for="rate-{{ i }}"><span class="visually-hidden">{{ i }} star{% if i > 1 %}s{% endif %}</span>{% render 'icon', name: 'star' %}</label>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+      <div class="form-grid form-grid--2">
+        <div class="field"><label for="ReviewName">Name to display</label><input id="ReviewName" type="text" name="contact[name]" required autocomplete="name"></div>
+        <div class="field"><label for="ReviewEmail">Email (not published)</label><input id="ReviewEmail" type="email" name="contact[email]" required autocomplete="email"></div>
+        <div class="field"><label for="ReviewProgram">Program</label>
+          <select id="ReviewProgram" name="contact[Program]">{%- for p in programs -%}<option>{{ p.title }}</option>{%- endfor -%}</select>
+        </div>
+        <div class="field"><label for="ReviewYear">Year level / batch</label><input id="ReviewYear" type="text" name="contact[Year level]" placeholder="e.g. 3rd Year, or Batch 2024"></div>
+        <div class="field field--full"><label for="ReviewBody">Your review</label><textarea id="ReviewBody" name="contact[body]" required></textarea></div>
+      </div>
+      <button type="submit" class="button button--primary">Submit review</button>
+      <p class="form-note">Reviews are moderated and published within a few working days. We never publish your email.</p>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ratings & reviews",
+  "settings": [
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Rate your CBA experience" },
+    { "type": "textarea", "id": "form_text", "label": "Form intro", "default": "Current students and alumni: tell future Centralians what your program is really like." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,51 @@
+<section class="page-hero on-dark">
+  <div class="page-width">
+    {% render 'breadcrumbs', current: 'Search' %}
+    <p class="eyebrow">Search</p>
+    <h1>{% if search.performed %}Results for “{{ search.terms | escape }}”{% else %}Search the site{% endif %}</h1>
+    <form class="big-search" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="SearchPage">Search</label>
+      <input id="SearchPage" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Try “finance”, “internship”, “honors”…">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button class="button button--gold" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+<section class="section">
+  <div class="page-width page-width--narrow">
+    {%- if search.performed -%}
+      {%- paginate search.results by 20 -%}
+        <p class="form-note">{{ search.results_count }} result{% unless search.results_count == 1 %}s{% endunless %}</p>
+        <div class="search-results">
+          {%- for item in search.results -%}
+            {%- case item.object_type -%}
+              {%- when 'product' -%}{%- assign kind = 'Program' -%}{%- assign summary = item.metafields.cba.tagline.value | default: item.description -%}
+              {%- when 'article' -%}{%- assign kind = 'Story' -%}{%- assign summary = item.excerpt_or_content -%}
+              {%- else -%}{%- assign kind = 'Page' -%}{%- assign summary = item.content -%}
+            {%- endcase -%}
+            <a class="result" href="{{ item.url }}">
+              <span class="badge{% if kind == 'Program' %} badge--navy{% endif %}">{{ kind }}</span>
+              <div><h3>{{ item.title }}</h3><p>{{ summary | strip_html | truncatewords: 26 }}</p></div>
+            </a>
+          {%- else -%}
+            <div class="empty"><h3>No results</h3><p>Try a program name like “Marketing”, or browse <a href="{{ routes.collections_url }}/programs">all programs</a> and <a href="/pages/faqs">FAQs</a>.</p></div>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}<nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>{%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <h2 style="font-size: var(--step-2)">Popular searches</h2>
+      <div class="filter-chips">
+        {%- assign terms = section.settings.suggestions | split: ',' -%}
+        {%- for term in terms -%}<a class="chip" style="text-decoration:none" href="{{ routes.search_url }}?q={{ term | strip | url_encode }}">{{ term | strip }}</a>{%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": [ { "type": "text", "id": "suggestions", "label": "Suggested terms (comma-separated)", "default": "Financial Management, Marketing, Entrepreneurship, Management Accounting, Human Resource, internship, honors, enrollment" } ]
+}
+{% endschema %}

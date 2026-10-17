@@ -1,0 +1,8 @@
+{%- comment -%} Params: parent_title, parent_url, current {%- endcomment -%}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="{{ routes.root_url }}">Home</a></li>
+    {%- if parent_title -%}<li><a href="{{ parent_url }}">{{ parent_title }}</a></li>{%- endif -%}
+    <li aria-current="page">{{ current }}</li>
+  </ol>
+</nav>

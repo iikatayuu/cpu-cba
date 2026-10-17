@@ -1,0 +1,39 @@
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width contact-grid">
+    <div class="card on-dark" style="background: var(--navy-900); border-color: var(--navy-900); color: #E8EEF9; padding: var(--space-6)">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 style="color:#fff">{{ section.settings.heading }}</h2>
+      <ul class="contact-list" style="margin-top: var(--space-5)">
+        <li>{% render 'icon', name: 'mail' %}<div><strong>Email</strong><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></div></li>
+        <li>{% render 'icon', name: 'phone' %}<div><strong>Phone</strong><span>{{ settings.contact_phone }}<br>{{ settings.contact_phone_2 }}{% if settings.contact_mobile != blank %}<br>Mobile: {{ settings.contact_mobile }}{% endif %}</span></div></li>
+        <li>{% render 'icon', name: 'pin' %}<div><strong>Visit us</strong><span>{{ settings.contact_address }}</span></div></li>
+        <li>{% render 'icon', name: 'clock' %}<div><strong>Office hours</strong><span>{{ settings.contact_hours }}</span></div></li>
+      </ul>
+    </div>
+    <div class="card" style="padding: var(--space-6)">
+      <h2 style="font-size: var(--step-3)">{{ section.settings.form_heading }}</h2>
+      <p class="form-note">{{ section.settings.form_text }}</p>
+      {% render 'inquiry-form', id: 'ContactForm' %}
+    </div>
+  </div>
+  {%- if section.settings.map_query != blank -%}
+    <div class="page-width" style="margin-top: var(--space-7)">
+      <iframe class="map" title="Map to {{ settings.college_name }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q={{ section.settings.map_query | url_encode }}&output=embed"></iframe>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Get in touch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We'd love to hear from you" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send us a message" },
+    { "type": "text", "id": "form_text", "label": "Form intro", "default": "Questions about programs, admissions or events? Our office will get back to you." },
+    { "type": "text", "id": "map_query", "label": "Map search query", "default": "Central Philippine University, Jaro, Iloilo City" }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

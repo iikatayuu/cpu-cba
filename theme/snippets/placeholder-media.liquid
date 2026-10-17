@@ -1,0 +1,17 @@
+{%- comment -%}
+  Renders a real image when one is set, otherwise a captioned placeholder that says what photo belongs here.
+  Params: image (image object, optional), label (string), ratio (e.g. '4 / 3'), light (bool), sizes, class
+{%- endcomment -%}
+{%- if image != blank -%}
+  <div class="media {{ class }}"{% if ratio %} style="--ratio: {{ ratio }}"{% endif %}>
+    {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: sizes, widths: '400, 700, 1000, 1400, 1600', alt: image.alt | default: label }}
+  </div>
+{%- else -%}
+  <div class="ph{% if light %} ph--light{% endif %} {{ class }}"{% if ratio %} style="--ratio: {{ ratio }}"{% endif %} role="img" aria-label="Photo placeholder: {{ label | escape }}">
+    <div class="ph__label">
+      {% render 'icon', name: 'image' %}
+      <strong>Photo placeholder</strong>
+      <span>{{ label }}</span>
+    </div>
+  </div>
+{%- endif -%}

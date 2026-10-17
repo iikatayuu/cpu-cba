@@ -1,0 +1,65 @@
+{%- comment -%} Advertisements: enrollment campaigns, events and announcements (cba_campaign metaobjects). Expired entries are hidden. {%- endcomment -%}
+{%- liquid
+  assign today = 'now' | date: '%Y%m%d' | plus: 0
+  assign shown = 0
+  assign limit = section.settings.limit
+-%}
+<section class="section{% if section.settings.style == 'paper' %} section--paper{% endif %}" id="campaigns-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="section-head section-head--row">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+      {%- if section.settings.show_filters -%}
+        <div class="filter-chips" data-filter-group="campaigns-{{ section.id }}" role="group" aria-label="Filter by type">
+          <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-filter="Enrollment" aria-pressed="false">Enrollment</button>
+          <button type="button" class="chip" data-filter="Event" aria-pressed="false">Events</button>
+          <button type="button" class="chip" data-filter="Announcement" aria-pressed="false">Announcements</button>
+        </div>
+      {%- elsif section.settings.link_label != blank -%}
+        <a class="link-arrow" href="{{ section.settings.link | default: '/pages/advertisements' }}">{{ section.settings.link_label }}</a>
+      {%- endif -%}
+    </div>
+    <div class="grid grid--3">
+      {%- for c in shop.metaobjects.cba_campaign.values -%}
+        {%- liquid
+          if shown >= limit
+            break
+          endif
+          assign ends = c.end_date.value | date: '%Y%m%d' | plus: 0
+          if c.end_date.value != blank and ends < today
+            continue
+          endif
+          assign shown = shown | plus: 1
+          assign hero = false
+          if section.settings.feature_first and shown == 1 and c.featured.value
+            assign hero = true
+          endif
+        -%}
+        {% render 'campaign-card', c: c, hero: hero %}
+      {%- endfor -%}
+    </div>
+    {%- if shown == 0 -%}
+      <div class="empty"><h3>No current campaigns</h3><p>Check back soon for enrollment announcements and events.</p></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Campaigns & events",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "News & events" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's happening at CBA" },
+    { "type": "checkbox", "id": "show_filters", "label": "Show type filters", "default": false },
+    { "type": "checkbox", "id": "feature_first", "label": "Show first featured campaign large", "default": false },
+    { "type": "range", "id": "limit", "label": "Max items", "min": 1, "max": 30, "step": 1, "default": 3 },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "All announcements" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "select", "id": "style", "label": "Background", "default": "cream", "options": [ { "value": "cream", "label": "Cream" }, { "value": "paper", "label": "White" } ] }
+  ],
+  "presets": [{ "name": "Campaigns & events" }]
+}
+{% endschema %}

@@ -1,0 +1,51 @@
+{
+  "handle": "bsba-human-resource-management",
+  "title": "BSBA Major in Human Resource Management",
+  "abbreviation": "BSBA-HRM",
+  "degree_type": "BSBA",
+  "tagline": "Hire, develop and champion the people who make organizations work.",
+  "accreditation": ["ACSCU-AAI Level IV Re-accredited (valid until Dec 2028)", "CHED Center of Excellence in Business Administration"],
+  "duration": "4 years (with summer terms)",
+  "overview": "The Human Resource Management major prepares you to manage an organization's most important asset: its people. Coursework covers recruitment and selection, compensation administration, training and development, performance management, labor law, labor relations and negotiation, and organizational development. The program ends with a 600-hour business internship.",
+  "who_for": "Students who are empathetic, organized and fair-minded, and who want to shape workplace culture and careers.",
+  "careers": ["HR Assistant / Generalist", "Recruitment Specialist", "Training and Development Officer", "Compensation and Benefits Analyst", "Employee Relations Officer", "Payroll Officer", "Labor Relations Associate", "Administrative Officer"],
+  "curricula": [
+    {
+      "label": "Regular",
+      "cmo_basis": "CHED Memo Order No. 17, s. 2017",
+      "revision": "Revision no. 0",
+      "effective": "August 2024",
+      "grand_total": [138, 6, 140],
+      "years": [
+        {"year": "First Year", "terms": [
+          {"name": "First Semester", "subtotal": [21, 3, 22], "courses": [
+            ["Acctg 1103", 3, 3, 4, ""], ["GEMath 1", 3, 0, 3, ""], ["GESocSci 1", 3, 0, 3, ""], ["GESocSci 2", 3, 0, 3, ""], ["PATHFit 1", 2, 0, 2, ""], ["RE 1", 3, 0, 3, ""], ["SEAL 1", 1, 0, 1, ""], ["NSTP 1", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [18, 3, 19], "courses": [
+            ["Acctg 1207", 0, 3, 1, "Acctg 1103"], ["GEEng 1", 3, 0, 3, ""], ["GEHum 1", 3, 0, 3, ""], ["CESocSci 4", 3, 0, 3, ""], ["PATHFit 2", 2, 0, 2, "PATHFit 1"], ["RE 2", 3, 0, 3, ""], ["SEAL 2", 1, 0, 1, "SEAL 1"], ["NSTP 2", 3, 0, 3, "NSTP 1"]]},
+          {"name": "Summer", "subtotal": [3, 0, 3], "courses": [
+            ["Bus 2101", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Second Year", "terms": [
+          {"name": "First Semester", "subtotal": [20, 0, 20], "courses": [
+            ["GESocSci 3", 3, 0, 3, ""], ["CETech 1", 3, 0, 3, ""], ["CEArts 1", 3, 0, 3, ""], ["GESocSci 5", 3, 0, 3, ""], ["BusEcn 1112", 3, 0, 3, ""], ["HRM 1111", 3, 0, 3, ""], ["PATHFit 3", 2, 0, 2, "PATHFit 1, PATHFit 2"]]},
+          {"name": "Second Semester", "subtotal": [19, 0, 19], "courses": [
+            ["GESocSci 4", 3, 0, 3, ""], ["Mgt 3102", 3, 0, 3, ""], ["Bus 2203", 3, 0, 3, ""], ["BusLaw 3112", 3, 0, 3, ""], ["Tax 2102", 3, 0, 3, ""], ["Elective 1", 2, 0, 2, ""], ["PATHFit 4", 2, 0, 2, "PATHFit 1, PATHFit 2"]]}
+        ]},
+        {"year": "Third Year", "terms": [
+          {"name": "First Semester", "subtotal": [18, 0, 18], "courses": [
+            ["Bus 3104", 3, 0, 3, ""], ["Mgt 3105", 3, 0, 3, "Bus 2203"], ["HRM 1112", 3, 0, 3, "Bus 2203"], ["BME 4004", 3, 0, 3, "BME 3003"], ["Bus 4106", 3, 0, 3, ""], ["HRM 1116", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [18, 0, 18], "courses": [
+            ["Bus 3205", 3, 0, 3, "Bus 3104"], ["HRM 1113", 3, 0, 3, ""], ["Mgt 3206", 3, 0, 3, "Bus 2203"], ["BME 3003", 3, 0, 3, ""], ["Elective 2", 3, 0, 3, ""], ["Elective 3", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Fourth Year", "terms": [
+          {"name": "First Semester", "subtotal": [15, 0, 15], "courses": [
+            ["Bus 4107", 3, 0, 3, "Bus 3104"], ["HRM 1114", 3, 0, 3, ""], ["Elective 4", 3, 0, 3, ""], ["Elective 5", 3, 0, 3, ""], ["GESocSci 6", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [6, 0, 6], "courses": [
+            ["BIntrn4000", 6, 0, 6, "All prof major courses"]]}
+        ]}
+      ]
+    }
+  ],
+  "electives": {"choose": 5, "courses": [
+    ["Bus 2003", 2, 0, 2, ""], ["Fin 3104", 3, 0, 3, "Acctg 1103, GEMath 1"], ["BME 1201", 3, 0, 3, ""], ["HRM 1115", 3, 0, 3, "Bus 2203"], ["Mktg 4110", 3, 0, 3, ""], ["Ent 2003", 3, 0, 3, ""], ["HRM 1117", 3, 0, 3, ""], ["Mgt 3203", 3, 0, 3, ""]]}
+}

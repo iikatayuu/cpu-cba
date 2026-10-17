@@ -1,0 +1,25 @@
+<section class="section section--navy section--tight" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}<p class="eyebrow">{{ section.settings.heading }}</p>{%- endif -%}
+    <div class="stats">
+      {%- for block in section.blocks -%}
+        <div class="stat reveal" {{ block.shopify_attributes }}>
+          <div class="stat__value">{{ block.settings.value }}</div>
+          <div class="stat__label">{{ block.settings.label }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stats band",
+  "settings": [ { "type": "text", "id": "heading", "label": "Eyebrow", "default": "CBA at a glance" } ],
+  "blocks": [ { "type": "stat", "name": "Stat", "limit": 6, "settings": [
+    { "type": "text", "id": "value", "label": "Value", "default": "1935" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Year founded" }
+  ] } ],
+  "presets": [{ "name": "Stats band" }]
+}
+{% endschema %}

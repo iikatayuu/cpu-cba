@@ -1,0 +1,32 @@
+{
+  "_note": "SAMPLE CONTENT. Replace with real, permissioned reviews, testimonials and campaigns before launch.",
+  "reviews": [
+    {"name": "Sample Student A.", "program": "bsba-financial-management", "rating": 5, "year_level": "4th Year", "date": "2026-03-14", "body": "The finance subjects are challenging but very practical. Our Credit and Collection and Capital Markets classes used real Philippine cases."},
+    {"name": "Sample Student B.", "program": "bs-entrepreneurship", "rating": 5, "year_level": "Alumna, Batch 2025", "date": "2026-02-02", "body": "Business Plan Implementation is where everything clicked. We ran an actual food stall on campus for a whole semester."},
+    {"name": "Sample Student C.", "program": "bsba-marketing-management", "rating": 4, "year_level": "3rd Year", "date": "2026-01-20", "body": "The professors know the industry well. I wish there were more digital marketing electives, but E-Commerce and Internet Marketing was great."},
+    {"name": "Sample Student D.", "program": "bs-management-accounting", "rating": 5, "year_level": "2nd Year", "date": "2025-12-08", "body": "It's heavy on accounting, but the structure is clear and the faculty really push you. JPAMA activities are a highlight."},
+    {"name": "Sample Student E.", "program": "bsba-human-resource-management", "rating": 4, "year_level": "4th Year", "date": "2025-11-27", "body": "Recruitment and Selection and Labor Relations gave me confidence going into my internship at a BPO HR department."},
+    {"name": "Sample Student F.", "program": "bsba-business-management", "rating": 5, "year_level": "1st Year (Bridging)", "date": "2025-10-15", "body": "I came from STEM, and the bridging subjects helped me catch up quickly. Classmates and teachers are very welcoming."}
+  ],
+  "testimonials": [
+    {"quote": "CBA taught me that numbers tell stories, and that integrity is what makes people trust the story you tell.", "name": "Sample Alumnus", "role": "Financial Analyst, Iloilo City", "program": "bsba-financial-management"},
+    {"quote": "I started my business plan in third year. Today it employs six people in my hometown.", "name": "Sample Alumna", "role": "Founder, food enterprise", "program": "bs-entrepreneurship"},
+    {"quote": "The 600-hour internship opened the door to my first job before I even graduated.", "name": "Sample Graduate", "role": "HR Associate", "program": "bsba-human-resource-management"}
+  ],
+  "campaigns": [
+    {"handle": "enrollment-sy-2027-2028", "type": "Enrollment", "title": "Enrollment for SY 2027–2028 is open", "body": "Secure your slot in any of our six business programs. Pre-register online and visit New Valentine Hall for advising.", "start_date": "2026-10-01", "end_date": "2027-08-15", "cta_label": "How to apply", "cta_url": "/pages/faqs#admissions", "featured": true},
+    {"handle": "bridging-program", "type": "Enrollment", "title": "Not from ABM? Try our Bridging Program", "body": "STEM, HUMSS, GAS and TVL graduates can take BSBA Business Management or Financial Management through our Bridging curricula.", "start_date": "2026-10-01", "end_date": "2027-08-15", "cta_label": "See BSBA programs", "cta_url": "/collections/programs", "featured": false},
+    {"handle": "cba-week-2026", "type": "Event", "title": "CBA Week 2026", "body": "Business quiz bowls, marketing pitch battles, an entrepreneurship bazaar, and the CBA intramurals at the CPU Gym.", "start_date": "2026-11-16", "end_date": "2026-11-21", "cta_label": "Ask about the events", "cta_url": "/pages/contact", "featured": false},
+    {"handle": "open-campus-day", "type": "Event", "title": "Open Campus Day for Senior High Students", "body": "Tour the College, sit in a sample class, and meet our student organizations.", "start_date": "2027-01-23", "end_date": "2027-01-23", "cta_label": "Register interest", "cta_url": "/pages/contact", "featured": false},
+    {"handle": "candle-lighting-cpas", "type": "Announcement", "title": "Congratulations, new Centralian CPAs!", "body": "The College honors its newly licensed Certified Public Accountants with its traditional candle-lighting ceremony.", "start_date": "2026-09-01", "end_date": "2026-12-31", "cta_label": "Read stories", "cta_url": "/blogs/stories", "featured": false}
+  ],
+  "stories": [
+    {"title": "From the College of Commerce to CBA: 90 years of business education", "tags": ["History"], "excerpt": "How a 1935 junior college with 20 students grew into a CHED Center of Excellence.", "body_from": "timeline"},
+    {"title": "Sample story: What I learned from 600 hours of internship", "tags": ["BSBA", "Sample"], "excerpt": "A (sample) 4th-year Financial Management student shares their internship experience.", "body": "<p>This is a sample story placeholder. Replace it with a real, permissioned student or alumni story.</p>"},
+    {"title": "Sample story: Building a business while still in school", "tags": ["BS Entrepreneurship", "Sample"], "excerpt": "Business Plan Implementation I and II, explained by a (sample) graduate.", "body": "<p>This is a sample story placeholder. Replace it with a real, permissioned student or alumni story.</p>"}
+  ],
+  "tuition_sample": {
+    "note": "SAMPLE ONLY. These figures are placeholders. Get your official assessment from the CPU Accounting Office.",
+    "rows": [["Tuition (per unit)", "₱ —"], ["Miscellaneous fees", "₱ —"], ["Laboratory fees (if applicable)", "₱ —"], ["Other school fees", "₱ —"], ["Estimated total per semester", "₱ —"]]
+  }
+}

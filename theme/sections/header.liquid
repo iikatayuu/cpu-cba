@@ -1,0 +1,82 @@
+{%- assign menu = linklists[section.settings.menu] -%}
+<header class="site-header" data-header>
+  <div class="page-width site-header__inner">
+    {% render 'brand' %}
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        {%- for link in menu.links -%}
+          <li class="nav__item">
+            <a class="nav__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <ul class="nav__sub">
+                {%- for child in link.links -%}<li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>{%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- else -%}
+          <li><a class="nav__link" href="{{ routes.collections_url }}/programs">Programs</a></li>
+          <li><a class="nav__link" href="{{ routes.root_url }}pages/about">About</a></li>
+          <li><a class="nav__link" href="{{ routes.root_url }}blogs/stories">Stories</a></li>
+          <li><a class="nav__link" href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
+          <li><a class="nav__link" href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
+          <li><a class="nav__link" href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="icon-button" data-open="search" aria-expanded="false" aria-controls="SearchModal" aria-label="Search">{% render 'icon', name: 'search' %}</button>
+      {%- if section.settings.cta_label != blank -%}
+        <a class="button button--primary button--small header-cta" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+      <button type="button" class="icon-button menu-toggle" data-open="drawer" aria-expanded="false" aria-controls="MenuDrawer" aria-label="Open menu">{% render 'icon', name: 'menu' %}</button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="MenuDrawer" data-modal="drawer" aria-hidden="true">
+  <div class="drawer__overlay" data-close></div>
+  <div class="drawer__panel on-dark" role="dialog" aria-modal="true" aria-label="Menu">
+    <button type="button" class="icon-button" data-close aria-label="Close menu">{% render 'icon', name: 'close' %}</button>
+    <ul class="drawer__list">
+      {%- for link in menu.links -%}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- for child in link.links -%}<li class="drawer__sub"><a href="{{ child.url }}">{{ child.title }}</a></li>{%- endfor -%}
+      {%- else -%}
+        <li><a href="{{ routes.collections_url }}/programs">Programs</a></li>
+        <li><a href="{{ routes.root_url }}pages/about">About</a></li>
+        <li><a href="{{ routes.root_url }}blogs/stories">Stories</a></li>
+        <li><a href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
+        <li><a href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
+        <li><a href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
+        <li><a href="{{ routes.root_url }}pages/contact">Contact</a></li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.cta_label != blank -%}
+      <a class="button button--gold" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+<div class="search-modal" id="SearchModal" data-modal="search" data-predictive-url="{{ routes.predictive_search_url }}.json" aria-hidden="true">
+  <div class="search-modal__box" role="dialog" aria-modal="true" aria-label="Search">
+    <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+      {% render 'icon', name: 'search' %}
+      <label class="visually-hidden" for="HeaderSearch">Search programs, stories and pages</label>
+      <input id="HeaderSearch" type="search" name="q" placeholder="Search programs, stories, FAQs…" autocomplete="off">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="button" class="icon-button" data-close aria-label="Close search">{% render 'icon', name: 'close' %}</button>
+    </form>
+    <div class="predictive" data-predictive aria-live="polite"></div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Inquire now" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{% render 'page-hero', eyebrow: section.settings.eyebrow, title: blog.title, text: section.settings.text %}
+<section class="section">
+  <div class="page-width">
+    {%- if blog.all_tags.size > 0 -%}
+      <div class="filter-chips" aria-label="Filter stories by tag">
+        <a class="chip" style="text-decoration:none" href="{{ blog.url }}"{% unless current_tags %} aria-current="page"{% endunless %}>All stories</a>
+        {%- for tag in blog.all_tags -%}
+          <a class="chip" style="text-decoration:none{% if current_tags contains tag %}; background: var(--navy-900); color: #fff{% endif %}" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- paginate blog.articles by 9 -%}
+      <div class="grid grid--3">
+        {%- for article in blog.articles -%}
+          <a class="article-card reveal" href="{{ article.url }}">
+            {% render 'placeholder-media', image: article.image, label: 'Story photo', ratio: '16 / 10', sizes: '(min-width: 900px) 33vw, 100vw' %}
+            <div class="article-card__meta">
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
+              {%- for tag in article.tags limit: 2 -%}<span class="badge badge--outline">{{ tag }}</span>{%- endfor -%}
+            </div>
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+          </a>
+        {%- else -%}
+          <div class="empty"><h3>No stories yet</h3><p>Student and alumni stories will appear here.</p></div>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stories & testimonials" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Students, alumni and faculty on life and learning at the College of Business and Accountancy." }
+  ]
+}
+{% endschema %}

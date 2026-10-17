@@ -1,0 +1,16 @@
+{%- if request.page_type == 'index' -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollegeOrUniversity",
+    "name": {{ settings.college_name | json }},
+    "parentOrganization": { "@type": "CollegeOrUniversity", "name": "Central Philippine University", "url": "https://cpu.edu.ph" },
+    "url": {{ request.origin | json }},
+    "email": {{ settings.contact_email | json }},
+    "telephone": {{ settings.contact_phone | json }},
+    "address": { "@type": "PostalAddress", "streetAddress": "Lopez Jaena St., Jaro", "addressLocality": "Iloilo City", "postalCode": "5000", "addressCountry": "PH" },
+    "foundingDate": "1935",
+    "logo": {{ 'cpu-seal.png' | asset_url | prepend: 'https:' | json }}
+  }
+</script>
+{%- endif -%}

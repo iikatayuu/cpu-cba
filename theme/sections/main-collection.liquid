@@ -1,0 +1,31 @@
+{% render 'page-hero', eyebrow: section.settings.eyebrow, title: collection.title, text: section.settings.text, current: collection.title %}
+<section class="section" id="collection-{{ section.id }}">
+  <div class="page-width">
+    {%- if collection.description != blank -%}<div class="rte lede" style="margin-bottom: var(--space-6)">{{ collection.description }}</div>{%- endif -%}
+    <div class="filter-chips" data-filter-group="collection-{{ section.id }}" role="group" aria-label="Filter programs">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">All programs</button>
+      <button type="button" class="chip" data-filter="BSBA" aria-pressed="false">BSBA majors</button>
+      <button type="button" class="chip" data-filter="BS" aria-pressed="false">BS degrees</button>
+      <span class="form-note" style="align-self:center; margin-left: var(--space-2)"><span data-filter-count>{{ collection.products_count }}</span> programs</span>
+    </div>
+    {%- paginate collection.products by 24 -%}
+      <div class="grid grid--3">
+        {%- for product in collection.products -%}
+          <div class="reveal" data-filter-item="{{ product.metafields.cba.degree_type.value | default: 'BS' }}">{% render 'program-card', product: product %}</div>
+        {%- else -%}
+          <div class="empty"><h3>No programs yet</h3><p>Programs will appear here once they're published.</p></div>
+        {%- endfor -%}
+      </div>
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Program listing",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Undergraduate programs" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Four BSBA majors and two specialized BS degrees, all four years with summer terms, all built on the CHED curriculum and CPU's Christian education." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{%- comment -%} Usage: {% render 'icon', name: 'search' %} {%- endcomment -%}
+{%- capture attrs -%}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"{%- endcapture -%}
+{%- case name -%}
+  {%- when 'search' -%}<svg {{ attrs }}><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+  {%- when 'menu' -%}<svg {{ attrs }}><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+  {%- when 'close' -%}<svg {{ attrs }}><path d="M6 6l12 12M18 6L6 18"/></svg>
+  {%- when 'arrow-left' -%}<svg {{ attrs }}><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+  {%- when 'arrow-right' -%}<svg {{ attrs }}><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  {%- when 'image' -%}<svg {{ attrs }}><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>
+  {%- when 'bulb' -%}<svg {{ attrs }}><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg>
+  {%- when 'shuffle' -%}<svg {{ attrs }}><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+  {%- when 'info' -%}<svg {{ attrs }}><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+  {%- when 'calendar' -%}<svg {{ attrs }}><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+  {%- when 'mail' -%}<svg {{ attrs }}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+  {%- when 'phone' -%}<svg {{ attrs }}><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+  {%- when 'pin' -%}<svg {{ attrs }}><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+  {%- when 'clock' -%}<svg {{ attrs }}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+  {%- when 'play' -%}<svg {{ attrs }}><path d="M7 4l13 8-13 8z"/></svg>
+  {%- when 'quote' -%}<svg {{ attrs }}><path d="M7 7h4v4c0 3-2 5-4 6M14 7h4v4c0 3-2 5-4 6"/></svg>
+  {%- when 'book' -%}<svg {{ attrs }}><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 5v16"/></svg>
+  {%- when 'star' -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.5 1.2 6.4L12 17.3l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>
+  {%- when 'facebook' -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg>
+  {%- when 'youtube' -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1c.4-1.2.4-3.8.4-3.8s0-2.6-.4-3.8zM10 15V9l5.2 3z"/></svg>
+  {%- when 'instagram' -%}<svg {{ attrs }}><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+{%- endcase -%}

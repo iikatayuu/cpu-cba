@@ -1,0 +1,29 @@
+<article>
+  <header class="article-hero">
+    <div class="page-width">
+      <div style="display:flex; justify-content:center">{% render 'breadcrumbs', parent_title: blog.title, parent_url: blog.url, current: article.title %}</div>
+      <p class="eyebrow" style="justify-content:center">{% for tag in article.tags limit: 1 %}{{ tag }}{% else %}Story{% endfor %}</p>
+      <h1>{{ article.title }}</h1>
+      <p class="form-note">{% if article.author != blank %}By {{ article.author }} · {% endif %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></p>
+    </div>
+  </header>
+  <div class="page-width page-width--narrow">
+    {% render 'placeholder-media', image: article.image, label: 'Feature photo for this story', ratio: '16 / 9', sizes: '860px' %}
+  </div>
+  <div class="section">
+    <div class="page-width page-width--narrow rte" style="margin-inline:auto">{{ article.content }}</div>
+  </div>
+  <div class="page-width page-width--narrow" style="padding-bottom: var(--space-8)">
+    <hr>
+    <div class="button-row" style="justify-content: space-between">
+      <a class="link-arrow" href="{{ blog.url }}">All stories</a>
+      <a class="button button--primary button--small" href="/pages/reviews#write">Share your own experience</a>
+    </div>
+  </div>
+</article>
+<script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "Article", "headline": {{ article.title | json }}, "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}, "author": { "@type": "Organization", "name": {{ settings.college_name | json }} } }
+</script>
+{% schema %}
+{ "name": "Article" }
+{% endschema %}

@@ -1,0 +1,29 @@
+<section class="section section--tight" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="cta-band on-dark reveal">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="lede">{{ section.settings.text }}</p>
+      <div class="button-row">
+        {%- if section.settings.button_1 != blank -%}<a class="button button--gold" href="{{ section.settings.link_1 | default: '/pages/contact' }}">{{ section.settings.button_1 }}</a>{%- endif -%}
+        {%- if section.settings.button_2 != blank -%}<a class="button button--outline" href="{{ section.settings.link_2 | default: '/pages/faqs' }}">{{ section.settings.button_2 }}</a>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Call to action",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Be a Centralian" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your business career starts in Jaro." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Talk to us about programs, requirements and the next enrollment window." },
+    { "type": "text", "id": "button_1", "label": "Primary button", "default": "Send an inquiry" },
+    { "type": "url", "id": "link_1", "label": "Primary link" },
+    { "type": "text", "id": "button_2", "label": "Secondary button", "default": "Read the FAQs" },
+    { "type": "url", "id": "link_2", "label": "Secondary link" }
+  ],
+  "presets": [{ "name": "Call to action" }]
+}
+{% endschema %}

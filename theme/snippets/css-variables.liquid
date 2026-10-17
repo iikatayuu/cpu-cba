@@ -1,0 +1,11 @@
+{%- comment -%} Exposes theme-setting colors as CSS custom properties, falling back to the brand defaults. {%- endcomment -%}
+<style>
+  :root {
+    --navy-900: {{ settings.color_navy | default: '#0B2A5B' }};
+    --blue-600: {{ settings.color_blue | default: '#1D4FA8' }};
+    --gold-500: {{ settings.color_gold | default: '#F2B705' }};
+    --gold-700: {{ settings.color_gold_text | default: '#B98800' }};
+    --cream-50: {{ settings.color_background | default: '#FBF7EE' }};
+    --ink: {{ settings.color_text | default: '#14182A' }};
+  }
+</style>

@@ -1,0 +1,17 @@
+{%- comment -%} Params: review (metaobject cba_review), show_program {%- endcomment -%}
+{%- assign prog = review.program.value -%}
+<article class="review" data-filter-item="{{ prog.handle | default: 'other' }}">
+  <div class="review__head">
+    <span class="avatar" aria-hidden="true">{{ review.name.value | slice: 0 }}</span>
+    <div>
+      <strong>{{ review.name.value }}</strong>
+      <small>{{ review.year_level.value }}</small>
+    </div>
+  </div>
+  {% render 'stars', rating: review.rating.value %}
+  <p>{{ review.body.value }}</p>
+  <div class="review__foot">
+    {%- if show_program and prog -%}<a href="{{ prog.url }}">{{ prog.metafields.cba.abbreviation.value | default: prog.title }}</a>{%- endif -%}
+    {%- if review.date.value -%}<time datetime="{{ review.date.value | date: '%Y-%m-%d' }}">{{ review.date.value | date: '%b %d, %Y' }}</time>{%- endif -%}
+  </div>
+</article>

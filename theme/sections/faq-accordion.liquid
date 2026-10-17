@@ -1,0 +1,53 @@
+{%- comment -%} FAQs from cba_faq metaobjects, grouped by category (order from settings). Includes FAQPage structured data. {%- endcomment -%}
+{%- assign categories = section.settings.categories | split: ',' -%}
+{%- assign faqs = shop.metaobjects.cba_faq.values -%}
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width faq-layout">
+    <nav class="faq-layout__nav" aria-label="FAQ categories" data-scrollspy>
+      <ul class="toc">
+        {%- for cat in categories -%}{%- assign c = cat | strip -%}<li><a href="#{{ c | handleize }}">{{ c }}</a></li>{%- endfor -%}
+      </ul>
+    </nav>
+    <div>
+      {%- for cat in categories -%}
+        {%- assign c = cat | strip -%}
+        <div class="faq-group" id="{{ c | handleize }}">
+          <h2>{{ c }}</h2>
+          <div class="accordion">
+            {%- for f in faqs -%}
+              {%- if f.category.value == c -%}
+                <details{% if forloop.first and forloop.parentloop.first %} open{% endif %}>
+                  <summary>{{ f.question.value }}</summary>
+                  <div class="accordion__body rte"><p>{{ f.answer.value | newline_to_br }}</p></div>
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+      {%- if faqs.size == 0 -%}<div class="empty"><p>Add entries in Content › Metaobjects › FAQ.</p></div>{%- endif -%}
+      <div class="note" style="margin-top: var(--space-7)">{% render 'icon', name: 'info' %}<span>{{ section.settings.footnote }}</span></div>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for f in faqs -%}
+        { "@type": "Question", "name": {{ f.question.value | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ f.answer.value | json }} } }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "FAQ accordion",
+  "settings": [
+    { "type": "text", "id": "categories", "label": "Categories (comma-separated, in order)", "default": "Admissions, Programs, Tuition & Scholarships, Academic Policies, Student Life" },
+    { "type": "textarea", "id": "footnote", "label": "Footnote", "default": "Admission information is summarized from cpu.edu.ph and may change each school year. For the latest, contact the CPU Information Center at (033) 329-1971 local 2129 or infocenter@cpu.edu.ph." }
+  ]
+}
+{% endschema %}

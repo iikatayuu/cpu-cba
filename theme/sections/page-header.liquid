@@ -1,0 +1,13 @@
+{%- assign t = section.settings.title | default: page.title -%}
+{% render 'page-hero', eyebrow: section.settings.eyebrow, title: t, text: section.settings.text %}
+{% schema %}
+{
+  "name": "Page header",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Title", "info": "Leave blank to use the page title." },
+    { "type": "textarea", "id": "text", "label": "Intro" }
+  ],
+  "presets": [{ "name": "Page header" }]
+}
+{% endschema %}

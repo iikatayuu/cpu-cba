@@ -1,0 +1,37 @@
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="section-head">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    <div class="grid grid--4">
+      {%- for block in section.blocks -%}
+        <div class="leader reveal" {{ block.shopify_attributes }}>
+          {% render 'placeholder-media', image: block.settings.photo, label: 'Portrait', ratio: '1 / 1', light: true, sizes: '300px' %}
+          <h3>{{ block.settings.name }}</h3>
+          <p class="leader__role">{{ block.settings.role }}</p>
+          <p>{{ block.settings.credentials }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Leadership",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Leadership" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The people behind CBA" },
+    { "type": "textarea", "id": "text", "label": "Intro" }
+  ],
+  "blocks": [ { "type": "person", "name": "Person", "settings": [
+    { "type": "image_picker", "id": "photo", "label": "Photo" },
+    { "type": "text", "id": "name", "label": "Name" },
+    { "type": "text", "id": "role", "label": "Role" },
+    { "type": "text", "id": "credentials", "label": "Credentials" }
+  ] } ],
+  "presets": [{ "name": "Leadership" }]
+}
+{% endschema %}

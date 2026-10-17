@@ -1,0 +1,182 @@
+{%- comment -%} Program detail page. Programs are Shopify products with cba.* metafields; there is no cart or checkout. {%- endcomment -%}
+{%- liquid
+  assign m = product.metafields.cba
+  assign abbr = m.abbreviation.value | default: product.type
+  assign curricula = m.curricula.value
+  assign electives = m.electives.value
+  assign tracks = m.tracks.value
+  assign tuition = m.tuition.value
+  assign review_count = 0
+  assign review_sum = 0
+  for r in shop.metaobjects.cba_review.values
+    if r.program.value.id == product.id and r.published.value != false
+      assign review_count = review_count | plus: 1
+      assign review_sum = review_sum | plus: r.rating.value
+    endif
+  endfor
+  if review_count > 0
+    assign review_avg = review_sum | times: 1.0 | divided_by: review_count | round: 1
+  endif
+-%}
+
+<section class="program-hero on-dark">
+  <div class="page-width program-hero__grid">
+    <div>
+      {% render 'breadcrumbs', parent_title: 'Programs', parent_url: '/collections/programs', current: abbr %}
+      <div class="program-hero__abbr" aria-hidden="true">{{ abbr }}</div>
+      <h1>{{ product.title }}</h1>
+      {%- if m.tagline.value != blank -%}<p class="lede">{{ m.tagline.value }}</p>{%- endif -%}
+      <div class="hero__badges" style="margin-top: var(--space-5)">
+        {%- for a in m.accreditation.value -%}<span class="badge">{{ a }}</span>{%- endfor -%}
+        {%- if review_count > 0 -%}<a class="badge" href="#reviews">★ {{ review_avg }} · {{ review_count }} review{% if review_count > 1 %}s{% endif %}</a>{%- endif -%}
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Degree</dt><dd>{{ m.degree_type.value | default: 'BS' }}</dd></div>
+        <div class="fact"><dt>Duration</dt><dd>{{ m.duration.value | default: '4 years' | split: ' (' | first }}</dd></div>
+        {%- if m.total_units.value -%}<div class="fact"><dt>Total units</dt><dd>{{ m.total_units.value }}</dd></div>{%- endif -%}
+        <div class="fact"><dt>Campus</dt><dd>Jaro, Iloilo City</dd></div>
+      </dl>
+    </div>
+    <div>
+      {% render 'placeholder-media', image: product.featured_image, label: 'Students of this program, e.g. a class activity or internship', ratio: '4 / 3', sizes: '(min-width: 960px) 40vw, 100vw' %}
+    </div>
+  </div>
+</section>
+
+<nav class="program-nav" aria-label="On this page" data-scrollspy>
+  <div class="page-width" style="display:flex; gap: var(--space-2)">
+    <a href="#overview">Overview</a>
+    {%- if m.careers.value -%}<a href="#careers">Careers</a>{%- endif -%}
+    {%- if curricula -%}<a href="#curriculum">Curriculum</a>{%- endif -%}
+    {%- if electives or tracks -%}<a href="#electives">Electives{% if tracks %} &amp; tracks{% endif %}</a>{%- endif -%}
+    <a href="#tuition">Tuition</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#inquire">Inquire</a>
+  </div>
+</nav>
+
+<div class="page-width program-layout">
+  <div>
+    <section class="program-block" id="overview">
+      <p class="eyebrow">Overview</p>
+      <h2>About the program</h2>
+      <div class="rte">{{ product.description }}</div>
+      {%- if m.who_for.value != blank -%}
+        <div class="note" style="margin-top: var(--space-5)">{% render 'icon', name: 'info' %}<span><strong>Who it's for:</strong> {{ m.who_for.value }}</span></div>
+      {%- endif -%}
+    </section>
+
+    {%- if m.careers.value -%}
+      <section class="program-block" id="careers">
+        <p class="eyebrow">Where it leads</p>
+        <h2>Career paths</h2>
+        <ul class="career-list">{%- for c in m.careers.value -%}<li>{{ c }}</li>{%- endfor -%}</ul>
+      </section>
+    {%- endif -%}
+
+    {%- if curricula -%}
+      <section class="program-block" id="curriculum">
+        <p class="eyebrow">Course offering</p>
+        <h2>Curriculum</h2>
+        <p class="lede">Every course by year and semester, as approved in the CBA Student Handbook (revised August 2024).</p>
+        {% render 'curriculum', curricula: curricula, uid: 'cur' %}
+      </section>
+    {%- endif -%}
+
+    {%- if electives or tracks -%}
+      <section class="program-block" id="electives">
+        <p class="eyebrow">Choose your path</p>
+        <h2>Electives{% if tracks %} &amp; specialized tracks{% endif %}</h2>
+        {%- if electives -%}
+          <p>Choose <strong>{{ electives.choose }}</strong> elective courses from the list below.</p>
+          {% render 'course-table', courses: electives.courses %}
+        {%- endif -%}
+        {%- if tracks -%}
+          <h3 style="margin-top: var(--space-7)">Specialized tracks</h3>
+          <p>Select one specialized track and take 4 subjects (12 units) under that track.</p>
+          <div class="tabs__list" role="tablist" aria-label="Specialized tracks">
+            {%- for t in tracks -%}<button type="button" class="tab" role="tab" id="track-{{ forloop.index }}-tab" aria-controls="track-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ t.name }}</button>{%- endfor -%}
+          </div>
+          {%- for t in tracks -%}
+            <div class="tabpanel" role="tabpanel" id="track-{{ forloop.index }}" aria-labelledby="track-{{ forloop.index }}-tab"{% unless forloop.first %} hidden{% endunless %}>
+              <p class="form-note">{{ t.rule }}</p>
+              {% render 'course-table', courses: t.courses %}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+
+    <section class="program-block" id="tuition">
+      <p class="eyebrow">Fees</p>
+      <h2>Tuition &amp; fees</h2>
+      {%- assign tu = tuition -%}
+      <div class="note">{% render 'icon', name: 'info' %}<span>{{ tu.note | default: section.settings.tuition_note }}</span></div>
+      <div class="table-wrap">
+        <table class="tuition-table">
+          <tbody>
+            {%- if tu.rows -%}
+              {%- for row in tu.rows -%}<tr><th scope="row">{{ row[0] }}</th><td>{{ row[1] }}</td></tr>{%- endfor -%}
+            {%- else -%}
+              <tr><th scope="row">Tuition (per unit)</th><td>₱ —</td></tr>
+              <tr><th scope="row">Miscellaneous &amp; other fees</th><td>₱ —</td></tr>
+              <tr><th scope="row">Estimated total per semester</th><td>₱ —</td></tr>
+            {%- endif -%}
+          </tbody>
+        </table>
+      </div>
+      <p class="form-note" style="margin-top: var(--space-3)">Want the official breakdown? <a href="#inquire">Send us an inquiry</a> and we'll reply with the current assessment.</p>
+    </section>
+
+    <section class="program-block" id="reviews">
+      <div class="section-head--row" style="display:flex; justify-content: space-between; align-items: end; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5)">
+        <div>
+          <p class="eyebrow">Ratings &amp; reviews</p>
+          <h2 style="margin:0">What students say</h2>
+        </div>
+        {%- if review_count > 0 -%}<div>{% render 'stars', rating: review_avg, size: 22 %} <strong>{{ review_avg }}</strong> / 5 · {{ review_count }} review{% if review_count > 1 %}s{% endif %}</div>{%- endif -%}
+      </div>
+      {%- if review_count > 0 -%}
+        <div class="grid grid--2">
+          {%- for r in shop.metaobjects.cba_review.values -%}
+            {%- if r.program.value.id == product.id and r.published.value != false -%}{% render 'review-card', review: r %}{%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="empty"><p>No reviews yet for this program.</p></div>
+      {%- endif -%}
+      <p style="margin-top: var(--space-5)"><a class="link-arrow" href="/pages/reviews#write">Share your experience</a></p>
+    </section>
+  </div>
+
+  <aside class="program-aside" id="inquire">
+    <div class="inquiry">
+      <p class="eyebrow">Interested?</p>
+      <h2>Inquire about {{ abbr }}</h2>
+      <p class="form-note">Ask about requirements, schedules, tuition or scholarships.</p>
+      {% render 'inquiry-form', program: product.title, id: 'ProgramInquiry', compact: true %}
+    </div>
+  </aside>
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | truncate: 300 | json }},
+    "provider": { "@type": "CollegeOrUniversity", "name": "Central Philippine University – College of Business and Accountancy", "sameAs": "https://cpu.edu.ph" }
+    {%- if review_count > 0 -%},
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": {{ review_avg | json }}, "reviewCount": {{ review_count }} }
+    {%- endif %}
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Program details",
+  "settings": [
+    { "type": "text", "id": "tuition_note", "label": "Default tuition note", "default": "Sample figures only. Get your official assessment from the CPU Accounting Office." }
+  ]
+}
+{% endschema %}

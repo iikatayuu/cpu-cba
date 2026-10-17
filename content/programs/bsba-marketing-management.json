@@ -1,0 +1,51 @@
+{
+  "handle": "bsba-marketing-management",
+  "title": "BSBA Major in Marketing Management",
+  "abbreviation": "BSBA-MM",
+  "degree_type": "BSBA",
+  "tagline": "Understand customers, build brands, and turn ideas into sales.",
+  "accreditation": ["ACSCU-AAI Level IV Re-accredited (valid until Dec 2028)", "CHED Center of Excellence in Business Administration"],
+  "duration": "4 years (with summer terms)",
+  "overview": "Marketing Management covers the full path from insight to sale: professional salesmanship, product management, distribution, retail, pricing, advertising, marketing research and strategic marketing. Electives include e-commerce and internet marketing, international marketing and services marketing. The program ends with a 600-hour business internship.",
+  "who_for": "Creative, people-oriented students who want to work in brand, sales, digital marketing, retail or market research.",
+  "careers": ["Marketing Associate", "Brand / Product Manager", "Sales Executive", "Digital Marketing Specialist", "Market Research Analyst", "Retail Manager", "Advertising Account Executive", "Entrepreneur"],
+  "curricula": [
+    {
+      "label": "Regular",
+      "cmo_basis": "CHED Memo Order No. 17, s. 2017",
+      "revision": "Revision no. 3",
+      "effective": "August 2023",
+      "grand_total": [138, 6, 140],
+      "years": [
+        {"year": "First Year", "terms": [
+          {"name": "First Semester", "subtotal": [21, 3, 22], "courses": [
+            ["Acctg 1103", 3, 3, 4, ""], ["BusEcn 1112", 3, 0, 3, ""], ["GEEng 1", 3, 0, 3, ""], ["GESocSci 1", 3, 0, 3, ""], ["PATHFit 1", 2, 0, 2, ""], ["SEAL 1", 1, 0, 1, ""], ["RE 1", 3, 0, 3, ""], ["NSTP 1", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [18, 3, 19], "courses": [
+            ["Acctg 1207", 0, 3, 1, "Acctg 1103"], ["BME 1201", 3, 0, 3, ""], ["GESocSci 2", 3, 0, 3, ""], ["GEMath 1", 3, 0, 3, ""], ["PATHFit 2", 2, 0, 2, "PATHFit 1"], ["SEAL 2", 1, 0, 1, ""], ["RE 2", 3, 0, 3, ""], ["NSTP 2", 3, 0, 3, "NSTP 1"]]},
+          {"name": "Summer", "subtotal": [3, 0, 3], "courses": [
+            ["CESocSci 4", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Second Year", "terms": [
+          {"name": "First Semester", "subtotal": [20, 0, 20], "courses": [
+            ["Mktg 2101", 3, 0, 3, "BME 1201"], ["Elective 1", 3, 0, 3, ""], ["CETech 1", 3, 0, 3, ""], ["GESocSci 5", 3, 0, 3, ""], ["CEArts 1", 3, 0, 3, ""], ["PATHFit 3", 2, 0, 2, "PATHFit 1, PATHFit 2"], ["GEHum 1", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [19, 0, 19], "courses": [
+            ["Elective 2", 2, 0, 2, ""], ["Mktg 2203", 3, 0, 3, "BME 1201"], ["Bus 2203", 3, 0, 3, ""], ["GESocSci 4", 3, 0, 3, ""], ["PATHFit 4", 2, 0, 2, "PATHFit 1, PATHFit 2"], ["Bus 2101", 3, 0, 3, ""], ["GESocSci 3", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Third Year", "terms": [
+          {"name": "First Semester", "subtotal": [18, 0, 18], "courses": [
+            ["Bus 3104", 3, 0, 3, ""], ["Elective 3", 3, 0, 3, ""], ["Mktg 3104", 3, 0, 3, "BME 1201"], ["Mktg 3105", 3, 0, 3, ""], ["Elective 4", 3, 0, 3, ""], ["GESocSci 6", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [18, 0, 18], "courses": [
+            ["BusLaw 3112", 3, 0, 3, ""], ["Mktg 3206", 3, 0, 3, "Bus 3104"], ["BME 3003", 3, 0, 3, "Acctg 1207, Junior standing"], ["Mktg 3210", 3, 0, 3, ""], ["Mktg 3208", 3, 0, 3, "Acctg 1207, BME 1201"], ["Elective 5", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Fourth Year", "terms": [
+          {"name": "First Semester", "subtotal": [15, 0, 15], "courses": [
+            ["BME 4004", 3, 0, 3, "BME 3003"], ["Mktg 4109", 3, 0, 3, "BME 1201"], ["Bus 4106", 3, 0, 3, "Senior standing"], ["Bus 4107", 3, 0, 3, "Bus 3104"], ["Tax 2102", 3, 0, 3, "Acctg 1207"]]},
+          {"name": "Second Semester", "subtotal": [6, 0, 6], "courses": [
+            ["BIntrn4000", 6, 0, 6, "All prof major courses"]]}
+        ]}
+      ]
+    }
+  ],
+  "electives": {"choose": 5, "courses": [
+    ["Mktg 3106", 3, 0, 3, "BME 1201"], ["Mktg 4211", 3, 0, 3, "BME 1201"], ["Fin 3209", 3, 0, 3, ""], ["Mktg 4109", 3, 0, 3, "BME 1201"], ["Bus 2003", 2, 0, 2, ""], ["HRM 1115", 3, 0, 3, "Bus 2203"], ["Fin 3104", 3, 0, 3, "Acctg 1103, GEMath 1"], ["Mktg 4110", 3, 0, 3, "BME 1201"]]}
+}

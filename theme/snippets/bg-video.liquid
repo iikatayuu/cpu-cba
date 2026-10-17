@@ -1,0 +1,13 @@
+{%- comment -%} Muted looping background video. Params: video (Shopify video object), url (string fallback), class {%- endcomment -%}
+{%- if video != blank -%}
+  <video class="{{ class }}" data-autoplay autoplay muted loop playsinline preload="metadata" aria-hidden="true"
+    {% if video.preview_image %}poster="{{ video.preview_image | image_url: width: 1600 }}"{% endif %}>
+    {%- for source in video.sources -%}
+      {%- if source.mime_type == 'video/mp4' -%}<source src="{{ source.url }}" type="{{ source.mime_type }}">{%- endif -%}
+    {%- endfor -%}
+  </video>
+{%- elsif url != blank -%}
+  <video class="{{ class }}" data-autoplay autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="{{ url }}" type="video/mp4">
+  </video>
+{%- endif -%}

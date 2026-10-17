@@ -1,0 +1,20 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "college_name": "College of Business and Accountancy",
+      "color_navy": "#0B2A5B",
+      "color_blue": "#1D4FA8",
+      "color_gold": "#F2B705",
+      "color_gold_text": "#B98800",
+      "color_background": "#FBF7EE",
+      "color_text": "#14182A",
+      "contact_email": "cba@cpu.edu.ph",
+      "contact_phone": "+63 (33) 329-1971",
+      "contact_phone_2": "+63 (33) 330-7200 local 2129",
+      "contact_mobile": "+63 921 760 2647",
+      "contact_address": "New Valentine Hall, Central Philippine University, Lopez Jaena St., Jaro, Iloilo City 5000",
+      "contact_hours": "Monday to Friday, 8:00 AM – 5:00 PM"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{%- assign entries = shop.metaobjects.cba_testimonial.values -%}
+<section class="section section--navy" data-slider {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="slider__controls">
+        <button type="button" class="icon-button" data-slider-prev aria-label="Previous testimonial">{% render 'icon', name: 'arrow-left' %}</button>
+        <button type="button" class="icon-button" data-slider-next aria-label="Next testimonial">{% render 'icon', name: 'arrow-right' %}</button>
+      </div>
+    </div>
+    {%- if entries.size > 0 -%}
+      <div class="slider__track" tabindex="0" aria-label="Testimonials">
+        {%- for t in entries -%}
+          {%- assign prog = t.program.value -%}
+          {%- capture role -%}{{ t.role.value }}{% if prog %} · {{ prog.metafields.cba.abbreviation.value | default: prog.title }}{% endif %}{%- endcapture -%}
+          {% render 'quote-card', quote: t.quote.value, name: t.name.value, role: role, photo: t.photo.value %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty"><p>Add entries in Content › Metaobjects › Testimonial to show quotes here.</p></div>
+    {%- endif -%}
+    {%- if section.settings.link_label != blank -%}
+      <p style="margin-top: var(--space-6)"><a class="link-arrow" href="{{ section.settings.link | default: '/blogs/stories' }}">{{ section.settings.link_label }}</a></p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Centralian voices" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Hear it from our students and alumni" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read their stories" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [{ "name": "Testimonials" }]
+}
+{% endschema %}

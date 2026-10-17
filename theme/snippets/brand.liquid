@@ -1,0 +1,12 @@
+{%- comment -%} Seal + college wordmark. Params: tag (default 'a'), size {%- endcomment -%}
+<a class="brand" href="{{ routes.root_url }}" aria-label="{{ settings.college_name }} home">
+  {%- if settings.logo != blank -%}
+    {{ settings.logo | image_url: width: 120 | image_tag: class: 'brand__seal', width: 46, height: 46, alt: '' }}
+  {%- else -%}
+    <img class="brand__seal" src="{{ 'cpu-seal.png' | asset_url }}" width="46" height="46" alt="">
+  {%- endif -%}
+  <span class="brand__text">
+    <span class="brand__college">{{ settings.college_name }}</span>
+    <span class="brand__uni">Central Philippine University</span>
+  </span>
+</a>

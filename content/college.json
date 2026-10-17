@@ -1,0 +1,127 @@
+{
+  "_source": "CBA Student Handbook (Revised August 2024) unless noted; web facts from cpu.edu.ph and Wikipedia.",
+  "contact": {
+    "email": "cba@cpu.edu.ph",
+    "phones": ["+63 (33) 329-1971", "+63 (33) 330-7200 local 2129"],
+    "mobile": "+63 921 760 2647",
+    "address": "College of Business and Accountancy, Central Philippine University, Lopez Jaena St., Jaro, Iloilo City 5000, Philippines",
+    "building": "New Valentine Hall",
+    "hours": "Monday to Friday, 8:00 AM – 5:00 PM (Philippine Time)"
+  },
+  "introduction": [
+    "Welcome to Central Philippine University especially to the College of Business and Accountancy. You have made the right decision in choosing your degree. We are grateful that you are now a member of the CBA family. Continue to soar high and hit your goal. You would be one of these persons in the future: A Certified Public Accountant, Certified Management Accountant, Certified Bookkeeper, Cost Accountant, Comptroller, Finance Officer, Manager, VP Finance, President of the Company, CEO, Treasurer, Banker, Entrepreneur and many more.",
+    "There are lots more to equip yourself as a whole person in order to face the complexity and challenges in the business world. The curriculum was thoroughly designed for every program offered to cater the needs of students academically. Convocations during Christ Emphasis Week celebration would strengthen your faith in God and you would be spiritually filled and morally secured. The activities done by the student organizations will improve you socially.",
+    "Be a CENTRALIAN, let us work together for our success. Be determined, have faith in God and focus on achieving your goals."
+  ],
+  "dean_message": {
+    "name": "Dr. Lorna T. Grande",
+    "title": "Dean, College of Business and Accountancy",
+    "body": [
+      "Thank you for enrolling in one of the programs at Central Philippine University under the College of Business and Accountancy. It is our desire to equip you with knowledge and skills you need to face the complex business world. We hope that your life here at CPU would be meaningful and joyful.",
+      "Student life is not easy. It is full of challenges which will make you a better person. Enjoy the facilities, programs, and wholesome activities provided by the University. Make new friends, join in the student organizations, and participate in programs organized by your organizations. These will develop your interpersonal skills in working along with other people as well as your leadership capability. You would be academically, socially and spiritually equipped before you earn your degree and leave CPU behind.",
+      "We have so many things to be proud of in our college. Both the Bachelor of Science in Business Administration (BSBA) and Bachelor of Science in Accountancy (BSA) programs have Level IV Re-accreditation Status granted by ACSCU-AAI. The BSBA program is a \"Center of Excellence\" grantee of CHED.",
+      "Let us work hand in hand towards our success and in everything we do, let it be for the glory of GOD."
+    ]
+  },
+  "vision": "A University committed to Exemplary Christian Education for Life (EXCEL) and responsive to the needs of the total person and the world",
+  "mission": "The mission of Central Philippine University is to carry out a program of spiritual, intellectual, moral, scientific, technological, and cultural training, and allied studies under influences which strengthen Christian faith, build up character and promote scholarship, research, and community service.",
+  "core_values": [
+    {"name": "Faith", "text": "The act of believing the things God has revealed about himself and acting on those beliefs. This includes commitment, cooperation, trust, and confidence."},
+    {"name": "Character", "text": "The aggregate features and traits that form the individual's nature, moral quality, and good report. This includes honesty, integrity, humility, and loyalty."},
+    {"name": "Justice", "text": "Righteousness or lawfulness and fairness. It is observing due process in administering the deserved sanction or reward. This includes fairness, equality, morality, and peace."},
+    {"name": "Stewardship", "text": "The proper and responsible management of life, position, possessions, and other resources entrusted by God to man. This includes service, accountability, culture, and outreach."},
+    {"name": "Excellence", "text": "The highly commendable quality or feature of a person's worth and/or deeds. This includes competence, technology, scholarship, and research."}
+  ],
+  "timeline": [
+    {"year": "1935", "title": "The College of Commerce opens", "text": "The Board of Trustees opens a junior College of Commerce offering the Certificate for Associate in Commercial Science, with 20 students. Miss Natividad Sitchon is the first dean."},
+    {"year": "1946", "title": "A full college", "text": "The junior college becomes a full college, offering majors in Accounting, Business Administration, Economics, and Finance."},
+    {"year": "1975", "title": "New programs", "text": "Dr. Milagros Dignadice becomes the second dean. Entrepreneurship, Management, Marketing, BS Accountancy and BS Computer Science are added under her leadership."},
+    {"year": "1982", "title": "First accreditation", "text": "The Association of Christian Schools and Colleges Accrediting Agency grants the College of Commerce Level 1 accreditation status."},
+    {"year": "1987", "title": "Entrepreneurship pioneer", "text": "The College is chosen as one of five pilot schools in entrepreneurship in the country, and receives Level 2 accreditation."},
+    {"year": "1997", "title": "Level 3", "text": "ACSC-AAI grants the Commerce program Level 3 accreditation. Mrs. Perla G. Deocampo becomes the third dean."},
+    {"year": "2001", "title": "Fourth dean", "text": "Mrs. Teresita E. Crucero becomes the fourth Dean, serving until 2017."},
+    {"year": "2006", "title": "College of Business and Accountancy", "text": "On April 1, 2006 the Board of Trustees renames the College of Commerce the College of Business and Accountancy. The Accounting Refresher Course is integrated into the BS Accountancy curriculum as 24 units of Integrated Review."},
+    {"year": "2012", "title": "Center of Development", "text": "CHED designates CPU a Center of Development (COD) in Business Administration."},
+    {"year": "2016", "title": "Center of Excellence", "text": "CHED grants CPU Center of Excellence status in Business Administration, later extended."},
+    {"year": "2017", "title": "Level IV", "text": "ACSCU-AAI grants Level IV Re-Accreditation to Business Administration and BS Accountancy. Dr. Lorna T. Grande becomes the fifth Dean (Dean since June 1, 2018)."},
+    {"year": "2018", "title": "BS Management Accounting returns", "text": "BS Management Accounting is re-offered under the new curriculum, in compliance with CHED Memo No. 28, s. 2017."},
+    {"year": "2023", "title": "Level IV to 2028", "text": "On December 11, 2023 both BSBA and BSA are granted Level IV Re-Accreditation, valid until December 2028. A CPU graduate places Top 9 in the October 2023 CPA Licensure Examination."}
+  ],
+  "stats": [
+    {"value": "1935", "label": "Year founded as the College of Commerce"},
+    {"value": "Level IV", "label": "ACSCU-AAI re-accreditation for BSBA, valid to 2028"},
+    {"value": "COE", "label": "CHED Center of Excellence in Business Administration"},
+    {"value": "100%", "label": "Faculty with a master's degree"}
+  ],
+  "organizations": [
+    {"abbr": "ACE", "name": "Association of Collegiate Entrepreneurs"},
+    {"abbr": "COAP", "name": "Council of Advertising Practitioners"},
+    {"abbr": "FIMA", "name": "Financial Management Association"},
+    {"abbr": "JMA", "name": "Junior Marketers' Association"},
+    {"abbr": "JMAP", "name": "Junior Management Association of the Philippines"},
+    {"abbr": "JPAMA", "name": "Junior Philippine Association of Management Accountants"},
+    {"abbr": "JPIA", "name": "Junior Philippine Institute of Accountants"},
+    {"abbr": "ENACTUS", "name": "Entrepreneurship in Us (formerly Students in Free Enterprise)"},
+    {"abbr": "PB", "name": "CBA Provincial Board"}
+  ],
+  "facilities": ["Mini-library", "Audio-visual room", "Tiled, well-ventilated classrooms", "Air-conditioned offices", "Shared CPU Gymnasium, swimming pool and track oval"],
+  "leaders": [
+    {"name": "Lorna T. Grande, PhD", "role": "Dean", "credentials": "PhD – Business Management"},
+    {"name": "Carmen N. Hernandez, DM", "role": "Chairperson, Department of Business Administration", "credentials": "DM – Human Resource Management"},
+    {"name": "Christine B. Golilao, DM", "role": "Chairperson, Department of Accountancy", "credentials": "DM – Business Management"},
+    {"name": "Rae Marie G. Leong On, MBA", "role": "Program Coordinator, BS Entrepreneurship", "credentials": "Master in Business Administration"},
+    {"name": "Gilda C. Monsole, MBM", "role": "Program Coordinator, BS Management Accounting", "credentials": "Master in Business Management"}
+  ],
+  "rules": {
+    "intro": "The following are prohibited at Central Philippine University, and violators will be subjected to administrative sanctions.",
+    "items": [
+      "Violation of any penal statute, or rules and regulations, or any valid order of a competent University authority.",
+      "Any conduct which threatens or endangers the health and/or safety of any person within the University premises or which adversely affects the student's acceptability as a member of the academic community, such as: carrying around or using explosive or deadly weapons such as guns or bladed weapons; intimidating, by covert or overt act, any student, faculty and staff member or administrative personnel; threatening, assaulting or insulting any student, faculty or staff member, employee or school authority; defaming any student, faculty member, employee or school authority; behaving abusively or discourteously towards any student, faculty member, employee or school authority; causing outsiders to assault any bona fide member of the University or to commit acts contrary to existing regulations.",
+      "Hazing that is injurious to health or results in bodily harm.",
+      "Forcefully or illegally occupying or using any University property whether field, park, building, lot or any other place.",
+      "Destroying, defacing, or stealing any University property. Vandalism.",
+      "Tampering with or forging school records, documents, transfer forms, CPU ID or using forged records or transfer credentials.",
+      "Tampering with official notices, announcements, etc. posted on bulletin boards, or displayed as streamers.",
+      "Fraudulent representation of the University, such as representing the University or any of its faculties, schools, colleges or departments without proper authorization, or using any identity symbols or identification cards of the University without proper authorization, for any fraudulent or unlawful purpose.",
+      "Producing and/or distributing written, printed or mimeographed materials containing language that is defamatory, slanderous, libelous or subversive in nature.",
+      "Engaging in immoral acts, such as being found in possession of or caught viewing obscene or pornographic materials, or being caught in any sexual act or conducting oneself lewdly.",
+      "Cheating and committing plagiarism and other forms of dishonesty.",
+      "Coming to school under the influence of liquor or any prohibited substance and/or bringing or consuming these substances on campus.",
+      "Smoking on campus.",
+      "Not wearing the CPU identification (ID) card on campus.",
+      "Disturbing or disrupting classes and programs, directly or indirectly, by voice or presence.",
+      "Gambling or betting in any form.",
+      "Violating traffic rules for motorists.",
+      "Littering inside the campus.",
+      "Use of cellphone inside the classrooms during classes and in any assembly area during convocations/meetings.",
+      "All other acts against any person or property of the government specified in the laws of the Republic of the Philippines."
+    ],
+    "sanction": "All CPU personnel and students are expected to obey these Rules and Regulations. Administrative sanction may consist of suspension, dropping or expulsion of the student, or appropriate legal action against any person."
+  },
+  "grading": [
+    ["A+", "1.0", "98 – 100"], ["A", "1.25", "95 – 97"], ["A-", "1.5", "92 – 94"], ["B+", "1.75", "89 – 91"], ["B", "2.0", "86 – 88"],
+    ["B-", "2.25", "83 – 85"], ["C+", "2.5", "80 – 82"], ["C", "2.75", "77 – 79"], ["C-", "3.0", "75 – 76"], ["F", "5.0", "Below 75"]
+  ],
+  "honors": {
+    "effective": "School Year 2024-2025",
+    "sections": [
+      {"title": "Minimum study load", "text": "A prospective honor student must maintain a minimum study load of 18 units each semester or 6 units for the summer term, except when the curriculum prescribes otherwise. Working students (CPU work students or students employed full- or part-time) must carry the same minimum load. Non-CPU working students must submit Certificates of Employment to the Registrar's Office and the Dean's Office at the start of every term to justify any academic underload."},
+      {"title": "Grade requirement", "text": "To qualify for honors, a college student must NOT have a grade lower than 2.0."},
+      {"title": "Failing grade", "text": "A student with a failing (F) or 5.0 grade in any course, whether in a previous or current degree program and whether taken at CPU or another school, will be ineligible for academic honors."},
+      {"title": "Dropped or left marks", "text": "A student with a dropped (D) or left (L) mark in any course, whether in a previous or current degree program and whether taken at CPU or another school, will be ineligible for academic honors."},
+      {"title": "Incomplete grades", "text": "A student with an incomplete or lapsed incomplete mark on any required course taken from another school, or a lapsed incomplete on any required course taken at CPU, is disqualified for honors. A graduating student who fails to complete an INC before the date of deliberation has the application for graduation canceled for that term, disqualifying them from honors."},
+      {"title": "Honors Point Average (HPA)", "text": "HPA is computed from the prescribed courses of the curriculum, excluding SEAL and NSTP grades. For transfer students, only courses in the current curriculum and courses from another school duly approved by the college dean are included. If a required course is taken twice, the first grade is used. HPA = Sum of (Grade × Credit Units) ÷ Total Units."},
+      {"title": "Residency at CPU", "text": "To qualify for honors, a student must have completed at CPU at least 75 percent of the total academic units required for graduation, and must have been enrolled for at least two years immediately before graduation."},
+      {"title": "Years to complete the degree", "text": "To qualify for honors, a student must finish the degree program within the number of years required by the curriculum."},
+      {"title": "Disciplinary action", "text": "After due process, a student found guilty of an offense and subject to disciplinary action will not be eligible to receive any academic honors."}
+    ],
+    "latin": [["Summa cum laude", "1.00 – 1.18"], ["Magna cum laude", "1.19 – 1.37"], ["Cum laude", "1.38 – 1.56"]]
+  },
+  "admissions": {
+    "source": "cpu.edu.ph (Admission Requirements / Online Admission announcements). Requirements may change each school year; confirm with the CPU Information Center.",
+    "freshmen": ["Senior High School Report Card (Form 138)", "PSA-authenticated Birth Certificate", "Certificate of Good Moral Character (optional)", "2×2 ID picture"],
+    "steps": ["Pre-register online at registration.cpu.edu.ph", "Pay the ₱500 admission fee through CPU's official payment options", "Submit your requirements and wait for your admission confirmation", "Proceed to enrollment and advising at the College of Business and Accountancy"],
+    "notes": ["The CPU College Aptitude Test (CPUCAT) is currently required only for Engineering, Pharmacy and Medical Laboratory Science applicants, not for CBA programs.", "Applicants without a final SHS report card yet may submit a scanned PSA birth certificate and Grade 12 ID."],
+    "info_center": "CPU Information Center: (033) 329-1971 local 2129 · 0921 760 2647 · infocenter@cpu.edu.ph"
+  }
+}

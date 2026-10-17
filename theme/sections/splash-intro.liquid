@@ -1,0 +1,51 @@
+{%- liquid
+  assign overlay = false
+  if section.settings.mode == 'overlay'
+    assign overlay = true
+  endif
+-%}
+<section class="splash{% unless overlay %} splash--page{% endunless %}" data-splash{% if overlay %} data-splash-overlay hidden role="dialog" aria-modal="true" aria-labelledby="SplashTitle-{{ section.id }}"{% endif %} {{ section.shopify_attributes }}>
+  <div class="splash__bg" aria-hidden="true"></div>
+  {% render 'bg-video', video: section.settings.video, url: section.settings.video_url, class: 'splash__video' %}
+  <div class="splash__content on-dark">
+    {%- if settings.logo != blank -%}
+      {{ settings.logo | image_url: width: 240 | image_tag: class: 'splash__seal', width: 116, height: 116, alt: 'Central Philippine University seal' }}
+    {%- else -%}
+      <img class="splash__seal" src="{{ 'cpu-seal.png' | asset_url }}" width="116" height="116" alt="Central Philippine University seal">
+    {%- endif -%}
+    <p class="splash__kicker">{{ section.settings.kicker }}</p>
+    <h1 class="splash__title" id="SplashTitle-{{ section.id }}">{{ section.settings.heading }}</h1>
+    <p class="splash__motto">{{ section.settings.motto }}</p>
+    <div class="button-row">
+      {%- if overlay -%}
+        <button type="button" class="button button--gold" data-splash-enter>{{ section.settings.enter_label }}</button>
+      {%- else -%}
+        <a class="button button--gold" href="{{ routes.root_url }}" data-splash-enter>{{ section.settings.enter_label }}</a>
+      {%- endif -%}
+      <a class="button button--outline" href="{{ section.settings.secondary_link | default: '/collections/programs' }}" data-splash-link>{{ section.settings.secondary_label }}</a>
+    </div>
+    {%- if overlay -%}<p class="splash__hint">Press Esc to skip</p>{%- endif -%}
+    <span class="splash__rule" aria-hidden="true"></span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Splash intro",
+  "settings": [
+    { "type": "select", "id": "mode", "label": "Display", "default": "overlay", "options": [
+      { "value": "overlay", "label": "Full-screen overlay, once per visit" },
+      { "value": "page", "label": "Inline (standalone welcome page)" }
+    ] },
+    { "type": "video", "id": "video", "label": "Background video", "info": "Upload a short, muted clip (e.g. CPU Gym intramurals) in Content › Files." },
+    { "type": "url", "id": "video_url", "label": "Or video file URL (.mp4)" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Central Philippine University" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "College of Business <em>&amp; Accountancy</em>" },
+    { "type": "text", "id": "motto", "label": "Motto line", "default": "Scientia et Fides · Forming business leaders since 1935" },
+    { "type": "text", "id": "enter_label", "label": "Enter button", "default": "Enter the site" },
+    { "type": "text", "id": "secondary_label", "label": "Second button", "default": "Explore programs" },
+    { "type": "url", "id": "secondary_link", "label": "Second button link" }
+  ],
+  "presets": [{ "name": "Splash intro" }]
+}
+{% endschema %}

@@ -1,0 +1,9 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": { "type": "announcement-bar", "settings": { "use_featured_campaign": true, "tag": "Enrollment", "text": "Enrollment for the coming school year is open", "link": "/pages/advertisements" } },
+    "header": { "type": "header", "settings": { "menu": "main-menu", "cta_label": "Inquire now", "cta_link": "/pages/contact" } }
+  },
+  "order": ["announcement", "header"]
+}

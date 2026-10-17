@@ -1,0 +1,60 @@
+{
+  "handle": "bs-entrepreneurship",
+  "title": "Bachelor of Science in Entrepreneurship",
+  "abbreviation": "BSEnt",
+  "degree_type": "BS",
+  "tagline": "Spot the opportunity, write the plan, and launch the venture while you study.",
+  "accreditation": ["CBA was one of five national pilot schools in entrepreneurship (1987)"],
+  "duration": "4 years (with summer terms)",
+  "overview": "BS Entrepreneurship takes you from entrepreneurial mindset to running business. You study social entrepreneurship, opportunity seeking, market research, pricing and costing, MSME law and taxation, and innovation management, then prepare and implement your own business plan across two lab-intensive semesters. You also choose a specialized track: Agripreneurship, Food Service, or IT.",
+  "who_for": "Self-starters with a business idea, or the drive to find one, who want to build and run their own ventures or a family business.",
+  "careers": ["Founder / Business Owner", "Family Business Successor", "Social Entrepreneur", "Franchise Operator", "Agripreneur", "Food Service Entrepreneur", "Tech Startup Founder", "Business Development Consultant"],
+  "curricula": [
+    {
+      "label": "Regular",
+      "note": "Choose one specialized track (Agripreneurship, Food Service, or IT) and take its four track subjects (12 units) in Track 1–4 slots.",
+      "cmo_basis": "CHED Memo Order No. 17, s. 2017",
+      "revision": "Revision no. 3",
+      "effective": "August 2023",
+      "grand_total": [139, 24, 147],
+      "years": [
+        {"year": "First Year", "terms": [
+          {"name": "First Semester", "subtotal": [21, 3, 22], "courses": [
+            ["Acctg 1103", 3, 3, 4, ""], ["BusEcon 1111", 3, 0, 3, ""], ["GEEng 1", 3, 0, 3, ""], ["PATHFit 1", 2, 0, 2, ""], ["SEAL 1", 1, 0, 1, ""], ["GESocSci 1", 3, 0, 3, ""], ["RE 1", 3, 0, 3, ""], ["NSTP 1", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [18, 3, 19], "courses": [
+            ["Acctg 1207", 0, 3, 1, "Acctg 1103"], ["GEMath 1", 3, 0, 3, ""], ["GESocSci 2", 3, 0, 3, ""], ["GESocSci 4", 3, 0, 3, ""], ["PATHFit 2", 2, 0, 2, "PATHFit 1"], ["SEAL 2", 1, 0, 1, ""], ["RE 2", 3, 0, 3, ""], ["NSTP 2", 3, 0, 3, "NSTP 1"]]},
+          {"name": "Summer", "subtotal": [6, 0, 6], "courses": [
+            ["Ent 2102", 3, 0, 3, ""], ["CESocSci 4", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Second Year", "terms": [
+          {"name": "First Semester", "subtotal": [20, 0, 20], "courses": [
+            ["CEArts 1", 3, 0, 3, ""], ["Elective 1", 3, 0, 3, ""], ["CETech 1", 3, 0, 3, ""], ["Ent 2001", 3, 0, 3, "BusEcon 1111, CESocSci 4"], ["Elective 2", 3, 0, 3, ""], ["GESocSci 3", 3, 0, 3, ""], ["PATHFit 3", 2, 0, 2, "PATHFit 1, PATHFit 2"]]},
+          {"name": "Second Semester", "subtotal": [19, 0, 19], "courses": [
+            ["Elective 3", 2, 0, 2, ""], ["Bus 2203", 3, 0, 3, ""], ["Ent 2203", 3, 0, 3, "Ent 2102"], ["Fin 2102", 3, 0, 3, "Acctg 1207, GEMath 1"], ["GEHum 1", 3, 0, 3, ""], ["GESocSci 5", 3, 0, 3, ""], ["PATHFit 4", 2, 0, 2, "PATHFit 1, PATHFit 2"]]}
+        ]},
+        {"year": "Third Year", "terms": [
+          {"name": "First Semester", "subtotal": [18, 0, 18], "courses": [
+            ["Ent 3104", 3, 0, 3, ""], ["BME 3003", 3, 0, 3, "Junior standing"], ["Bus 4106", 3, 0, 3, ""], ["BusLaw 3212", 3, 0, 3, "Acctg 1207"], ["Track 1", 3, 0, 3, ""], ["Track 2", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [18, 0, 18], "courses": [
+            ["Mgt 4104", 3, 0, 3, "BME 3003"], ["Ent 3207", 3, 0, 3, "Ent 3104"], ["Ent 3209", 3, 0, 3, ""], ["GESocSci 6", 3, 0, 3, ""], ["Elective 4", 3, 0, 3, ""], ["Track 3", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Fourth Year", "terms": [
+          {"name": "First Semester", "subtotal": [14, 9, 17], "courses": [
+            ["Elective 5", 3, 0, 3, ""], ["Ent 4100", 2, 9, 5, "Ent 3207, Junior Entrep core courses"], ["Ent 3105", 3, 0, 3, "Ent 2001, Ent 2102"], ["BME 4004", 3, 0, 3, "BME 3003"], ["Elective 6", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [5, 9, 8], "courses": [
+            ["Ent 4200", 2, 9, 5, "Ent 4100"], ["Track 4", 3, 0, 3, ""]]}
+        ]}
+      ]
+    }
+  ],
+  "electives": {"choose": 6, "courses": [
+    ["Ent 3206", 3, 0, 3, "Bus 2203"], ["Bus 2003", 2, 0, 2, ""], ["Ent 3208", 3, 0, 3, ""], ["Mktg 3107", 3, 0, 3, ""], ["Fin 3209", 3, 0, 3, ""], ["Fin 3104", 3, 0, 3, ""], ["BME 1201", 3, 0, 3, ""], ["Mktg 4110", 3, 0, 3, ""], ["Mgt 3203", 3, 0, 3, ""], ["HRM 1115", 3, 0, 3, ""], ["Mktg 3110", 3, 0, 3, ""]]},
+  "tracks": [
+    {"name": "Agripreneurship Track", "rule": "Select any four subjects", "courses": [
+      ["AS 1202", 2, 3, 3, ""], ["ACS 2103", 2, 3, 3, ""], ["ACS 1202", 2, 3, 3, ""], ["ACS 3204", 3, 0, 3, ""], ["AS 4205", 2, 3, 3, "AS 1202"]]},
+    {"name": "Food Service Track", "rule": "Take all four subjects", "courses": [
+      ["HPC 1101", 2, 3, 3, ""], ["THC 1202", 3, 0, 3, ""], ["HPC 2205", 2, 3, 3, ""], ["HMPE 4113", 2, 3, 3, ""]]},
+    {"name": "IT Track", "rule": "Take all four subjects", "courses": [
+      ["CCS 1400", 2, 3, 3, ""], ["CCS 1500", 2, 3, 3, "CCS 1400"], ["CCS 2100", 2, 3, 3, "CCS 1500"], ["CCS 2110", 3, 0, 3, "CCS 1500"]]}
+  ]
+}

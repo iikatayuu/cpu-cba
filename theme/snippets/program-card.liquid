@@ -1,0 +1,18 @@
+{%- comment -%} Params: product, heading_tag {%- endcomment -%}
+{%- liquid
+  assign m = product.metafields.cba
+  assign abbr = m.abbreviation.value | default: product.type
+  assign units = m.total_units.value
+-%}
+<a class="program-card" href="{{ product.url }}">
+  <span class="badge badge--navy program-card__abbr">{{ abbr }}</span>
+  {% render 'placeholder-media', image: product.featured_image, label: 'Students of this program in class or on internship', ratio: '16 / 10', sizes: '(min-width: 1100px) 400px, 100vw' %}
+  <div class="program-card__body">
+    <h3>{{ product.title }}</h3>
+    <p>{{ m.tagline.value | default: product.description | strip_html | truncatewords: 18 }}</p>
+    <div class="program-card__meta">
+      <span>{% if units %}{{ units }} units · {% endif %}{{ m.duration.value | default: '4 years' | split: ' (' | first }}</span>
+      <span class="link-arrow">Explore</span>
+    </div>
+  </div>
+</a>

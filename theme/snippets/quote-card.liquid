@@ -1,0 +1,9 @@
+{%- comment -%} Params: quote, name, role, photo {%- endcomment -%}
+<figure class="quote-card">
+  <span class="quote-card__mark" aria-hidden="true">&ldquo;</span>
+  <blockquote>{{ quote }}</blockquote>
+  <figcaption>
+    <span class="avatar">{% if photo != blank %}{{ photo | image_url: width: 96 | image_tag: alt: '' }}{% else %}{{ name | slice: 0 }}{% endif %}</span>
+    <span><cite>{{ name }}</cite><small>{{ role }}</small></span>
+  </figcaption>
+</figure>

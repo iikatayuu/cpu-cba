@@ -1,0 +1,11 @@
+<section class="section"><div class="page-width page-width--narrow">
+  <h1>Create account</h1>
+  {%- form 'create_customer', class: 'stack' -%}
+    {{ form.errors | default_errors }}
+    <div class="field"><label for="RegFirst">First name</label><input id="RegFirst" type="text" name="customer[first_name]" autocomplete="given-name"></div>
+    <div class="field"><label for="RegLast">Last name</label><input id="RegLast" type="text" name="customer[last_name]" autocomplete="family-name"></div>
+    <div class="field"><label for="RegEmail">Email</label><input id="RegEmail" type="email" name="customer[email]" autocomplete="email" required></div>
+    <div class="field"><label for="RegPassword">Password</label><input id="RegPassword" type="password" name="customer[password]" autocomplete="new-password" required></div>
+    <button class="button button--primary" type="submit">Create</button>
+  {%- endform -%}
+</div></section>

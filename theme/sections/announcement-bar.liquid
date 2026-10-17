@@ -1,0 +1,39 @@
+{%- liquid
+  assign text = section.settings.text
+  assign link = section.settings.link
+  assign tag = section.settings.tag
+  if section.settings.use_featured_campaign
+    assign today = 'now' | date: '%Y%m%d' | plus: 0
+    for c in shop.metaobjects.cba_campaign.values
+      if c.featured.value
+        assign ends = c.end_date.value | date: '%Y%m%d' | plus: 0
+        if c.end_date.value == blank or ends >= today
+          assign text = c.title.value
+          assign link = c.cta_url.value
+          assign tag = c.type.value
+          break
+        endif
+      endif
+    endfor
+  endif
+-%}
+{%- if text != blank -%}
+  <div class="announcement" {{ section.shopify_attributes }}>
+    <div class="page-width announcement__inner">
+      {%- if tag != blank -%}<span class="announcement__tag">{{ tag }}</span>{%- endif -%}
+      {%- if link != blank -%}<a href="{{ link }}">{{ text }} →</a>{%- else -%}<span>{{ text }}</span>{%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "checkbox", "id": "use_featured_campaign", "label": "Use the featured Advertisement campaign", "default": true, "info": "Pulls the first featured, non-expired entry from Content › Metaobjects › Campaign. Falls back to the text below." },
+    { "type": "text", "id": "tag", "label": "Tag", "default": "Enrollment" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Enrollment for the coming school year is open" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ]
+}
+{% endschema %}

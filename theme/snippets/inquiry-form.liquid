@@ -1,0 +1,49 @@
+{%- comment -%}
+  Native Shopify contact form. Params: program (string, preselects/locks program), id (unique), compact (bool)
+{%- endcomment -%}
+{%- assign programs = collections['programs'].products -%}
+{%- form 'contact', id: id, class: 'stack' -%}
+  {% render 'form-status', form: form %}
+  <input type="hidden" name="contact[Form]" value="{% if program %}Program inquiry{% else %}General inquiry{% endif %}">
+  <div class="form-grid{% unless compact %} form-grid--2{% endunless %}">
+    <div class="field">
+      <label for="{{ id }}-name">Full name</label>
+      <input id="{{ id }}-name" type="text" name="contact[name]" autocomplete="name" required value="{{ form.name }}">
+    </div>
+    <div class="field">
+      <label for="{{ id }}-email">Email</label>
+      <input id="{{ id }}-email" type="email" name="contact[email]" autocomplete="email" required spellcheck="false" autocapitalize="off" value="{{ form.email }}">
+    </div>
+    <div class="field">
+      <label for="{{ id }}-phone">Mobile number</label>
+      <input id="{{ id }}-phone" type="tel" name="contact[Phone]" autocomplete="tel" pattern="[0-9\-\+\s\(\)]*" value="{{ form.phone }}">
+    </div>
+    {%- if program -%}
+      <input type="hidden" name="contact[Program]" value="{{ program | escape }}">
+      <div class="field">
+        <label for="{{ id }}-status">I am a…</label>
+        <select id="{{ id }}-status" name="contact[Applicant type]">
+          <option>Grade 12 student</option>
+          <option>Senior high graduate</option>
+          <option>Transferee</option>
+          <option>Parent / guardian</option>
+          <option>Other</option>
+        </select>
+      </div>
+    {%- else -%}
+      <div class="field">
+        <label for="{{ id }}-program">Program of interest</label>
+        <select id="{{ id }}-program" name="contact[Program]">
+          <option value="Not sure yet">Not sure yet</option>
+          {%- for p in programs -%}<option>{{ p.title }}</option>{%- endfor -%}
+        </select>
+      </div>
+    {%- endif -%}
+    <div class="field field--full">
+      <label for="{{ id }}-body">Message</label>
+      <textarea id="{{ id }}-body" name="contact[body]" rows="{% if compact %}4{% else %}6{% endif %}" required placeholder="{% if program %}Ask about tuition, schedules, requirements…{% else %}How can we help?{% endif %}">{{ form.body }}</textarea>
+    </div>
+  </div>
+  <button type="submit" class="button button--primary">{% if program %}Send inquiry{% else %}Send message{% endif %}</button>
+  <p class="form-note">We reply within 2–3 working days. By sending, you agree to our <a href="{{ routes.root_url }}pages/policies#privacy">privacy policy</a>.</p>
+{%- endform -%}

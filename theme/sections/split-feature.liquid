@@ -1,0 +1,40 @@
+<section class="section{% if section.settings.style == 'paper' %} section--paper{% elsif section.settings.style == 'navy' %} section--navy{% endif %}" {{ section.shopify_attributes }}>
+  <div class="page-width split{% if section.settings.image_first %} split--wide-right{% else %} split--wide-left{% endif %}">
+    <div class="reveal"{% if section.settings.image_first %} style="order: 2"{% endif %}>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="rte">{{ section.settings.text }}</div>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="feature-list">
+          {%- for block in section.blocks -%}<li {{ block.shopify_attributes }}><span><strong>{{ block.settings.title }}</strong>{% if block.settings.text != blank %} — {{ block.settings.text }}{% endif %}</span></li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.button != blank -%}<a class="button button--primary" href="{{ section.settings.link }}">{{ section.settings.button }}</a>{%- endif -%}
+    </div>
+    <div class="reveal">
+      {% render 'placeholder-media', image: section.settings.image, label: section.settings.image_label, ratio: '5 / 4', sizes: '(min-width: 900px) 45vw, 100vw' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why CBA" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A business school with a Christian heart" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We form competent, ethical professionals: men and women of faith, character and excellence.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_label", "label": "Placeholder caption", "default": "Classroom discussion at New Valentine Hall" },
+    { "type": "checkbox", "id": "image_first", "label": "Image on the left", "default": false },
+    { "type": "text", "id": "button", "label": "Button label" },
+    { "type": "url", "id": "link", "label": "Button link" },
+    { "type": "select", "id": "style", "label": "Background", "default": "cream", "options": [ { "value": "cream", "label": "Cream" }, { "value": "paper", "label": "White" }, { "value": "navy", "label": "Navy" } ] }
+  ],
+  "blocks": [ { "type": "point", "name": "Point", "limit": 6, "settings": [
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "text", "id": "text", "label": "Text" }
+  ] } ],
+  "presets": [{ "name": "Image with text" }]
+}
+{% endschema %}

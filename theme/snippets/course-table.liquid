@@ -1,0 +1,34 @@
+{%- comment -%} Params: courses (array of {code,title,lec,lab,units,prereq}), subtotal (array [lec,lab,units]) {%- endcomment -%}
+<div class="table-wrap">
+  <table class="course-table">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Course title</th>
+        <th scope="col" class="num"><abbr title="Lecture hours per week">Lec</abbr></th>
+        <th scope="col" class="num"><abbr title="Laboratory hours per week">Lab</abbr></th>
+        <th scope="col" class="num">Units</th>
+        <th scope="col">Pre-requisites <span class="visually-hidden">or co-requisites</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for c in courses -%}
+        {%- assign is_open = false -%}
+        {%- if c.code contains 'Elective' or c.code contains 'Track' -%}{%- assign is_open = true -%}{%- endif -%}
+        <tr{% if is_open %} class="is-elective"{% endif %}>
+          <td>{{ c.code }}</td>
+          <td>{% if c.title != blank %}{{ c.title }}{% elsif c.code contains 'Track' %}Specialized track subject{% else %}Elective course (see list){% endif %}</td>
+          <td class="num">{{ c.lec }}</td>
+          <td class="num">{{ c.lab }}</td>
+          <td class="num">{{ c.units }}</td>
+          <td class="prereq">{{ c.prereq | default: '—' }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+    {%- if subtotal -%}
+      <tfoot>
+        <tr><td colspan="2">Sub-total</td><td class="num">{{ subtotal[0] }}</td><td class="num">{{ subtotal[1] }}</td><td class="num">{{ subtotal[2] }}</td><td></td></tr>
+      </tfoot>
+    {%- endif -%}
+  </table>
+</div>

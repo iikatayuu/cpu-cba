@@ -1,0 +1,49 @@
+{%- comment -%}
+  Renders curriculum variants (Regular / Bridging) as a segmented tab set, each with year tabs and semester tables.
+  Params: curricula (array), uid (string)
+{%- endcomment -%}
+{%- assign variant_count = curricula | size -%}
+{%- if variant_count > 1 -%}
+  <div class="tabs__list tabs__list--segmented" role="tablist" aria-label="Curriculum version">
+    {%- for cur in curricula -%}
+      <button type="button" class="tab" role="tab" id="{{ uid }}-v{{ forloop.index }}-tab" aria-controls="{{ uid }}-v{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ cur.label }}</button>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+{%- for cur in curricula -%}
+  {%- assign vid = uid | append: '-v' | append: forloop.index -%}
+  <div class="tabpanel" id="{{ vid }}"{% if variant_count > 1 %} role="tabpanel" aria-labelledby="{{ vid }}-tab"{% unless forloop.first %} hidden{% endunless %}{% endif %}>
+    {%- if variant_count == 1 and cur.label != 'Regular' -%}
+      <p><span class="badge">{{ cur.label }}</span></p>
+    {%- endif -%}
+    {%- if cur.note != blank -%}
+      <div class="note">{% render 'icon', name: 'info' %}<span>{{ cur.note }}</span></div>
+    {%- endif -%}
+    <div class="curriculum-meta">
+      {%- if cur.cmo_basis != blank -%}<span class="badge badge--outline">Based on {{ cur.cmo_basis }}</span>{%- endif -%}
+      {%- if cur.revision != blank -%}<span class="badge badge--outline">{{ cur.revision }}</span>{%- endif -%}
+      {%- if cur.effective != blank -%}<span class="badge badge--outline">Effective {{ cur.effective }}</span>{%- endif -%}
+    </div>
+    <div class="tabs__list" role="tablist" aria-label="Year level">
+      {%- for y in cur.years -%}
+        <button type="button" class="tab" role="tab" id="{{ vid }}-y{{ forloop.index }}-tab" aria-controls="{{ vid }}-y{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ y.year }}</button>
+      {%- endfor -%}
+    </div>
+    {%- for y in cur.years -%}
+      <div class="tabpanel" role="tabpanel" id="{{ vid }}-y{{ forloop.index }}" aria-labelledby="{{ vid }}-y{{ forloop.index }}-tab"{% unless forloop.first %} hidden{% endunless %}>
+        {%- for t in y.terms -%}
+          <div class="term">
+            <div class="term__title"><h4>{{ y.year }} · {{ t.name }}</h4><span>{{ t.subtotal[2] }} units</span></div>
+            {% render 'course-table', courses: t.courses, subtotal: t.subtotal %}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+    {%- if cur.grand_total -%}
+      <div class="grand-total">
+        <span>Grand total for the {{ cur.label | downcase }} curriculum</span>
+        <span><strong>{{ cur.grand_total[2] }}</strong> credit units · {{ cur.grand_total[0] }} lec / {{ cur.grand_total[1] }} lab hrs</span>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endfor -%}

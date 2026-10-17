@@ -1,0 +1,51 @@
+{
+  "handle": "bs-management-accounting",
+  "title": "Bachelor of Science in Management Accounting",
+  "abbreviation": "BSMA",
+  "degree_type": "BS",
+  "tagline": "Turn accounting data into strategy, and become the analyst every decision-maker needs.",
+  "accreditation": ["Offered by the ACSCU-AAI Level IV Department of Accountancy"],
+  "duration": "4 years (with summer terms)",
+  "overview": "BS Management Accounting combines a strong accounting foundation (financial reporting, cost accounting, intermediate accounting, auditing principles and taxation) with management-focused courses: management accounting, valuation, management reporting, performance management systems, strategic business analysis, and sustainability and strategic audit. It ends with a management accounting research project and internship.",
+  "who_for": "Analytical students who like accounting but want to work inside companies, on budgeting, costing, performance and strategy.",
+  "careers": ["Management Accountant", "Cost Accountant", "Budget Analyst", "Financial Planning and Analysis (FP&A) Associate", "Internal Auditor", "Certified Management Accountant (CMA) track", "Comptroller", "Business Analyst"],
+  "curricula": [
+    {
+      "label": "Regular",
+      "cmo_basis": "CHED Memo Order No. 28, s. 2017",
+      "revision": "Revision No. 5",
+      "effective": "Academic Year 2023 – 2024",
+      "grand_total": [181, 9, 184],
+      "years": [
+        {"year": "First Year", "terms": [
+          {"name": "First Semester", "subtotal": [24, 3, 25], "courses": [
+            ["SEAL 1", 1, 0, 1, ""], ["GESocSci 1", 3, 0, 3, ""], ["GESocSci 4", 3, 0, 3, ""], ["GEEng 1", 3, 0, 3, ""], ["Acctg 1103", 3, 3, 4, ""], ["Acctg 1102", 3, 0, 3, ""], ["RE 1", 3, 0, 3, ""], ["PATHFit 1", 2, 0, 2, ""], ["NSTP 1", 3, 0, 3, ""]]},
+          {"name": "Second Semester", "subtotal": [24, 3, 25], "courses": [
+            ["SEAL 2", 1, 0, 1, "SEAL 1"], ["GEMath 1", 3, 0, 3, ""], ["GESocSci 6", 3, 0, 3, ""], ["BME 2102", 3, 0, 3, ""], ["Acctg 1207", 0, 3, 1, "Acctg 1103"], ["Acctg 1206", 6, 0, 6, "Acctg 1103"], ["RE 2", 3, 0, 3, ""], ["PATHFit 2", 2, 0, 2, "PATHFit 1"], ["NSTP 2", 3, 0, 3, "NSTP 1"]]},
+          {"name": "Summer", "subtotal": [9, 0, 9], "courses": [
+            ["Acctg 1204", 3, 0, 3, ""], ["Tax 2101", 3, 0, 3, "Acctg 1102"], ["Acctg 1307", 3, 0, 3, ""]]}
+        ]},
+        {"year": "Second Year", "terms": [
+          {"name": "First Semester", "subtotal": [23, 0, 23], "courses": [
+            ["GEHum 1", 3, 0, 3, ""], ["GESocSci 2", 3, 0, 3, ""], ["GESocSci 3", 3, 0, 3, ""], ["Acctg 1306", 3, 0, 3, "Acctg 1103"], ["Acctg 2110", 3, 0, 3, "Acctg 1103"], ["Bus Law 3111", 3, 0, 3, ""], ["Tax 2302", 3, 0, 3, ""], ["PATHFit 3", 2, 0, 2, "PATHFit 1, PATHFit 2"]]},
+          {"name": "Second Semester", "subtotal": [20, 3, 21], "courses": [
+            ["CETech 1", 3, 0, 3, ""], ["CESocSci 4", 3, 0, 3, ""], ["CEArts 1", 3, 0, 3, ""], ["Acctg 2210", 3, 0, 3, ""], ["Acctg 2212", 3, 3, 4, "Acctg 2110"], ["Bus Law 2211", 3, 0, 3, ""], ["PATHFit 4", 2, 0, 2, "PATHFit 1, PATHFit 2, PATHFit 3"]]},
+          {"name": "Summer", "subtotal": [9, 0, 9], "courses": [
+            ["Acctg 2312", 3, 0, 3, ""], ["Acctg 3115", 3, 0, 3, ""], ["Acctg 2313", 3, 0, 3, "Acctg 2212"]]}
+        ]},
+        {"year": "Third Year", "terms": [
+          {"name": "First Semester", "subtotal": [24, 0, 24], "courses": [
+            ["Acctg 3114", 3, 0, 3, ""], ["Bus 4106", 3, 0, 3, ""], ["Acctg 3116", 3, 0, 3, ""], ["Acctg 3117", 3, 0, 3, "Bus Law 3111"], ["Acctg 3118", 3, 0, 3, ""], ["Acctg 3119", 3, 0, 3, "Acctg 2313"], ["Tax 3103", 3, 0, 3, "Tax 2101"], ["Acctg 3122", 3, 0, 3, "Acctg 2313"]]},
+          {"name": "Second Semester", "subtotal": [21, 0, 21], "courses": [
+            ["BME 3003", 3, 0, 3, "Acctg 1206"], ["Mgt 3203", 3, 0, 3, ""], ["Acctg 3237", 3, 0, 3, "Acctg 2313"], ["Acctg 3329", 3, 0, 3, "Acctg 2210"], ["Acctg 3226", 3, 0, 3, "Acctg 2313"], ["GESocSci 5", 3, 0, 3, ""], ["Acctg 3227", 3, 0, 3, "Acctg 3118"]]}
+        ]},
+        {"year": "Fourth Year", "terms": [
+          {"name": "First Semester", "subtotal": [18, 0, 18], "courses": [
+            ["BME 4004", 3, 0, 3, "BME 3003"], ["Acctg 4240", 3, 0, 3, "Acctg 3237"], ["Acctg 4241", 3, 0, 3, "Acctg 3237"], ["Acctg 4242", 3, 0, 3, "Acctg 3122"], ["Acctg 4243", 3, 0, 3, "Acctg 3237"], ["Acctg 4132", 3, 0, 3, "Acctg 3122"]]},
+          {"name": "Second Semester", "subtotal": [9, 0, 9], "courses": [
+            ["Acctg 4138", 3, 0, 3, "(Acctg 4139)"], ["Acctg 4139", 6, 0, 6, "(Acctg 4138)"]]}
+        ]}
+      ]
+    }
+  ]
+}

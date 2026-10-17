@@ -1,0 +1,19 @@
+{%- if section.settings.show_hero -%}
+  {% render 'page-hero', eyebrow: section.settings.eyebrow, title: page.title, text: section.settings.text %}
+{%- endif -%}
+{%- if page.content != blank -%}
+  <section class="section">
+    <div class="page-width page-width--narrow rte">{{ page.content }}</div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    { "type": "checkbox", "id": "show_hero", "label": "Show page header", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "textarea", "id": "text", "label": "Intro" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+{%- comment -%} Params: c (metaobject cba_campaign), hero (bool) {%- endcomment -%}
+{%- assign type = c.type.value | default: 'Announcement' -%}
+<article class="campaign{% if c.featured.value %} campaign--featured{% endif %}{% if hero %} campaign--hero{% endif %}" data-filter-item="{{ type }}">
+  {% render 'placeholder-media', image: c.image.value, label: 'Poster or photo for this campaign', ratio: '4 / 3', sizes: '(min-width: 900px) 33vw, 100vw' %}
+  <div class="campaign__body">
+    <div class="campaign__top">
+      <span class="badge badge--{{ type }}">{{ type }}</span>
+      {%- if c.start_date.value -%}
+        <span class="campaign__date">{% render 'icon', name: 'calendar' %}
+          {{ c.start_date.value | date: '%b %d, %Y' }}{% if c.end_date.value and c.end_date.value != c.start_date.value %} – {{ c.end_date.value | date: '%b %d, %Y' }}{% endif %}
+        </span>
+      {%- endif -%}
+    </div>
+    <h3>{{ c.title.value }}</h3>
+    <p>{{ c.body.value }}</p>
+    {%- if c.cta_url.value != blank -%}
+      <a class="button button--{% if hero %}gold{% else %}outline{% endif %} button--small" href="{{ c.cta_url.value }}">{{ c.cta_label.value | default: 'Learn more' }}</a>
+    {%- endif -%}
+  </div>
+</article>
