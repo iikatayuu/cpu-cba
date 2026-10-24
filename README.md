@@ -71,7 +71,7 @@ If you change `content/*.json`, re-run `node scripts/build-templates.mjs` and `n
 ## Before launch: content to replace or confirm
 
 - **Sample content.** Reviews, testimonials, campaigns and two stories are clearly labeled samples (`content/samples.json`). Replace them with real, permissioned content.
-- **Tuition.** Tuition tables are placeholders (₱ —), because no fee pages were provided.
+- **Tuition.** Program-specific tuition, miscellaneous, laboratory and total fees are transcribed from the provided fee schedules. Fees may change by school year; confirm the official assessment with the CPU Accounting Office.
 - **Admissions.** Requirements are summarized from cpu.edu.ph and may change each school year.
 - **BSBA Business Management.** Only the **Bridging Program** curriculum was in the handbook photos, so it is labeled as such.
 - **Possible handbook typos.** These were transcribed as printed; verify them with the college:
