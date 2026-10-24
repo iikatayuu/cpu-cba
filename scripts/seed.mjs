@@ -302,7 +302,7 @@ async function seedEntries(productIdByHandle) {
   for (const [i, t] of samples.testimonials.entries()) {
     await upsertEntry('cba_testimonial', `sample-testimonial-${i + 1}`, { quote: t.quote, name: t.name, role: t.role, program: productIdByHandle[t.program] });
   }
-  console.log('• Campaigns (sample)');
+  console.log('• Campaigns (Facebook source)');
   for (const c of samples.campaigns) {
     await upsertEntry('cba_campaign', c.handle, { title: c.title, type: c.type, body: c.body, start_date: c.start_date, end_date: c.end_date, cta_label: c.cta_label, cta_url: c.cta_url, featured: c.featured ? 'true' : 'false' });
   }
