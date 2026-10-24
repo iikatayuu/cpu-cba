@@ -111,21 +111,25 @@
       <p class="eyebrow">Fees</p>
       <h2>Tuition &amp; fees</h2>
       {%- assign tu = tuition -%}
-      <div class="note">{% render 'icon', name: 'info' %}<span>{{ tu.note | default: section.settings.tuition_note }}</span></div>
       <div class="table-wrap">
         <table class="tuition-table">
+          <thead>
+            <tr>
+              <th scope="col">Fees</th>
+              {%- for year in tu.years -%}<th scope="col">{{ year }}</th>{%- endfor -%}
+            </tr>
+          </thead>
           <tbody>
-            {%- if tu.rows -%}
-              {%- for row in tu.rows -%}<tr><th scope="row">{{ row[0] }}</th><td>{{ row[1] }}</td></tr>{%- endfor -%}
-            {%- else -%}
-              <tr><th scope="row">Tuition (per unit)</th><td>₱ —</td></tr>
-              <tr><th scope="row">Miscellaneous &amp; other fees</th><td>₱ —</td></tr>
-              <tr><th scope="row">Estimated total per semester</th><td>₱ —</td></tr>
-            {%- endif -%}
+            {%- for row in tu.rows -%}
+              <tr{% if row.label == 'Total' %} class="tuition-total"{% endif %}>
+                <th scope="row">{{ row.label }}</th>
+                {%- for value in row.values -%}<td>{{ value }}</td>{%- endfor -%}
+              </tr>
+            {%- endfor -%}
           </tbody>
         </table>
       </div>
-      <p class="form-note" style="margin-top: var(--space-3)">Want the official breakdown? <a href="#inquire">Send us an inquiry</a> and we'll reply with the current assessment.</p>
+      <p class="form-note" style="margin-top: var(--space-3)">Tuition and fees are based on the current schedule and may change. <a href="#inquire">Send us an inquiry</a> for the official assessment.</p>
     </section>
 
     <section class="program-block" id="reviews">
@@ -176,7 +180,6 @@
 {
   "name": "Program details",
   "settings": [
-    { "type": "text", "id": "tuition_note", "label": "Default tuition note", "default": "Sample figures only. Get your official assessment from the CPU Accounting Office." }
   ]
 }
 {% endschema %}

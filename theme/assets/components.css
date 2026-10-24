@@ -317,6 +317,8 @@
 .inquiry .form-grid { gap: var(--space-3); }
 .tuition-table td, .tuition-table th { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--line); text-align: left; }
 .tuition-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.tuition-table td { text-align: right; font-variant-numeric: tabular-nums; }
+.tuition-table .tuition-total th, .tuition-table .tuition-total td { font-weight: 700; background: var(--cream-50); }
 
 /* ---------- Reviews ---------- */
 .stars { display: inline-flex; gap: 2px; color: var(--gold-500); vertical-align: middle; }
