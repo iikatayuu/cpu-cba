@@ -14,9 +14,8 @@
       </div>
     </div>
     <div class="hero__media reveal">
-      {% render 'placeholder-media', image: section.settings.image, label: section.settings.image_label, ratio: '4 / 5', sizes: '(min-width: 960px) 45vw, 100vw' %}
+      {% render 'placeholder-media', image: section.settings.image, asset: section.settings.image_asset, label: section.settings.image_label, ratio: '4 / 5', sizes: '(min-width: 960px) 45vw, 100vw' %}
       <div class="hero__ribbon">
-        <img src="{{ 'cpu-seal.png' | asset_url }}" width="40" height="40" alt="" loading="lazy">
         <div><strong>{{ section.settings.ribbon_title }}</strong><span>{{ section.settings.ribbon_text }}</span></div>
       </div>
     </div>
@@ -35,6 +34,7 @@
     { "type": "text", "id": "button_2", "label": "Secondary button", "default": "Why CBA?" },
     { "type": "url", "id": "link_2", "label": "Secondary link" },
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Theme asset fallback", "default": "cba-campus.jpg", "info": "Used until an image is selected above." },
     { "type": "text", "id": "image_label", "label": "Placeholder caption", "default": "CBA students in front of Valentine Hall, CPU campus, Jaro" },
     { "type": "text", "id": "ribbon_title", "label": "Ribbon title", "default": "Since 1935" },
     { "type": "text", "id": "ribbon_text", "label": "Ribbon text", "default": "90 years of business education" }

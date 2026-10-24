@@ -12,7 +12,7 @@
       {%- if section.settings.button != blank -%}<a class="button button--primary" href="{{ section.settings.link }}">{{ section.settings.button }}</a>{%- endif -%}
     </div>
     <div class="reveal">
-      {% render 'placeholder-media', image: section.settings.image, label: section.settings.image_label, ratio: '5 / 4', sizes: '(min-width: 900px) 45vw, 100vw' %}
+      {% render 'placeholder-media', image: section.settings.image, asset: section.settings.image_asset, label: section.settings.image_label, ratio: '5 / 4', sizes: '(min-width: 900px) 45vw, 100vw' %}
     </div>
   </div>
 </section>
@@ -25,6 +25,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "A business school with a Christian heart" },
     { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We form competent, ethical professionals: men and women of faith, character and excellence.</p>" },
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Theme asset fallback", "default": "cba-faculty.jpg", "info": "Used until an image is selected above." },
     { "type": "text", "id": "image_label", "label": "Placeholder caption", "default": "Classroom discussion at New Valentine Hall" },
     { "type": "checkbox", "id": "image_first", "label": "Image on the left", "default": false },
     { "type": "text", "id": "button", "label": "Button label" },

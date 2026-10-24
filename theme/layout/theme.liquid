@@ -9,7 +9,7 @@
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
     {%- else -%}
-      <link rel="icon" type="image/png" href="{{ 'cpu-seal.png' | asset_url }}">
+      <link rel="icon" type="image/png" href="{{ 'cba-logo-transparent.png' | asset_url }}">
     {%- endif -%}
     {{ 'fraunces.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
     {{ 'inter.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}

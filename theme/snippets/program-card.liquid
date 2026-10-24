@@ -3,10 +3,22 @@
   assign m = product.metafields.cba
   assign abbr = m.abbreviation.value | default: product.type
   assign units = m.total_units.value
+  assign fallback_asset = 'program-bm.jpg'
+  if abbr contains 'ENT'
+    assign fallback_asset = 'program-entrepreneurship.jpg'
+  elsif abbr contains 'MM'
+    assign fallback_asset = 'program-marketing.jpg'
+  elsif abbr contains 'FM'
+    assign fallback_asset = 'program-finance.jpg'
+  elsif abbr contains 'HRM'
+    assign fallback_asset = 'program-hrm.jpg'
+  elsif abbr contains 'MA'
+    assign fallback_asset = 'program-accounting.jpg'
+  endif
 -%}
 <a class="program-card" href="{{ product.url }}">
   <span class="badge badge--navy program-card__abbr">{{ abbr }}</span>
-  {% render 'placeholder-media', image: product.featured_image, label: 'Students of this program in class or on internship', ratio: '16 / 10', sizes: '(min-width: 1100px) 400px, 100vw' %}
+  {% render 'placeholder-media', image: product.featured_image, asset: fallback_asset, label: 'Students of this program in class or on internship', ratio: '16 / 10', sizes: '(min-width: 1100px) 400px, 100vw' %}
   <div class="program-card__body">
     <h3>{{ product.title }}</h3>
     <p>{{ m.tagline.value | default: product.description | strip_html | truncatewords: 18 }}</p>

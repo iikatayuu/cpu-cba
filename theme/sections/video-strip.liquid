@@ -10,6 +10,8 @@
         <figure class="video-tile reveal" {{ block.shopify_attributes }}>
           {%- if block.settings.video != blank or block.settings.video_url != blank -%}
             {% render 'bg-video', video: block.settings.video, url: block.settings.video_url %}
+          {%- elsif block.settings.image_asset != blank -%}
+            <img src="{{ block.settings.image_asset | asset_url }}" width="1600" height="1200" loading="lazy" alt="{{ block.settings.caption | escape }}">
           {%- else -%}
             {% render 'placeholder-media', label: 'Short muted clip, e.g. CBA intramurals at the CPU Gym', ratio: '4 / 3' %}
           {%- endif -%}
@@ -31,6 +33,7 @@
   "blocks": [ { "type": "video", "name": "Video", "limit": 4, "settings": [
     { "type": "video", "id": "video", "label": "Video" },
     { "type": "url", "id": "video_url", "label": "Or video file URL (.mp4)" },
+    { "type": "text", "id": "image_asset", "label": "Image fallback asset", "info": "Used until a video is uploaded." },
     { "type": "text", "id": "caption", "label": "Caption" }
   ] } ],
   "presets": [{ "name": "Video strip" }]

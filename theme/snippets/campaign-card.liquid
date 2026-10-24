@@ -1,7 +1,15 @@
 {%- comment -%} Params: c (metaobject cba_campaign), hero (bool) {%- endcomment -%}
 {%- assign type = c.type.value | default: 'Announcement' -%}
+{%- liquid
+  assign fallback_asset = 'cba-student-life-2.jpg'
+  if type == 'Enrollment'
+    assign fallback_asset = 'cba-campus.jpg'
+  elsif type == 'Event'
+    assign fallback_asset = 'cba-student-life-1.jpg'
+  endif
+-%}
 <article class="campaign{% if c.featured.value %} campaign--featured{% endif %}{% if hero %} campaign--hero{% endif %}" data-filter-item="{{ type }}">
-  {% render 'placeholder-media', image: c.image.value, label: 'Poster or photo for this campaign', ratio: '4 / 3', sizes: '(min-width: 900px) 33vw, 100vw' %}
+  {% render 'placeholder-media', image: c.image.value, asset: fallback_asset, label: 'Poster or photo for this campaign', ratio: '4 / 3', sizes: '(min-width: 900px) 33vw, 100vw' %}
   <div class="campaign__body">
     <div class="campaign__top">
       <span class="badge badge--{{ type }}">{{ type }}</span>
