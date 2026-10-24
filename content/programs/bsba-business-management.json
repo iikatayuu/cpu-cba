@@ -8,6 +8,16 @@
   "duration": "4 years (with summer terms)",
   "overview": "Business Management gives you a broad grounding in how organizations work: people, operations, projects, law, finance and strategy. You practise managerial economics, project and operations management, brand management, research and feasibility studies, then apply them in a 600-hour business internship.",
   "who_for": "Future managers, supervisors and business owners who want a well-rounded view of running an enterprise.",
+  "tuition": {
+    "years": ["1st year", "2nd year", "3rd year", "4th year"],
+    "rows": [
+      {"label": "Units", "values": ["22.5", "20", "18", "15"]},
+      {"label": "Tuition", "values": ["₱22,815.00", "₱20,280.00", "₱18,252.00", "₱15,210.00"]},
+      {"label": "Miscellaneous", "values": ["₱11,152.00", "₱8,917.00", "₱8,917.00", "₱11,467.00"]},
+      {"label": "Laboratory", "values": ["₱900.00", "₱1,200.00", "₱950.00", "—"]},
+      {"label": "Total", "values": ["₱34,867.00", "₱30,397.00", "₱28,119.00", "₱26,677.00"]}
+    ]
+  },
   "careers": ["Management Trainee", "Operations Supervisor", "Project Coordinator", "Business Development Officer", "Branch / Store Manager", "Brand Associate", "Entrepreneur", "Executive Assistant"],
   "curricula": [
     {

@@ -8,6 +8,16 @@
   "duration": "4 years (with summer terms)",
   "overview": "BS Management Accounting combines a strong accounting foundation (financial reporting, cost accounting, intermediate accounting, auditing principles and taxation) with management-focused courses: management accounting, valuation, management reporting, performance management systems, strategic business analysis, and sustainability and strategic audit. It ends with a management accounting research project and internship.",
   "who_for": "Analytical students who like accounting but want to work inside companies, on budgeting, costing, performance and strategy.",
+  "tuition": {
+    "years": ["1st year", "2nd year", "3rd year", "4th year"],
+    "rows": [
+      {"label": "Units", "values": ["25.5", "23", "24", "18"]},
+      {"label": "Tuition", "values": ["₱25,857.00", "₱23,322.00", "₱24,336.00", "₱18,252.00"]},
+      {"label": "Miscellaneous", "values": ["₱11,152.00", "₱8,917.00", "₱8,917.00", "₱11,467.00"]},
+      {"label": "Laboratory", "values": ["₱900.00", "₱1,200.00", "₱3,270.00", "—"]},
+      {"label": "Total", "values": ["₱37,909.00", "₱33,439.00", "₱36,523.00", "₱29,719.00"]}
+    ]
+  },
   "careers": ["Management Accountant", "Cost Accountant", "Budget Analyst", "Financial Planning and Analysis (FP&A) Associate", "Internal Auditor", "Certified Management Accountant (CMA) track", "Comptroller", "Business Analyst"],
   "curricula": [
     {

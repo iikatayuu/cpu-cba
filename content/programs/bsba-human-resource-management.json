@@ -8,6 +8,16 @@
   "duration": "4 years (with summer terms)",
   "overview": "The Human Resource Management major prepares you to manage an organization's most important asset: its people. Coursework covers recruitment and selection, compensation administration, training and development, performance management, labor law, labor relations and negotiation, and organizational development. The program ends with a 600-hour business internship.",
   "who_for": "Students who are empathetic, organized and fair-minded, and who want to shape workplace culture and careers.",
+  "tuition": {
+    "years": ["1st year", "2nd year", "3rd year", "4th year"],
+    "rows": [
+      {"label": "Units", "values": ["22.5", "20", "18", "15"]},
+      {"label": "Tuition", "values": ["₱22,815.00", "₱20,280.00", "₱18,252.00", "₱15,210.00"]},
+      {"label": "Miscellaneous", "values": ["₱11,152.00", "₱8,917.00", "₱8,917.00", "₱11,467.00"]},
+      {"label": "Laboratory", "values": ["₱450.00", "₱3,162.00", "₱950.00", "—"]},
+      {"label": "Total", "values": ["₱34,417.00", "₱32,359.00", "₱28,119.00", "₱26,677.00"]}
+    ]
+  },
   "careers": ["HR Assistant / Generalist", "Recruitment Specialist", "Training and Development Officer", "Compensation and Benefits Analyst", "Employee Relations Officer", "Payroll Officer", "Labor Relations Associate", "Administrative Officer"],
   "curricula": [
     {

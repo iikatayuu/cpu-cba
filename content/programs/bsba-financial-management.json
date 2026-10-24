@@ -8,6 +8,16 @@
   "duration": "4 years (with summer terms)",
   "overview": "The Financial Management major trains you in corporate finance, banking, investments, credit, capital markets and business analytics. You learn to analyze financial statements, value investments and recommend sound funding decisions for businesses of every size. The program ends with a 600-hour business internship.",
   "who_for": "Students who enjoy numbers, markets and problem-solving, and who want careers in banking, corporate finance, investments or financial planning.",
+  "tuition": {
+    "years": ["1st year", "2nd year", "3rd year", "4th year"],
+    "rows": [
+      {"label": "Units", "values": ["19.5", "19", "18", "15"]},
+      {"label": "Tuition", "values": ["₱19,773.00", "₱19,266.00", "₱18,252.00", "₱15,210.00"]},
+      {"label": "Miscellaneous", "values": ["₱11,152.00", "₱8,917.00", "₱8,917.00", "₱11,467.00"]},
+      {"label": "Laboratory", "values": ["₱900.00", "₱1,200.00", "₱950.00", "—"]},
+      {"label": "Total", "values": ["₱31,825.00", "₱29,383.00", "₱28,119.00", "₱26,677.00"]}
+    ]
+  },
   "careers": ["Financial Analyst", "Bank Officer / Banker", "Credit and Collection Officer", "Investment and Portfolio Associate", "Treasury Officer", "Finance Manager / Comptroller", "Financial Planner", "Entrepreneur"],
   "curricula": [
     {

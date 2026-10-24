@@ -216,7 +216,6 @@ async function publish(id) {
 }
 
 async function upsertProduct(p) {
-  const tuition = { note: samples.tuition_sample.note, rows: samples.tuition_sample.rows };
   const metafields = [
     ['abbreviation', 'single_line_text_field', p.abbreviation],
     ['tagline', 'single_line_text_field', p.tagline],
@@ -227,7 +226,7 @@ async function upsertProduct(p) {
     ['accreditation', 'list.single_line_text_field', JSON.stringify(p.accreditation || [])],
     ['careers', 'list.single_line_text_field', JSON.stringify(p.careers || [])],
     ['curricula', 'json', JSON.stringify(expandCurricula(p))],
-    ['tuition', 'json', JSON.stringify(tuition)]
+    ['tuition', 'json', JSON.stringify(p.tuition)]
   ];
   if (p.electives) metafields.push(['electives', 'json', JSON.stringify({ choose: p.electives.choose, courses: p.electives.courses.map(course) })]);
   if (p.tracks) metafields.push(['tracks', 'json', JSON.stringify(p.tracks.map((t) => ({ name: t.name, rule: t.rule, courses: t.courses.map(course) })))]);
