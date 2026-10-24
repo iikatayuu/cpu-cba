@@ -37,7 +37,10 @@
         "badge_2",
         "badge_3"
       ],
-      "settings": {}
+      "settings": {
+        "image_asset": "cba-campus.jpg",
+        "image_label": "New Valentine Hall on the CPU campus"
+      }
     },
     "stats": {
       "type": "stats-band",
@@ -272,7 +275,8 @@
         "eyebrow": "Why CBA",
         "heading": "A business school with a Christian heart",
         "text": "<p>For 90 years the College has formed diligent, trustworthy and resourceful graduates, the kind supervisors ask for again and again.</p>",
-        "image_label": "Students presenting a business plan to faculty panelists",
+        "image_label": "CBA faculty gathered at the CPU campus",
+        "image_asset": "cba-faculty.jpg",
         "style": "paper",
         "button": "About the College",
         "link": "/pages/about"
@@ -296,18 +300,21 @@
         "video_1": {
           "type": "video",
           "settings": {
+            "image_asset": "cba-student-life-1.jpg",
             "caption": "Intramurals at the CPU Gym"
           }
         },
         "video_2": {
           "type": "video",
           "settings": {
+            "image_asset": "cba-student-life-2.jpg",
             "caption": "Team spirit, CBA style"
           }
         },
         "video_3": {
           "type": "video",
           "settings": {
+            "image_asset": "cba-campus.jpg",
             "caption": "Game day"
           }
         }
