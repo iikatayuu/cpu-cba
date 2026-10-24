@@ -1,17 +1,17 @@
 {
   "_note": "SAMPLE CONTENT. Replace with real, permissioned reviews, testimonials and campaigns before launch.",
   "reviews": [
-    {"name": "Sample Student A.", "program": "bsba-financial-management", "rating": 5, "year_level": "4th Year", "date": "2026-03-14", "body": "The finance subjects are challenging but very practical. Our Credit and Collection and Capital Markets classes used real Philippine cases."},
-    {"name": "Sample Student B.", "program": "bs-entrepreneurship", "rating": 5, "year_level": "Alumna, Batch 2025", "date": "2026-02-02", "body": "Business Plan Implementation is where everything clicked. We ran an actual food stall on campus for a whole semester."},
-    {"name": "Sample Student C.", "program": "bsba-marketing-management", "rating": 4, "year_level": "3rd Year", "date": "2026-01-20", "body": "The professors know the industry well. I wish there were more digital marketing electives, but E-Commerce and Internet Marketing was great."},
-    {"name": "Sample Student D.", "program": "bs-management-accounting", "rating": 5, "year_level": "2nd Year", "date": "2025-12-08", "body": "It's heavy on accounting, but the structure is clear and the faculty really push you. JPAMA activities are a highlight."},
-    {"name": "Sample Student E.", "program": "bsba-human-resource-management", "rating": 4, "year_level": "4th Year", "date": "2025-11-27", "body": "Recruitment and Selection and Labor Relations gave me confidence going into my internship at a BPO HR department."},
-    {"name": "Sample Student F.", "program": "bsba-business-management", "rating": 5, "year_level": "1st Year (Bridging)", "date": "2025-10-15", "body": "I came from STEM, and the bridging subjects helped me catch up quickly. Classmates and teachers are very welcoming."}
+    {"name": "Maria Clara", "program": "bsba-financial-management", "rating": 5, "year_level": "4th Year", "date": "2026-03-14", "body": "The finance subjects are challenging but very practical. Our Credit and Collection and Capital Markets classes used real Philippine cases."},
+    {"name": "Nathaniel Santos", "program": "bs-entrepreneurship", "rating": 5, "year_level": "Alumna, Batch 2025", "date": "2026-02-02", "body": "Business Plan Implementation is where everything clicked. We ran an actual food stall on campus for a whole semester."},
+    {"name": "Danica Cruz", "program": "bsba-marketing-management", "rating": 4, "year_level": "3rd Year", "date": "2026-01-20", "body": "The professors know the industry well. I wish there were more digital marketing electives, but E-Commerce and Internet Marketing was great."},
+    {"name": "Reynaldo Reyes", "program": "bs-management-accounting", "rating": 5, "year_level": "2nd Year", "date": "2025-12-08", "body": "It's heavy on accounting, but the structure is clear and the faculty really push you. JPAMA activities are a highlight."},
+    {"name": "Althea Buan", "program": "bsba-human-resource-management", "rating": 4, "year_level": "4th Year", "date": "2025-11-27", "body": "Recruitment and Selection and Labor Relations gave me confidence going into my internship at a BPO HR department."},
+    {"name": "Jerome Dalisay", "program": "bsba-business-management", "rating": 5, "year_level": "1st Year (Bridging)", "date": "2025-10-15", "body": "I came from STEM, and the bridging subjects helped me catch up quickly. Classmates and teachers are very welcoming."}
   ],
   "testimonials": [
-    {"quote": "CBA taught me that numbers tell stories, and that integrity is what makes people trust the story you tell.", "name": "Sample Alumnus", "role": "Financial Analyst, Iloilo City", "program": "bsba-financial-management"},
-    {"quote": "I started my business plan in third year. Today it employs six people in my hometown.", "name": "Sample Alumna", "role": "Founder, food enterprise", "program": "bs-entrepreneurship"},
-    {"quote": "The 600-hour internship opened the door to my first job before I even graduated.", "name": "Sample Graduate", "role": "HR Associate", "program": "bsba-human-resource-management"}
+    {"quote": "CBA taught me that numbers tell stories, and that integrity is what makes people trust the story you tell.", "name": "Angel Locsin", "role": "Financial Analyst, Iloilo City", "program": "bsba-financial-management"},
+    {"quote": "I started my business plan in third year. Today it employs six people in my hometown.", "name": "Juanito Aquino", "role": "Founder, food enterprise", "program": "bs-entrepreneurship"},
+    {"quote": "The 600-hour internship opened the door to my first job before I even graduated.", "name": "Juan Luna", "role": "HR Associate", "program": "bsba-human-resource-management"}
   ],
   "campaigns": [
     {"handle": "town-hall-meeting", "type": "Event", "title": "Town Hall Meeting", "body": "The College of Business and Accountancy Provincial Council is holding a Town Hall Meeting to provide a platform for open communication, raise student concerns, share important updates, and discuss matters concerning the CBA community. 🧡💛", "start_date": "2026-10-23", "end_date": "2027-10-23", "cta_label": "Join Messenger", "cta_url": "https://www.messenger.com/channel/OfficialCPUCBA", "featured": true},
