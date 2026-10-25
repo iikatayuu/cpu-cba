@@ -23,7 +23,7 @@
   <div class="page-width">
     {%- if product == blank -%}
       <div class="empty">
-        <h3>Choose a T-shirt</h3>
+        <h3>Choose a merchandise</h3>
         <p>Select a product in the section settings to display it here.</p>
       </div>
     {%- else -%}
@@ -70,7 +70,7 @@
           {%- else -%}
             <div class="ph" style="--ratio: 1 / 1;">
               <div class="ph__label">
-                <strong>T-shirt photo</strong>
+                <strong>Merchandise photo</strong>
                 Add an image to this product in Shopify.
               </div>
             </div>
@@ -218,14 +218,14 @@
 
 {% schema %}
 {
-  "name": "T-shirt spotlight",
+  "name": "Merchandise",
   "tag": "section",
   "class": "section-merchandise-spotlight",
   "settings": [
     {
       "type": "product",
       "id": "product",
-      "label": "T-shirt product"
+      "label": "Merchandise product"
     },
     {
       "type": "text",
@@ -288,7 +288,7 @@
   ],
   "presets": [
     {
-      "name": "T-shirt spotlight"
+      "name": "Merchandise"
     }
   ]
 }
