@@ -6,28 +6,28 @@
       <div class="grid grid--3 merchandise-grid">
         {%- for product in collection.products -%}
           {%- assign variant = product.selected_or_first_available_variant -%}
-          <article class="card merchandise-card reveal">
-            <div class="merchandise-card__image">
-              {% render 'placeholder-media', image: product.featured_image, label: product.title, ratio: '1 / 1', sizes: '(min-width: 900px) 30vw, 100vw' %}
-            </div>
-            <div class="merchandise-card__content">
-              <a href="{{ product.url }}">
+          <a href="{{ product.url }}" class="merchandise-card__link">
+            <article class="card merchandise-card reveal">
+              <div class="merchandise-card__image">
+                {% render 'placeholder-media', image: product.featured_image, label: product.title, ratio: '1 / 1', sizes: '(min-width: 900px) 30vw, 100vw' %}
+              </div>
+              <div class="merchandise-card__content">
                 <h2 class="merchandise-card__title">{{ product.title }}</h2>
-              </a>
-              {%- if product.description != blank -%}
-                <div class="rte merchandise-card__description">{{ product.description | strip_html | truncate: 120 }}</div>
-              {%- endif -%}
-              <p class="merchandise-card__price">{{ variant.price | money }}</p>
-              {%- form 'product', product, class: 'merchandise-card__form' -%}
-                <input type="hidden" name="id" value="{{ variant.id }}">
-                <label class="visually-hidden" for="MerchandiseQuantity-{{ section.id }}-{{ forloop.index }}">Quantity for {{ product.title }}</label>
-                <input class="quantity-input" id="MerchandiseQuantity-{{ section.id }}-{{ forloop.index }}" type="number" name="quantity" value="1" min="1">
-                <button class="button button--primary" type="submit" name="add"{% unless variant.available %} disabled{% endunless %}>
-                  {%- if variant.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
-                </button>
-              {%- endform -%}
-            </div>
-          </article>
+                {%- if product.description != blank -%}
+                  <div class="rte merchandise-card__description">{{ product.description | strip_html | truncate: 120 }}</div>
+                {%- endif -%}
+                <p class="merchandise-card__price">{{ variant.price | money }}</p>
+                {%- form 'product', product, class: 'merchandise-card__form' -%}
+                  <input type="hidden" name="id" value="{{ variant.id }}">
+                  <label class="visually-hidden" for="MerchandiseQuantity-{{ section.id }}-{{ forloop.index }}">Quantity for {{ product.title }}</label>
+                  <input class="quantity-input" id="MerchandiseQuantity-{{ section.id }}-{{ forloop.index }}" type="number" name="quantity" value="1" min="1">
+                  <button class="button button--primary" type="submit" name="add"{% unless variant.available %} disabled{% endunless %}>
+                    {%- if variant.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                  </button>
+                {%- endform -%}
+              </div>
+            </article>
+          </a>
         {%- else -%}
           <div class="empty">
             <h2>No merchandise yet</h2>
@@ -47,7 +47,7 @@
 </section>
 
 {% stylesheet %}
-.merchandise-card__content a {
+.merchandise-card__link {
   text-decoration: none;
 }
 {% endstylesheet %}
