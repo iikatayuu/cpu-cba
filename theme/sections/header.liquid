@@ -1,26 +1,74 @@
 {%- assign menu = linklists[section.settings.menu] -%}
+{%- assign max_visible = section.settings.max_visible | default: 5 -%}
+{%- assign more_label = section.settings.more_label | default: 'More' -%}
+{%- assign more_items = '' -%}
+{%- assign more_current = false -%}
+
 <header class="site-header" data-header>
   <div class="page-width site-header__inner">
     {% render 'brand' %}
     <nav class="nav" aria-label="Main">
       <ul class="nav__list">
-        <li><a class="nav__link" href="{{ routes.collections_url }}/programs">Programs</a></li>
-        <li><a class="nav__link" href="{{ routes.root_url }}pages/about">About</a></li>
-        <li><a class="nav__link" href="{{ routes.root_url }}collections/merchandise">Merchandise</a></li>
-        <li class="nav__item">
-          <a class="nav__link" href="{{ routes.root_url }}pages/contact">More</a>
-          <ul class="nav__sub">
-            <li><a href="{{ routes.root_url }}blogs/stories">Stories</a></li>
-            <li><a href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
-            <li><a href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
-            <li><a href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
-            <li><a href="{{ routes.root_url }}pages/contact">Contact</a></li>
-          </ul>
-        </li>
+        {%- if menu.links.size > 0 -%}
+
+          {%- capture more_items -%}
+            {%- for link in menu.links -%}
+              {%- if forloop.index > max_visible -%}
+                <li><a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+                {%- for child in link.links -%}
+                  <li class="nav__sub-child"><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- for link in menu.links -%}
+            {%- if forloop.index <= max_visible -%}
+              <li class="nav__item">
+                <a class="nav__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+                {%- if link.links.size > 0 -%}
+                  <ul class="nav__sub">
+                    {%- for child in link.links -%}<li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>{%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- else -%}
+              {%- if link.current or link.child_current -%}{%- assign more_current = true -%}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+        {%- else -%}
+
+          {%- assign fb_titles = 'Programs|About|Stories|Reviews|News &amp; Events|FAQs' | split: '|' -%}
+          {%- assign fb_urls = routes.collections_url | append: '/programs|' | append: routes.root_url | append: 'pages/about|' | append: routes.root_url | append: 'blogs/stories|' | append: routes.root_url | append: 'pages/reviews|' | append: routes.root_url | append: 'pages/advertisements|' | append: routes.root_url | append: 'pages/faqs' | split: '|' -%}
+
+          {%- capture more_items -%}
+            {%- for title in fb_titles -%}
+              {%- if forloop.index > max_visible -%}
+                <li><a href="{{ fb_urls[forloop.index0] }}">{{ title }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- for title in fb_titles -%}
+            {%- if forloop.index <= max_visible -%}
+              <li class="nav__item"><a class="nav__link" href="{{ fb_urls[forloop.index0] }}">{{ title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+
+        {%- endif -%}
+
+        {%- if more_items != blank -%}
+          <li class="nav__item nav__item--more" data-more>
+            <button type="button" class="nav__link nav__more-btn" aria-haspopup="true" aria-expanded="false" aria-controls="NavMore"{% if more_current %} aria-current="page"{% endif %} data-more-toggle>{{ more_label }}</button>
+            <ul class="nav__sub" id="NavMore">
+              {{ more_items }}
+            </ul>
+          </li>
+        {%- endif -%}
       </ul>
     </nav>
     <div class="header-actions">
-      <a class="header-cart" href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
       <button type="button" class="icon-button" data-open="search" aria-expanded="false" aria-controls="SearchModal" aria-label="Search">{% render 'icon', name: 'search' %}</button>
       {%- if section.settings.cta_label != blank -%}
         <a class="button button--primary button--small header-cta" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
@@ -45,7 +93,6 @@
         <li><a href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
         <li><a href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
         <li><a href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
-        <li><a href="{{ routes.root_url }}collections/merchandise">Merchandise</a></li>
         <li><a href="{{ routes.root_url }}pages/contact">Contact</a></li>
       {%- endfor -%}
     </ul>
@@ -68,11 +115,53 @@
   </div>
 </div>
 
+{% stylesheet %}
+  .nav__more-btn { border: 0; background: transparent; font: inherit; font-weight: 500; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .nav__more-btn::after { content: ''; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.2s var(--ease); }
+  .nav__item--more.is-open > .nav__more-btn::after { transform: translateY(1px) rotate(225deg); }
+  .nav__item--more > .nav__sub { left: auto; right: 0; }
+  .nav__item--more.is-open > .nav__sub { opacity: 1; visibility: visible; transform: none; }
+  .nav__sub a[aria-current='page'] { color: var(--navy-900); font-weight: 600; background: var(--cream-100); }
+  .nav__sub .nav__sub-child a { padding-left: 1.6rem; font-size: 0.88rem; color: var(--slate); }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    var more = document.querySelector('[data-more]');
+    if (!more) return;
+    var btn = more.querySelector('[data-more-toggle]');
+    function setOpen(open) {
+      more.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () {
+      setOpen(!more.classList.contains('is-open'));
+    });
+    document.addEventListener('click', function (e) {
+      if (!more.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { setOpen(false); }
+    });
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Header",
   "settings": [
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    {
+      "type": "range",
+      "id": "max_visible",
+      "label": "Links shown before \"More\"",
+      "info": "Any extra menu links move into the More dropdown.",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 5
+    },
+    { "type": "text", "id": "more_label", "label": "More button label", "default": "More" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Inquire now" },
     { "type": "url", "id": "cta_link", "label": "Button link" }
   ]
