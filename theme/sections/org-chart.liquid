@@ -1,0 +1,314 @@
+{%- comment -%}
+  Organization chart section
+  Place in /sections/org-chart.liquid
+
+  Uses the CPU CBA theme tokens and classes (section, page-width, section-head,
+  eyebrow, lede, etc.). Pure Liquid + CSS, no JavaScript needed.
+
+  HOW TO EDIT THE CHART
+  In the section settings, paste one person per line, in top-to-bottom order:
+
+    level | name | position | credentials | options | width
+
+  - level       : 0 = top (Dean), 1 = reports to the Dean, 2 = reports to a level 1 person, and so on
+  - name        : the person's name
+  - position    : job title (can be blank)
+  - credentials : degrees. Separate several with a semicolon (;)
+  - options     : blank, or one of
+                    staff  = lighter card for secretaries / support staff
+                    group  = a label (e.g. Faculty) whose people below it are shown as a grid
+                    aside  = card shown beside the person above it (used for the Dean's secretary)
+  - width       : (optional, level 1 only) column width. 1 = normal, 2 = twice as wide
+
+  If the box is left blank, the built-in CBA chart below is shown.
+{%- endcomment -%}
+
+{%- liquid
+  assign bg = section.settings.background
+  assign section_class = 'section'
+  if bg == 'cream'
+    assign section_class = 'section section--cream'
+  elsif bg == 'paper'
+    assign section_class = 'section section--paper'
+  elsif bg == 'navy'
+    assign section_class = 'section section--navy on-dark'
+  endif
+-%}
+
+{%- capture default_chart -%}
+0 | Lorna T. Grande | Dean | PhD - Business Management
+1 | Stephen A. Yuson | Secretary | Master in Business Administration | aside
+1 | Carmen H. Hernandez | Chairperson, Department of Business Administration | DM - Human Resource Management | | 2.4
+2 | Gibrelle Roy J. Madero | Secretary / Laboratory Coordinator | BSC - Marketing | staff
+2 | Rae Marie G. Leong On | Program Coordinator, BS Entrepreneurship | Master in Business Administration; DM - Business Management (on-going)
+2 | Jenmark P. Calumba | Program Coordinator, BS Advertising | Master in Business Administration (CAR)
+2 | Jeanil D. Sajo | Laboratory Coordinator | BS Advertising; Master in Business Administration (CAR)
+2 | Faculty | | | group
+3 | Lode Joy E. Bade | | Master in Business Administration; DM - Business Management (on-going)
+3 | Jesica P. Chin | | DM - Business Management
+3 | Rodalyn E. Daylo | | PhD in Education - Edu Mgt
+3 | April Ann B. Dela Gente | | PhD in Education - Edu Mgt
+3 | Hermely A. Jalando-on | | Masters of Management - Business Management; DM - Business Management (CAR)
+3 | Ian Jade E. Lozada | | Master in Business Administration
+3 | Ma. Rhea P. Milleza | | Master in Business Administration
+3 | Joan A. Militar | | Master in Business Administration; DM - Business Management (CAR)
+3 | Antonio A. Parreno | | Masters of Management - Business Management
+3 | Mary O. T. Penetrante | | DM - Business Management
+3 | Marivic C. Santos | | Master in Business Administration; DM - Business Management (CAR)
+3 | Mary Jane P. Tabar | | Master in Business Administration
+1 | Grace Ann C. Jardenil | | BS Advertising; Master in Business Administration (CAR) | | 1
+1 | Rodalyn E. Daylo | Internship Coordinator - External | PhD in Education - Edu Mgt | | 1
+1 | Stephen A. Yuson | Internship Coordinator - Internal / Overall Coordinator - CESL | Master in Business Administration | | 1
+2 | Ian Jade E. Lozada | CESL Coordinator, Department of Business Administration | Master in Business Administration
+2 | Gilda C. Monsole | CESL Coordinator, Department of Accountancy | Master in Business Management; DM - Business Management (CAR)
+1 | Christine B. Golilao | Chairperson, Department of Accountancy | DM - Business Management | | 2
+2 | Venson S. Ardales | Secretary | BSC - Management | staff
+2 | Gilda C. Monsole | Program Coordinator, BS Management Accounting | Master in Business Management; DM - Business Management (CAR)
+2 | Faculty | | | group
+3 | Russali S. Baldevarona | | Master in Business Education; EdD with units
+3 | Charis Emmelynn M. Bautista | | Masters of Management - Business Management
+3 | Marc Lovel C. Bedona | | Juris Doctor
+3 | Chary Joy M. Gamayon | | PhD - Business Management
+3 | Jet R. Nillos | | Master in Business Administration; DM - Business Management (on-going)
+3 | Roldan P. Pescos | | PhD - Business Management
+{%- endcapture -%}
+
+{%- assign chart_raw = section.settings.chart_data -%}
+{%- if chart_raw == blank -%}
+  {%- assign chart_raw = default_chart -%}
+{%- endif -%}
+
+{%- liquid
+  assign lines = chart_raw | newline_to_br | split: '<br />'
+  assign prev_level = -1
+  assign prev_group = false
+-%}
+
+{%- capture tree_html -%}
+  {%- for raw_line in lines -%}
+    {%- assign line = raw_line | strip -%}
+    {%- if line == blank -%}{%- continue -%}{%- endif -%}
+    {%- liquid
+      assign cols = line | split: '|'
+      assign level = cols[0] | strip | plus: 0
+      assign name = cols[1] | strip | escape
+      assign position = cols[2] | strip | escape
+      assign creds = cols[3] | strip | split: ';'
+      assign opts = cols[4] | strip | downcase
+      assign weight = cols[5] | strip | default: 1
+      assign variant = 'member'
+      if level == 0
+        assign variant = 'dean'
+      elsif level == 1
+        assign variant = 'head'
+      endif
+      if opts contains 'staff'
+        assign variant = 'staff'
+      endif
+    -%}
+
+    {%- capture node_html -%}
+      {%- if opts contains 'group' -%}
+        <div class="orgchart__label">{{ name }}</div>
+      {%- else -%}
+        <div class="orgchart__node orgchart__node--{{ variant }}">
+          <p class="orgchart__name">{{ name }}</p>
+          {%- if position != blank or creds.size > 0 -%}
+            <div class="orgchart__body">
+              {%- if position != blank -%}<strong>{{ position }}</strong>{%- endif -%}
+              {%- for c in creds -%}
+                {%- assign c_clean = c | strip -%}
+                {%- if c_clean != blank -%}<span>{{ c_clean | escape }}</span>{%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if opts contains 'aside' -%}
+      <div class="orgchart__aside">{{ node_html }}</div>
+    {%- else -%}
+      {%- if level > prev_level -%}
+        {%- if prev_level < 0 -%}
+          <ul class="orgchart__root" role="list">
+        {%- elsif prev_level == 0 -%}
+          <ul class="orgchart__branches" role="list">
+        {%- elsif prev_group -%}
+          <ul class="orgchart__grid" role="list">
+        {%- else -%}
+          <ul class="orgchart__hang" role="list">
+        {%- endif -%}
+      {%- else -%}
+        </li>
+        {%- assign diff = prev_level | minus: level -%}
+        {%- for i in (1..diff) -%}</ul></li>{%- endfor -%}
+      {%- endif -%}
+      <li class="orgchart__item" style="--w: {{ weight }}">{{ node_html }}
+      {%- assign prev_level = level -%}
+      {%- if opts contains 'group' -%}
+        {%- assign prev_group = true -%}
+      {%- else -%}
+        {%- assign prev_group = false -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if prev_level >= 0 -%}
+    </li>
+    {%- for i in (1..prev_level) -%}</ul></li>{%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="{{ section_class }} orgchart" id="orgchart-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.description != blank -%}
+      <div class="section-head section-head--center">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="lede">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if prev_level < 0 -%}
+      <div class="empty">
+        <h3>No chart data yet</h3>
+        <p>Add people to the section settings to build the organization chart.</p>
+      </div>
+    {%- else -%}
+      <div class="orgchart__scroll">
+        <div class="orgchart__tree" aria-label="Organization chart">
+          {{ tree_html }}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .orgchart { --oc-line: rgb(18 54 114 / 0.55); --oc-gap: 20px; }
+  .section--navy.orgchart { --oc-line: rgb(248 215 116 / 0.75); }
+
+  .orgchart__tree ul { list-style: none; margin: 0; padding: 0; }
+  .orgchart__tree li { margin: 0; }
+
+  /* ---------- Cards (compact) ---------- */
+  .orgchart__node { background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .orgchart__name { margin: 0; padding: 0.3rem 0.5rem; background: var(--navy-800); color: #fff; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-align: center; line-height: 1.25; }
+  .orgchart__node--head .orgchart__name { background: var(--navy-900); }
+  .orgchart__node--dean .orgchart__name { background: var(--gold-500); color: var(--navy-900); font-size: 0.74rem; padding-block: 0.4rem; }
+  .orgchart__node--staff .orgchart__name { background: var(--slate); }
+  .orgchart__body { padding: 0.35rem 0.5rem 0.45rem; font-size: 0.7rem; line-height: 1.3; text-align: center; }
+  .orgchart__body strong { display: block; margin-bottom: 1px; color: var(--navy-900); font-weight: 700; }
+  .orgchart__body span { display: block; color: var(--slate); }
+
+  .orgchart__label { display: inline-block; padding: 0.2rem 0.75rem; background: var(--gold-100); color: var(--navy-900); border: 1px solid var(--gold-300); border-radius: 999px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ---------- Root (Dean) ---------- */
+  .orgchart__root > li { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .orgchart__root > li > .orgchart__node { width: min(100%, 260px); }
+  .orgchart__aside { width: min(100%, 220px); margin-top: var(--space-2); }
+
+  /* ---------- Grid (faculty groups) ---------- */
+  .orgchart__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); gap: 6px; margin-top: 6px !important; align-items: start; }
+
+  /* ---------- Hanging list (all sizes) ---------- */
+  .orgchart__hang { padding-left: 20px !important; }
+  .orgchart__hang > li { position: relative; padding-top: 8px; }
+  .orgchart__hang > li::before { content: ''; position: absolute; left: -10px; top: 20px; width: 10px; border-top: 2px solid var(--oc-line); }
+  .orgchart__hang > li::after { content: ''; position: absolute; left: -10px; top: 0; bottom: 0; border-left: 2px solid var(--oc-line); }
+  .orgchart__hang > li:last-child::after { bottom: auto; height: 20px; }
+
+  /* ---------- Small screens: everything hangs vertically ---------- */
+  @media (max-width: 1099px) {
+    .orgchart__branches { padding-left: 20px !important; margin-top: var(--space-3) !important; }
+    .orgchart__branches > li { position: relative; padding-top: 8px; }
+    .orgchart__branches > li::before { content: ''; position: absolute; left: -10px; top: 20px; width: 10px; border-top: 2px solid var(--oc-line); }
+    .orgchart__branches > li::after { content: ''; position: absolute; left: -10px; top: 0; bottom: 0; border-left: 2px solid var(--oc-line); }
+    .orgchart__branches > li:last-child::after { bottom: auto; height: 20px; }
+    .orgchart__root > li > .orgchart__branches { align-self: stretch; }
+  }
+
+  /* ---------- Desktop: top-down tree ---------- */
+  @media (min-width: 1100px) {
+    .orgchart__scroll { overflow-x: auto; padding-bottom: var(--space-2); }
+    .orgchart__tree { min-width: 900px; }
+
+    .orgchart__aside { position: absolute; top: 0; left: calc(50% + 130px + 24px); width: 200px; margin: 0; }
+    .orgchart__aside::before { content: ''; position: absolute; right: 100%; top: 14px; width: 24px; border-top: 2px solid var(--oc-line); }
+
+    .orgchart__branches { display: flex; align-items: flex-start; position: relative; width: 100%; padding-top: var(--oc-gap) !important; }
+    .orgchart__branches::before { content: ''; position: absolute; top: 0; left: 50%; height: var(--oc-gap); border-left: 2px solid var(--oc-line); }
+    .orgchart__branches > li { position: relative; flex: var(--w, 1) 1 0; min-width: calc(var(--w, 1) * 120px); padding: var(--oc-gap) 5px 0; }
+    .orgchart__branches > li::before,
+    .orgchart__branches > li::after { content: ''; position: absolute; top: 0; width: 50%; height: var(--oc-gap); border-top: 2px solid var(--oc-line); }
+    .orgchart__branches > li::before { right: 50%; }
+    .orgchart__branches > li::after { left: 50%; border-left: 2px solid var(--oc-line); }
+    .orgchart__branches > li:only-child { padding-top: 0; }
+    .orgchart__branches > li:only-child::before,
+    .orgchart__branches > li:only-child::after { display: none; }
+    .orgchart__branches > li:first-child::before,
+    .orgchart__branches > li:last-child::after { border-top: 0; }
+    .orgchart__branches > li:last-child::before { border-right: 2px solid var(--oc-line); border-radius: 0 6px 0 0; }
+    .orgchart__branches > li:first-child::after { border-radius: 6px 0 0 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Organization chart",
+  "tag": "section",
+  "class": "section-org-chart",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small label above heading",
+      "default": "College of Business and Accountancy"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Organizational Chart"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Central Philippine University"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default (cream)" },
+        { "value": "cream", "label": "Darker cream" },
+        { "value": "paper", "label": "White" },
+        { "value": "navy", "label": "Navy" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "textarea",
+      "id": "chart_data",
+      "label": "Chart data",
+      "info": "One person per line: level | name | position | credentials | options | width. Example: 2 | Jane Doe | Program Coordinator | MBA; PhD. Options: staff, group, aside. Leave blank to use the built-in CBA chart."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Organization chart"
+    }
+  ]
+}
+{% endschema %}

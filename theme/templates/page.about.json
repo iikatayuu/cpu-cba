@@ -275,10 +275,22 @@
         "p_4",
         "p_5"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Leadership",
         "heading": "The people behind CBA",
         "text": "From the CBA Organizational Chart. Our faculty includes holders of PhD, DM, MBA and Juris Doctor degrees."
+      }
+    },
+    "org_chart_FeKrYT": {
+      "type": "org-chart",
+      "name": "Organization chart",
+      "settings": {
+        "eyebrow": "College of Business and Accountancy",
+        "heading": "Organizational Chart",
+        "description": "Central Philippine University",
+        "background": "default",
+        "chart_data": ""
       }
     },
     "orgs": {
@@ -443,6 +455,7 @@
     "vm",
     "history",
     "leaders",
+    "org_chart_FeKrYT",
     "orgs",
     "facilities",
     "cta"
