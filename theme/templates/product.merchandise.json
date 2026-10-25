@@ -1,0 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "disabled": true,
+      "settings": {}
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "eyebrow": "Be a Centralian",
+        "heading": "Ready to become a Centralian?",
+        "text": "Talk to us about programs, requirements and the next enrollment window.",
+        "button_1": "Send an inquiry",
+        "link_1": "",
+        "button_2": "Read the FAQs",
+        "link_2": ""
+      }
+    },
+    "merchandise_ntdxmK": {
+      "type": "merchandise",
+      "name": "Merchandise",
+      "settings": {
+        "eyebrow": "Official merchandise",
+        "heading": "",
+        "description": "",
+        "features": "100% soft cotton\nDurable screen-printed design\nAvailable in sizes S to XL",
+        "button_label": "Add to cart",
+        "show_quantity": true,
+        "image_position": "left",
+        "background": "default"
+      }
+    }
+  },
+  "order": [
+    "merchandise_ntdxmK",
+    "main",
+    "cta"
+  ]
+}
