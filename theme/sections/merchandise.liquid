@@ -3,10 +3,14 @@
   Place in /sections/merchandise.liquid
   Uses the CPU CBA theme classes (section, page-width, split, eyebrow, badge,
   button, field, quantity-input, feature-list, ph, media, etc.)
+
+  This section displays the product of the CURRENT product template
+  (the global `product` object). No product picker is needed: add the
+  section to the product template and it renders whichever product page
+  is being viewed.
 {%- endcomment -%}
 
 {%- liquid
-  assign product = section.settings.product
   assign bg = section.settings.background
   assign section_class = 'section'
   if bg == 'cream'
@@ -17,14 +21,16 @@
     assign section_class = 'section section--navy on-dark'
   endif
   assign features = section.settings.features | newline_to_br | split: '<br />'
+  assign product_form_id = 'merchandise-form-' | append: section.id
+  assign main_image_id = 'merchandise-main-' | append: section.id
 -%}
 
 <section class="{{ section_class }} merchandise-spotlight" id="merchandise-{{ section.id }}">
   <div class="page-width">
     {%- if product == blank -%}
       <div class="empty">
-        <h3>Choose a merchandise</h3>
-        <p>Select a product in the section settings to display it here.</p>
+        <h3>Merchandise</h3>
+        <p>This section displays the current product. Add it to a product template to see it here.</p>
       </div>
     {%- else -%}
       {%- assign current_variant = product.selected_or_first_available_variant -%}
@@ -46,7 +52,7 @@
                   widths: '500, 700, 1000',
                   sizes: '(min-width: 900px) 50vw, 100vw',
                   alt: product.featured_image.alt,
-                  id: 'merchandise-main-' | append: section.id
+                  id: main_image_id
               }}
             </div>
 
@@ -166,10 +172,6 @@
               </button>
             </div>
           {%- endform -%}
-
-          <p>
-            <a class="link-arrow" href="{{ product.url }}">View full details</a>
-          </p>
         </div>
       </div>
     {%- endif -%}
@@ -221,12 +223,10 @@
   "name": "Merchandise",
   "tag": "section",
   "class": "section-merchandise-spotlight",
+  "enabled_on": {
+    "templates": ["product"]
+  },
   "settings": [
-    {
-      "type": "product",
-      "id": "product",
-      "label": "Merchandise product"
-    },
     {
       "type": "text",
       "id": "eyebrow",
