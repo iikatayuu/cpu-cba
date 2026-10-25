@@ -19,7 +19,7 @@
   assign features = section.settings.features | newline_to_br | split: '<br />'
 -%}
 
-<section class="{{ section_class }} tshirt-spotlight" id="tshirt-{{ section.id }}">
+<section class="{{ section_class }} merchandise-spotlight" id="merchandise-{{ section.id }}">
   <div class="page-width">
     {%- if product == blank -%}
       <div class="empty">
@@ -33,12 +33,12 @@
         {%- assign layout_class = 'split split--wide-right' -%}
       {%- endif -%}
 
-      <div class="{{ layout_class }} tshirt-spotlight__layout{% if section.settings.image_position == 'right' %} tshirt-spotlight__layout--flip{% endif %}">
+      <div class="{{ layout_class }} merchandise-spotlight__layout{% if section.settings.image_position == 'right' %} merchandise-spotlight__layout--flip{% endif %}">
 
         {%- comment -%} ---------- Images ---------- {%- endcomment -%}
-        <div class="tshirt-spotlight__gallery">
+        <div class="merchandise-spotlight__gallery">
           {%- if product.featured_image -%}
-            <div class="media tshirt-spotlight__main" style="--ratio: 1 / 1;">
+            <div class="media merchandise-spotlight__main" style="--ratio: 1 / 1;">
               {{
                 product.featured_image
                 | image_url: width: 1000
@@ -46,17 +46,17 @@
                   widths: '500, 700, 1000',
                   sizes: '(min-width: 900px) 50vw, 100vw',
                   alt: product.featured_image.alt,
-                  id: 'tshirt-main-' | append: section.id
+                  id: 'merchandise-main-' | append: section.id
               }}
             </div>
 
             {%- if product.images.size > 1 -%}
-              <ul class="tshirt-spotlight__thumbs" role="list">
+              <ul class="merchandise-spotlight__thumbs" role="list">
                 {%- for image in product.images limit: 5 -%}
                   <li>
                     <button
                       type="button"
-                      class="tshirt-spotlight__thumb{% if forloop.first %} is-active{% endif %}"
+                      class="merchandise-spotlight__thumb{% if forloop.first %} is-active{% endif %}"
                       data-image="{{ image | image_url: width: 1000 }}"
                       data-alt="{{ image.alt | escape }}"
                       aria-label="Show photo {{ forloop.index }} of {{ product.images.size }}"
@@ -78,16 +78,16 @@
         </div>
 
         {%- comment -%} ---------- Details ---------- {%- endcomment -%}
-        <div class="tshirt-spotlight__details stack">
+        <div class="merchandise-spotlight__details stack">
           {%- if section.settings.eyebrow != blank -%}
             <span class="eyebrow">{{ section.settings.eyebrow }}</span>
           {%- endif -%}
 
           <h2>{{ section.settings.heading | default: product.title }}</h2>
 
-          <p class="tshirt-spotlight__price">
+          <p class="merchandise-spotlight__price">
             {%- if current_variant.compare_at_price > current_variant.price -%}
-              <s class="tshirt-spotlight__was">{{ current_variant.compare_at_price | money }}</s>
+              <s class="merchandise-spotlight__was">{{ current_variant.compare_at_price | money }}</s>
               <span class="badge badge--navy">Sale</span>
             {%- endif -%}
             <strong>{{ current_variant.price | money }}</strong>
@@ -113,15 +113,15 @@
             </ul>
           {%- endif -%}
 
-          {%- form 'product', product, id: product_form_id, class: 'tshirt-spotlight__form' -%}
+          {%- form 'product', product, id: product_form_id, class: 'merchandise-spotlight__form' -%}
             {%- if product.has_only_default_variant -%}
               <input type="hidden" name="id" value="{{ current_variant.id }}">
             {%- else -%}
               <div class="field">
-                <label for="tshirt-variant-{{ section.id }}">
+                <label for="merchandise-variant-{{ section.id }}">
                   {{ product.options_with_values | map: 'name' | join: ' / ' }}
                 </label>
-                <select id="tshirt-variant-{{ section.id }}" name="id">
+                <select id="merchandise-variant-{{ section.id }}" name="id">
                   {%- for variant in product.variants -%}
                     <option
                       value="{{ variant.id }}"
@@ -138,10 +138,10 @@
 
             <div class="merchandise-card__form">
               {%- if section.settings.show_quantity -%}
-                <label class="visually-hidden" for="tshirt-qty-{{ section.id }}">Quantity</label>
+                <label class="visually-hidden" for="merchandise-qty-{{ section.id }}">Quantity</label>
                 <input
                   class="quantity-input"
-                  id="tshirt-qty-{{ section.id }}"
+                  id="merchandise-qty-{{ section.id }}"
                   type="number"
                   name="quantity"
                   value="1"
@@ -177,32 +177,32 @@
 </section>
 
 {% stylesheet %}
-  .tshirt-spotlight__gallery { display: grid; gap: var(--space-3); }
-  .tshirt-spotlight__main { box-shadow: var(--shadow); background: var(--cream-100); border-radius: var(--radius-lg); }
-  .tshirt-spotlight__thumbs { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-2); flex-wrap: wrap; }
-  .tshirt-spotlight__thumb { width: 68px; height: 68px; padding: 0; border: 2px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--paper); }
-  .tshirt-spotlight__thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .tshirt-spotlight__thumb:hover { border-color: var(--gold-300); }
-  .tshirt-spotlight__thumb.is-active { border-color: var(--gold-500); }
-  .tshirt-spotlight__price { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); font-size: var(--step-2); font-family: var(--font-display); color: var(--navy-900); margin: 0; }
-  .section--navy .tshirt-spotlight__price { color: var(--gold-500); }
-  .tshirt-spotlight__was { font-size: var(--step-0); color: var(--slate); font-family: var(--font-body); }
-  .tshirt-spotlight__form { display: grid; gap: var(--space-4); max-width: 420px; }
-  .tshirt-spotlight__form .field label { color: inherit; }
-  .section--navy .tshirt-spotlight__form .field select { color: var(--ink); }
-  .section--navy .tshirt-spotlight .lede { color: #C9D5EC; }
-  .tshirt-spotlight .button[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .merchandise-spotlight__gallery { display: grid; gap: var(--space-3); }
+  .merchandise-spotlight__main { box-shadow: var(--shadow); background: var(--cream-100); border-radius: var(--radius-lg); }
+  .merchandise-spotlight__thumbs { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-2); flex-wrap: wrap; }
+  .merchandise-spotlight__thumb { width: 68px; height: 68px; padding: 0; border: 2px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--paper); }
+  .merchandise-spotlight__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .merchandise-spotlight__thumb:hover { border-color: var(--gold-300); }
+  .merchandise-spotlight__thumb.is-active { border-color: var(--gold-500); }
+  .merchandise-spotlight__price { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); font-size: var(--step-2); font-family: var(--font-display); color: var(--navy-900); margin: 0; }
+  .section--navy .merchandise-spotlight__price { color: var(--gold-500); }
+  .merchandise-spotlight__was { font-size: var(--step-0); color: var(--slate); font-family: var(--font-body); }
+  .merchandise-spotlight__form { display: grid; gap: var(--space-4); max-width: 420px; }
+  .merchandise-spotlight__form .field label { color: inherit; }
+  .section--navy .merchandise-spotlight__form .field select { color: var(--ink); }
+  .section--navy .merchandise-spotlight .lede { color: #C9D5EC; }
+  .merchandise-spotlight .button[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
   @media (min-width: 900px) {
-    .tshirt-spotlight__layout--flip .tshirt-spotlight__gallery { order: 2; }
+    .merchandise-spotlight__layout--flip .merchandise-spotlight__gallery { order: 2; }
   }
 {% endstylesheet %}
 
 <script>
   (function () {
-    var root = document.getElementById('tshirt-{{ section.id }}');
+    var root = document.getElementById('merchandise-{{ section.id }}');
     if (!root) return;
-    var main = root.querySelector('.tshirt-spotlight__main img');
-    var thumbs = root.querySelectorAll('.tshirt-spotlight__thumb');
+    var main = root.querySelector('.merchandise-spotlight__main img');
+    var thumbs = root.querySelectorAll('.merchandise-spotlight__thumb');
     if (!main || !thumbs.length) return;
     thumbs.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -220,7 +220,7 @@
 {
   "name": "T-shirt spotlight",
   "tag": "section",
-  "class": "section-tshirt-spotlight",
+  "class": "section-merchandise-spotlight",
   "settings": [
     {
       "type": "product",
