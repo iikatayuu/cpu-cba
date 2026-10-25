@@ -1,12 +1,39 @@
-{%- comment -%} This site has no checkout. The cart page redirects visitors to the inquiry form. {%- endcomment -%}
 <section class="section">
-  <div class="page-width page-width--narrow" style="text-align:center">
-    <h1>No cart needed</h1>
-    <p class="lede" style="margin-inline:auto">Programs aren't purchased online. Send us an inquiry and our office will guide you through admission.</p>
-    <a class="button button--primary" href="/pages/contact">Go to the inquiry form</a>
+  <div class="page-width page-width--narrow">
+    <p class="eyebrow">Your order</p>
+    <h1>Cart</h1>
+    {%- if cart.item_count == 0 -%}
+      <div class="empty">
+        <p>Your cart is empty.</p>
+        <a class="button button--primary" href="{{ routes.collections_url }}/merchandise">Browse merchandise</a>
+      </div>
+    {%- else -%}
+      {% form 'cart', cart, class: 'cart-form' %}
+        <div class="cart-items">
+          {%- for item in cart.items -%}
+            <div class="cart-item">
+              <a class="cart-item__image" href="{{ item.url }}">{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.title }}</a>
+              <div class="cart-item__details">
+                <h2><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                {%- unless item.product.has_only_default_variant -%}<p class="form-note">{{ item.variant.title }}</p>{%- endunless -%}
+                <p>{{ item.final_line_price | money }}</p>
+                <label for="CartQuantity-{{ forloop.index }}">Quantity</label>
+                <input class="quantity-input" id="CartQuantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="cart-summary">
+          <p><strong>Subtotal</strong> <span>{{ cart.total_price | money }}</span></p>
+          <p class="form-note">Shipping and taxes are calculated at checkout.</p>
+          <button class="button button--outline" type="submit" name="update">Update cart</button>
+          <button class="button button--primary" type="submit" name="checkout">Checkout</button>
+          {{ content_for_additional_checkout_buttons }}
+        </div>
+      {% endform %}
+    {%- endif -%}
   </div>
 </section>
-<script>window.location.replace('/pages/contact');</script>
 {% schema %}
-{ "name": "Cart redirect" }
+{ "name": "Cart" }
 {% endschema %}

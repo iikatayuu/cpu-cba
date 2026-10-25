@@ -1,0 +1,56 @@
+{% render 'page-hero', eyebrow: section.settings.eyebrow, title: section.settings.heading, text: section.settings.text, current: section.settings.heading %}
+
+<section class="section" id="merchandise-{{ section.id }}">
+  <div class="page-width">
+    {%- paginate collection.products by 24 -%}
+      <div class="grid grid--3 merchandise-grid">
+        {%- for product in collection.products -%}
+          {%- assign variant = product.selected_or_first_available_variant -%}
+          <article class="card merchandise-card reveal">
+            <div class="merchandise-card__image">
+              {% render 'placeholder-media', image: product.featured_image, label: product.title, ratio: '1 / 1', sizes: '(min-width: 900px) 30vw, 100vw' %}
+            </div>
+            <div class="merchandise-card__content">
+              <h2 class="merchandise-card__title">{{ product.title }}</h2>
+              {%- if product.description != blank -%}
+                <div class="rte merchandise-card__description">{{ product.description | strip_html | truncate: 120 }}</div>
+              {%- endif -%}
+              <p class="merchandise-card__price">{{ variant.price | money }}</p>
+              {%- form 'product', product, class: 'merchandise-card__form' -%}
+                <input type="hidden" name="id" value="{{ variant.id }}">
+                <label class="visually-hidden" for="MerchandiseQuantity-{{ section.id }}-{{ forloop.index }}">Quantity for {{ product.title }}</label>
+                <input class="quantity-input" id="MerchandiseQuantity-{{ section.id }}-{{ forloop.index }}" type="number" name="quantity" value="1" min="1">
+                <button class="button button--primary" type="submit" name="add"{% unless variant.available %} disabled{% endunless %}>
+                  {%- if variant.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+                </button>
+              {%- endform -%}
+            </div>
+          </article>
+        {%- else -%}
+          <div class="empty">
+            <h2>No merchandise yet</h2>
+            <p>Merchandise will appear here once products are published in Shopify.</p>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Merchandise pages">
+          {%- if paginate.previous -%}<a class="button button--outline button--small" href="{{ paginate.previous.url }}">Previous</a>{%- endif -%}
+          <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a class="button button--outline button--small" href="{{ paginate.next.url }}">Next</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Merchandise listing",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "CBA shop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wear your CBA pride" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Official College of Business and Accountancy merchandise, available for delivery or pickup." }
+  ]
+}
+{% endschema %}

@@ -4,26 +4,23 @@
     {% render 'brand' %}
     <nav class="nav" aria-label="Main">
       <ul class="nav__list">
-        {%- for link in menu.links -%}
-          <li class="nav__item">
-            <a class="nav__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
-            {%- if link.links.size > 0 -%}
-              <ul class="nav__sub">
-                {%- for child in link.links -%}<li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>{%- endfor -%}
-              </ul>
-            {%- endif -%}
-          </li>
-        {%- else -%}
-          <li><a class="nav__link" href="{{ routes.collections_url }}/programs">Programs</a></li>
-          <li><a class="nav__link" href="{{ routes.root_url }}pages/about">About</a></li>
-          <li><a class="nav__link" href="{{ routes.root_url }}blogs/stories">Stories</a></li>
-          <li><a class="nav__link" href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
-          <li><a class="nav__link" href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
-          <li><a class="nav__link" href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
-        {%- endfor -%}
+        <li><a class="nav__link" href="{{ routes.collections_url }}/programs">Programs</a></li>
+        <li><a class="nav__link" href="{{ routes.root_url }}pages/about">About</a></li>
+        <li><a class="nav__link" href="{{ routes.root_url }}collections/merchandise">Merchandise</a></li>
+        <li class="nav__item">
+          <a class="nav__link" href="{{ routes.root_url }}pages/contact">More</a>
+          <ul class="nav__sub">
+            <li><a href="{{ routes.root_url }}blogs/stories">Stories</a></li>
+            <li><a href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
+            <li><a href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
+            <li><a href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
+            <li><a href="{{ routes.root_url }}pages/contact">Contact</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
     <div class="header-actions">
+      <a class="header-cart" href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
       <button type="button" class="icon-button" data-open="search" aria-expanded="false" aria-controls="SearchModal" aria-label="Search">{% render 'icon', name: 'search' %}</button>
       {%- if section.settings.cta_label != blank -%}
         <a class="button button--primary button--small header-cta" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
@@ -48,6 +45,7 @@
         <li><a href="{{ routes.root_url }}pages/reviews">Reviews</a></li>
         <li><a href="{{ routes.root_url }}pages/advertisements">News &amp; Events</a></li>
         <li><a href="{{ routes.root_url }}pages/faqs">FAQs</a></li>
+        <li><a href="{{ routes.root_url }}collections/merchandise">Merchandise</a></li>
         <li><a href="{{ routes.root_url }}pages/contact">Contact</a></li>
       {%- endfor -%}
     </ul>

@@ -1,6 +1,6 @@
 # CPU College of Business and Accountancy: Shopify site
 
-A promotional website for the College of Business and Accountancy (CBA) of Central Philippine University. It covers six programs: BSBA Business Management, Financial Management, Marketing Management, Human Resource Management, BS Entrepreneurship and BS Management Accounting. It is built as a custom Online Store 2.0 Shopify theme. Programs are Shopify products shown for information and inquiries only; there is no cart or checkout.
+A promotional website for the College of Business and Accountancy (CBA) of Central Philippine University. It covers six programs: BSBA Business Management, Financial Management, Marketing Management, Human Resource Management, BS Entrepreneurship and BS Management Accounting. It is built as a custom Online Store 2.0 Shopify theme. Programs are Shopify products shown for information and inquiries only; merchandise is sold through Shopify's native cart and checkout.
 
 ## Repository layout
 
@@ -19,6 +19,7 @@ A promotional website for the College of Business and Accountancy (CBA) of Centr
 | Splash (first visit, once per session) | `/` overlay, or `/pages/welcome` | `index.json` (`splash-intro`), `page.welcome.json` |
 | Homepage, with random "Did you know?" trivia | `/` | `index.json` |
 | Programs (product/service listing) | `/collections/programs` | `collection.json` |
+| Merchandise shop | `/collections/merchandise` | `collection.merchandise.json` |
 | Program detail | `/products/<handle>` | `product.json` |
 | About us | `/pages/about` | `page.about.json` |
 | Contact | `/pages/contact` | `page.contact.json` |
@@ -64,6 +65,7 @@ A promotional website for the College of Business and Accountancy (CBA) of Centr
 | Announcement bar | Shows the first **featured**, non-expired Campaign. Campaigns past their end date are hidden automatically. |
 | Reviews submitted on the site | Arrive by email as a contact-form submission marked "Review submission". Staff add approved ones as Review entries. |
 | Program details (curriculum, electives, tracks, tuition) | Product metafields in the `cba` namespace |
+| Merchandise products | Products added to the `merchandise` collection in Shopify; prices, inventory, variants and checkout settings are managed in Shopify Admin |
 | Page text (hero, about, policies, timeline, leaders) | Section and block settings in the theme editor |
 
 If you change `content/*.json`, re-run `node scripts/build-templates.mjs` and `node scripts/seed.mjs`. Note that regenerating templates overwrites edits made in the theme editor.

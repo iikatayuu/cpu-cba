@@ -266,6 +266,7 @@ async function upsertCollection(productIds) {
     check(d.collectionCreate, 'collection');
     id = d.collectionCreate.collection && d.collectionCreate.collection.id;
   }
+
   if (id) {
     const d = await gql(`mutation($id: ID!, $p: [ID!]!) { collectionAddProducts(id: $id, productIds: $p) { userErrors { field message } } }`, { id, p: productIds });
     check(d.collectionAddProducts, 'collection add');
@@ -276,6 +277,29 @@ async function upsertCollection(productIds) {
     await publish(id);
   }
   console.log('  ✓ collection programs');
+  return id;
+}
+
+async function upsertMerchandiseCollection() {
+  const found = await gql(`query { collectionByIdentifier(identifier: { handle: "merchandise" }) { id } }`);
+  let id = found.collectionByIdentifier && found.collectionByIdentifier.id;
+  const base = {
+    title: 'Merchandise',
+    handle: 'merchandise',
+    sortOrder: 'BEST_SELLING',
+    templateSuffix: 'merchandise',
+    descriptionHtml: '<p>Official College of Business and Accountancy merchandise.</p>'
+  };
+  if (!id) {
+    const d = await gql(`mutation($c: CollectionCreateInput!) { collectionCreate(collection: $c) { collection { id } userErrors { field message } } }`, { c: base });
+    check(d.collectionCreate, 'merchandise collection');
+    id = d.collectionCreate.collection && d.collectionCreate.collection.id;
+  } else {
+    const d = await gql(`mutation($c: CollectionInput!) { collectionUpdate(input: $c) { collection { id } userErrors { field message } } }`, { c: { id, ...base } });
+    check(d.collectionUpdate, 'merchandise collection');
+  }
+  if (id) await publish(id);
+  console.log('  ✓ collection merchandise');
   return id;
 }
 
@@ -393,6 +417,7 @@ async function main() {
   for (const p of programs) productIdByHandle[p.handle] = await upsertProduct(p);
   const productIds = PROGRAM_ORDER.map((h) => productIdByHandle[h]).filter(Boolean);
   const collectionId = await upsertCollection(productIds);
+  const merchandiseCollectionId = await upsertMerchandiseCollection();
 
   await seedEntries(productIdByHandle);
 
@@ -407,12 +432,20 @@ async function main() {
   const programItems = programs.map((p) => ({ title: p.title.replace('Bachelor of Science in ', 'BS ').replace('BSBA Major in ', 'BSBA '), type: 'PRODUCT', resourceId: productIdByHandle[p.handle] }));
   await upsertMenu('main-menu', 'Main menu', [
     { title: 'Programs', type: 'COLLECTION', resourceId: collectionId, items: programItems },
+    { title: 'Merchandise', type: 'COLLECTION', resourceId: merchandiseCollectionId },
     page('About', 'about'),
-    { title: 'Stories', type: 'BLOG', resourceId: blogId },
-    page('Reviews', 'reviews'),
-    page('News & Events', 'advertisements'),
-    page('FAQs', 'faqs'),
-    page('Contact', 'contact')
+    {
+      title: 'More',
+      type: 'PAGE',
+      resourceId: pageId.contact,
+      items: [
+        { title: 'Stories', type: 'BLOG', resourceId: blogId },
+        page('Reviews', 'reviews'),
+        page('News & Events', 'advertisements'),
+        page('FAQs', 'faqs'),
+        page('Contact', 'contact')
+      ]
+    }
   ]);
   await upsertMenu('footer-programs', 'Footer: programs', programItems);
   await upsertMenu('footer', 'Footer menu', [
