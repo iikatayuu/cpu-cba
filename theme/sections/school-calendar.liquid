@@ -1,0 +1,660 @@
+{%- comment -%}
+  School calendar section
+  Place in /sections/school-calendar.liquid
+
+  Uses the CPU CBA theme tokens and classes (section, page-width, section-head,
+  eyebrow, lede, badge, chip, etc.).
+
+  HOW TO EDIT EVENTS
+  In the section settings, paste one event per line using this format:
+
+    date | title | type
+
+  - date  : YYYY-MM-DD for one day, or YYYY-MM-DD..YYYY-MM-DD for a range.
+            Use commas for several ranges, e.g. 2027-02-04..2027-02-05, 2027-02-08..2027-02-09
+  - title : the event name
+  - type  : class, exam, holiday, deadline or event   (blank = event)
+
+  Keep lines in date order. If a semester's box is left blank, the built-in
+  AY 2026-2027 calendar below is shown.
+{%- endcomment -%}
+
+{%- liquid
+  assign bg = section.settings.background
+  assign section_class = 'section'
+  if bg == 'cream'
+    assign section_class = 'section section--cream'
+  elsif bg == 'paper'
+    assign section_class = 'section section--paper'
+  elsif bg == 'navy'
+    assign section_class = 'section section--navy on-dark'
+  endif
+  assign known_types = 'class,exam,holiday,deadline,event' | split: ','
+  assign chip_labels = 'Classes,Exams,Holidays,Deadlines,Events' | split: ','
+-%}
+
+{%- capture default_sem1 -%}
+2026-05-18 | Start of enrollment for Freshmen Students | class
+2026-06-12 | Independence Day | holiday
+2026-06-15 | Enrollment of Work Students, F/S Dependents, Athletes, CPUR Officials & International Students | class
+2026-06-15 | Start of application for graduation for graduating students | deadline
+2026-06-16 | Start of enrollment of 4th year students | class
+2026-06-17 | Start of enrollment of 3rd year students | class
+2026-06-18 | Start of enrollment of 2nd year students | class
+2026-06-20 | Enrollment for all levels; start of changes in schedule & subject assignment | class
+2026-06-22 | Classes Begin | class
+2026-06-22 | Submission of application for graduation at the Dean's Offices | deadline
+2026-06-24 | Thanksgiving Worship Service and Welcome Program for New College Students | event
+2026-06-25 | Faculty & Staff Conference | event
+2026-07-01 | Last day of enrollment, changes in schedule & subject assignment | class
+2026-07-01 | Orientation for New Hires; Orientation 1 for New College Students | event
+2026-07-02 | Orientation 2 for New College Students | event
+2026-07-03 | OSH Mandatory Seminar for New Hires | event
+2026-07-09..2026-07-10 | LGU Orientation | event
+2026-07-10 | Seminar Training for New Faculty | event
+2026-07-11 | College Parents' Orientation | event
+2026-07-15 | Deadline for submission of applications for graduation at the Registrar's Office | deadline
+2026-07-28..2026-07-31 | Prelim Examinations | exam
+2026-08-07 | Faculty and Staff CEW Convocation | event
+2026-08-08, 2026-08-10..2026-08-14 | Christ Emphasis Week (CEW) | event
+2026-08-17 | University-wide Earthquake Drill | event
+2026-08-21 | Ninoy Aquino Day | holiday
+2026-08-25 | Iloilo Charter Day | holiday
+2026-08-31 | National Heroes Day | holiday
+2026-09-01 | Opening Program for the 121st Founding Anniversary of CPU | event
+2026-09-15..2026-09-18 | Midterm Examinations | exam
+2026-09-17..2026-09-18 | Pre-Employment Orientation for Workforce Entrance Readiness (POWER) Session | event
+2026-10-01 | Foundation Day | event
+2026-10-02 | Centralian Fest University Week Highlight Day; Foot Parade and University-wide Picnic | event
+2026-10-03 | Grand Alumni Homecoming and General Assembly; Alumni Night | event
+2026-10-05 | Teachers' Day | event
+2026-10-05 | Recognition and Scholarship Awarding | event
+2026-10-19..2026-10-23 | Final Examinations | exam
+2026-10-23..2026-10-31 | Academic Counseling | class
+2026-10-26 | Deadline for submission of grades for Honor Students | deadline
+2026-10-30 | Deadline for submission of OJT/Practicum/Internship/Practice Teaching Certificates | deadline
+2026-11-01 | All Saints' Day | holiday
+2026-11-02 | Additional Special Non-Working Day | holiday
+2026-11-03 | Deadline for online submission of grades | deadline
+2026-11-05 | Deliberation of grades for graduating students | deadline
+2026-11-12 | Deadline for submission of grade sheets | deadline
+2026-11-25 | University Thanksgiving Service | event
+2026-11-30 | Bonifacio Day | holiday
+{%- endcapture -%}
+
+{%- capture default_sem2 -%}
+2026-10-28 | Start of pre-enlistment | class
+2026-11-04 | Start of enrollment for Work Students, F/S Dependents, Athletes, CPUR Officials & International Students | class
+2026-11-04 | Enrollment of 4th year students | class
+2026-11-04 | Start of application for graduation for graduating students | deadline
+2026-11-05 | Enrollment of 1st year students | class
+2026-11-06 | Enrollment of 2nd year students | class
+2026-11-07 | Enrollment of 3rd year students | class
+2026-11-09 | Enrollment for all levels | class
+2026-11-10 | Start of changes in schedule & subject assignments | class
+2026-11-10 | Submission of application for graduation at the Dean's Offices | deadline
+2026-11-11 | Classes Begin | class
+2026-11-20 | College Orientation for New Students | event
+2026-11-21 | Last day for late enrollment, changes in schedule & subject assignments | class
+2026-11-25 | University Thanksgiving Service | event
+2026-11-30 | Bonifacio Day | holiday
+2026-12-03 | Deadline for submission of application for graduation at the Registrar's Office | deadline
+2026-12-04 | Opening of the Festival of Lights | event
+2026-12-07..2026-12-11 | University Outreach Week | event
+2026-12-08 | Feast of the Immaculate Conception | holiday
+2026-12-09 | White Gift/Advent Celebration | event
+2026-12-11 | Service Awards (morning) | event
+2026-12-11 | University Faculty and Staff Christmas Party (afternoon) | event
+2026-12-14..2026-12-17 | Prelim Exams | exam
+2026-12-20 | Hopevale Memorial Day | event
+2026-12-21..2026-12-22 | Online asynchronous class | class
+2026-12-23..2027-01-03 | Christmas Break | holiday
+2027-01-04 | Classes Resume | class
+2027-01-11 | National Baptist Day | event
+2027-01-15 | Kasanagan Alternative Classes | class
+2027-01-22 | Recognition and Scholarship Awarding | event
+2027-01-28..2027-01-29 | POWER Session - Cluster A | event
+2027-02-02 | Jaro Fiesta | holiday
+2027-02-04..2027-02-05, 2027-02-08..2027-02-09 | Mid-term Exams | exam
+2027-02-06 | Chinese New Year | holiday
+2027-02-11 | Evelio Javier Day | holiday
+2027-02-12 | University-Wide Earthquake Drill | event
+2027-02-18..2027-02-19 | POWER Session - Cluster B | event
+2027-02-19 | SDP Leadership Training Seminar | event
+2027-02-21 | Dr. Rex D. Drilon Day | event
+2027-02-22..2027-02-26 | RESONATE 2027 | event
+2027-02-25 | EDSA Revolution Day | holiday
+2027-02-26 | F/S CEW Convocation | event
+2027-02-27 | NSTP and Graduate Studies CEW Convocation | event
+2027-03-01..2027-03-05 | Christ Emphasis Week | event
+2027-03-10 | Eid'l Fitr | holiday
+2027-03-13 | CPUR Elections | event
+2027-03-15..2027-03-16 | Campus Organizations Evaluation and Exhibits | event
+2027-03-17 | Annual Campus Job Fair | event
+2027-03-18 | Panay Liberation Day | holiday
+2027-03-22..2027-03-23, 2027-03-29..2027-03-31 | Final Exams | exam
+2027-03-25 | Maundy Thursday | holiday
+2027-03-26 | Good Friday | holiday
+2027-03-27 | Black Saturday | holiday
+2027-03-28 | Resurrection Sunday | holiday
+2027-04-01..2027-04-10 | Academic Counseling | class
+2027-04-07 | Deadline for submission of grades for prospective Honor Students | deadline
+2027-04-08 | CPUR Day | event
+2027-04-09 | Araw ng Kagitingan | holiday
+2027-04-10 | Deadline for online submission of grades | deadline
+2027-04-14 | Deadline for submission of grade sheets | deadline
+2027-04-15 | Deadline for submission of OJT/Practicum/Internship/Practice Teaching Certificates | deadline
+2027-04-15 | Deliberation of grades for graduating students | deadline
+2027-05-01 | Labor Day | holiday
+2027-05-07 | CPU Corporation Meeting | event
+2027-05-08 | CPU BOT Meeting | event
+2027-05-09 | Baccalaureate Service & Commencement Exercises | event
+{%- endcapture -%}
+
+<section class="{{ section_class }} school-calendar" id="calendar-{{ section.id }}">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.description != blank -%}
+      <div class="section-head">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="lede">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="calendar__switch" role="group" aria-label="Choose semester">
+      {%- for sem in (1..2) -%}
+        {%- assign switch_key = 'sem' | append: sem | append: '_label' -%}
+        <button type="button" class="calendar__switch-btn" data-cal-sem aria-pressed="{% if sem == 1 %}true{% else %}false{% endif %}">{{ section.settings[switch_key] | default: 'Semester' }}</button>
+      {%- endfor -%}
+    </div>
+
+    {%- for sem in (1..2) -%}
+      {%- liquid
+        assign key_label = 'sem' | append: sem | append: '_label'
+        assign key_events = 'sem' | append: sem | append: '_events'
+        assign key_start = 'sem' | append: sem | append: '_start'
+        assign key_end = 'sem' | append: sem | append: '_end'
+        assign key_summary = 'sem' | append: sem | append: '_summary'
+        assign events_raw = section.settings[key_events]
+        if events_raw == blank
+          if sem == 1
+            assign events_raw = default_sem1
+          else
+            assign events_raw = default_sem2
+          endif
+        endif
+        assign lines = events_raw | newline_to_br | split: '<br />'
+        assign prev_month = ''
+        assign exam_html = ''
+      -%}
+
+      {%- capture list_html -%}
+        {%- for raw_line in lines -%}
+          {%- assign line = raw_line | strip -%}
+          {%- if line == blank -%}{%- continue -%}{%- endif -%}
+          {%- liquid
+            assign cols = line | split: '|'
+            assign dates_raw = cols[0] | strip | remove: ' '
+            assign title = cols[1] | strip
+            assign type = cols[2] | strip | downcase
+            unless known_types contains type
+              assign type = 'event'
+            endunless
+            assign title_safe = title | escape
+            assign parts = dates_raw | split: ','
+            assign display = ''
+            for part in parts
+              assign bounds = part | split: '..'
+              assign s = bounds[0]
+              assign e = bounds[1] | default: s
+              assign s_label = s | date: '%b %-d'
+              if e == s
+                assign piece = s_label
+              else
+                assign s_month = s | date: '%Y-%m'
+                assign e_month = e | date: '%Y-%m'
+                if s_month == e_month
+                  assign e_day = e | date: '%-d'
+                  assign piece = s_label | append: '–' | append: e_day
+                else
+                  assign e_label = e | date: '%b %-d'
+                  assign piece = s_label | append: ' – ' | append: e_label
+                endif
+              endif
+              if display == ''
+                assign display = piece
+              else
+                assign display = display | append: ', ' | append: piece
+              endif
+            endfor
+            assign first_bounds = parts[0] | split: '..'
+            assign first_start = first_bounds[0]
+            assign month_key = first_start | date: '%Y-%m'
+            case type
+              when 'class'
+                assign type_name = 'Classes'
+              when 'exam'
+                assign type_name = 'Exam'
+              when 'holiday'
+                assign type_name = 'Holiday'
+              when 'deadline'
+                assign type_name = 'Deadline'
+              else
+                assign type_name = 'Event'
+            endcase
+          -%}
+
+          {%- if month_key != prev_month -%}
+            {%- assign prev_month = month_key -%}
+            <li class="calendar__month-head" data-cal-month-head>{{ first_start | date: '%B %Y' }}</li>
+          {%- endif -%}
+
+          <li class="calendar__item" data-cal-item data-type="{{ type }}" data-dates="{{ dates_raw }}" data-title="{{ title_safe }}">
+            <span class="calendar__date">{{ display }}</span>
+            <span class="calendar__title">{{ title_safe }}</span>
+            <span class="calendar__tag calendar__tag--{{ type }}">{{ type_name }}</span>
+          </li>
+
+          {%- if type == 'exam' -%}
+            {%- capture exam_html -%}{{ exam_html }}<li><strong>{{ title_safe }}</strong><span>{{ display }}</span></li>{%- endcapture -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      <div class="calendar__panel" data-cal-panel data-start="{{ section.settings[key_start] }}" data-end="{{ section.settings[key_end] }}">
+        <div class="calendar__panel-head">
+          <h3>{{ section.settings[key_label] | default: 'Semester' }}</h3>
+          {%- if section.settings[key_summary] != blank -%}
+            <span class="badge">{{ section.settings[key_summary] }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if exam_html != blank -%}
+          <p class="calendar__subhead">Examination schedule</p>
+          <ul class="calendar__exams" role="list">{{ exam_html }}</ul>
+        {%- endif -%}
+
+        <div class="calendar__months" data-cal-months></div>
+        <p class="calendar__detail" data-cal-detail aria-live="polite">Tap a highlighted date to see what is happening.</p>
+
+        <p class="calendar__subhead">All dates</p>
+        <div class="calendar__filters" role="group" aria-label="Filter events">
+          <button type="button" class="chip calendar__chip" data-cal-filter="all" aria-pressed="true">All</button>
+          {%- for t in known_types -%}
+            <button type="button" class="chip calendar__chip" data-cal-filter="{{ t }}" aria-pressed="false"><span class="calendar__dot calendar__dot--{{ t }}"></span>{{ chip_labels[forloop.index0] }}</button>
+          {%- endfor -%}
+        </div>
+
+        <ul class="calendar__list" role="list">{{ list_html }}</ul>
+      </div>
+    {%- endfor -%}
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="calendar__footnote">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .school-calendar {
+    --c-class: #1D4FA8; --c-class-bg: #DCE7FA;
+    --c-exam: #2E7D5B; --c-exam-bg: #E4F3EC;
+    --c-holiday: #C2185B; --c-holiday-bg: #FCE4EC;
+    --c-deadline: #6B46C1; --c-deadline-bg: #EDE7F8;
+    --c-event: #B98800; --c-event-bg: #FDF1C7;
+  }
+  .js .calendar__panel[hidden] { display: none; }
+  .school-calendar [hidden] { display: none !important; }
+
+  /* Semester switch */
+  .calendar__switch { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: var(--space-6); border-radius: 999px; background: rgb(11 42 91 / 0.08); }
+  .section--navy .calendar__switch { background: rgb(255 255 255 / 0.12); }
+  .calendar__switch-btn { min-height: 44px; padding: 0.5rem 1.25rem; border: 0; border-radius: 999px; background: transparent; color: inherit; font-weight: 600; font-size: 0.95rem; }
+  .calendar__switch-btn:hover { background: rgb(11 42 91 / 0.08); }
+  .section--navy .calendar__switch-btn:hover { background: rgb(255 255 255 / 0.1); }
+  .calendar__switch-btn[aria-pressed='true'] { background: var(--gold-500); color: var(--navy-900); }
+
+  .calendar__panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+  .calendar__panel-head h3 { margin: 0; }
+  .calendar__subhead { margin: var(--space-6) 0 var(--space-3); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.8; }
+
+  /* Exam schedule */
+  .calendar__exams { list-style: none; margin: 0 0 var(--space-6); padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+  .calendar__exams li { display: flex; flex-direction: column; gap: 2px; padding: var(--space-3) var(--space-4); background: var(--paper); color: var(--ink); border-left: 4px solid var(--c-exam); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); }
+  .calendar__exams strong { color: var(--navy-900); }
+  .calendar__exams span { font-size: var(--step--1); color: var(--slate); font-variant-numeric: tabular-nums; }
+
+  /* Month grids */
+  .calendar__months { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+  .calendar__month { padding: var(--space-4); background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+  .calendar__month .calendar__month-title { margin: 0 0 var(--space-3); font-family: var(--font-display); font-weight: 600; font-size: var(--step-0); color: var(--navy-900); }
+  .calendar__month table { width: 100%; table-layout: fixed; font-size: 0.85rem; }
+  .calendar__month th { padding-bottom: 4px; font-size: 0.7rem; font-weight: 600; color: var(--slate); text-align: center; }
+  .calendar__month td { padding: 2px 0; text-align: center; }
+  .calendar__day { display: grid; place-items: center; width: 100%; max-width: 32px; aspect-ratio: 1; margin-inline: auto; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ink); font: inherit; font-variant-numeric: tabular-nums; }
+  button.calendar__day { font-weight: 700; cursor: pointer; transition: transform 0.15s var(--ease); }
+  button.calendar__day:hover { transform: scale(1.12); }
+  .calendar__day.is-class { background: var(--c-class); color: #fff; }
+  .calendar__day.is-exam { background: var(--c-exam); color: #fff; }
+  .calendar__day.is-holiday { background: var(--c-holiday); color: #fff; }
+  .calendar__day.is-deadline { background: var(--c-deadline); color: #fff; }
+  .calendar__day.is-event { background: var(--gold-500); color: var(--navy-900); }
+  .calendar__day.is-today { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--navy-900); }
+  .calendar__day.is-selected { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--blue-600); }
+
+  .calendar__detail { margin: var(--space-4) 0 0; padding: var(--space-3) var(--space-4); background: var(--paper); color: var(--ink); border: 1px dashed var(--line); border-radius: var(--radius-sm); font-size: 0.95rem; }
+  .calendar__detail strong { color: var(--navy-900); }
+
+  /* Filters */
+  .calendar__filters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .calendar__chip { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .calendar__chip[aria-pressed='true'] { background: var(--gold-500); border-color: var(--gold-500); color: var(--navy-900); }
+  .calendar__dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .calendar__dot--class { background: var(--c-class); }
+  .calendar__dot--exam { background: var(--c-exam); }
+  .calendar__dot--holiday { background: var(--c-holiday); }
+  .calendar__dot--deadline { background: var(--c-deadline); }
+  .calendar__dot--event { background: var(--gold-500); }
+
+  /* Event list */
+  .calendar__list { list-style: none; margin: 0; padding: 0; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .calendar__month-head { padding: 0.6rem var(--space-4); background: var(--cream-100); color: var(--navy-900); font-family: var(--font-display); font-weight: 600; border-bottom: 1px solid var(--line); }
+  .calendar__item { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'date tag' 'title title'; gap: 2px var(--space-3); align-items: center; padding: 0.7rem var(--space-4); border-bottom: 1px solid var(--line); }
+  .calendar__item:last-child { border-bottom: 0; }
+  .calendar__date { grid-area: date; font-weight: 700; color: var(--navy-900); font-variant-numeric: tabular-nums; }
+  .calendar__title { grid-area: title; }
+  .calendar__tag { grid-area: tag; justify-self: end; padding: 0.15rem 0.65rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+  .calendar__tag--class { background: var(--c-class-bg); color: var(--c-class); }
+  .calendar__tag--exam { background: var(--c-exam-bg); color: var(--c-exam); }
+  .calendar__tag--holiday { background: var(--c-holiday-bg); color: var(--c-holiday); }
+  .calendar__tag--deadline { background: var(--c-deadline-bg); color: var(--c-deadline); }
+  .calendar__tag--event { background: var(--c-event-bg); color: var(--navy-900); }
+  @media (min-width: 700px) {
+    .calendar__item { grid-template-columns: 9.5rem 1fr auto; grid-template-areas: 'date title tag'; gap: var(--space-4); }
+    .calendar__tag { justify-self: end; }
+  }
+
+  .calendar__footnote { margin: var(--space-6) 0 0; font-weight: 600; color: var(--blue-600); }
+  .section--navy .calendar__footnote { color: var(--gold-300); }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    var root = document.getElementById('calendar-{{ section.id }}');
+    if (!root) return;
+
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var PRIORITY = ['holiday', 'exam', 'class', 'deadline', 'event'];
+    var today = new Date();
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function toDate(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+    function toKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text) n.textContent = text;
+      return n;
+    }
+    function longDate(d) { return DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear(); }
+
+    function buildMonth(year, month, dayMap, onPick) {
+      var wrap = el('div', 'calendar__month');
+      wrap.appendChild(el('p', 'calendar__month-title', MONTHS[month] + ' ' + year));
+      var table = el('table');
+      var head = el('tr');
+      ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(function (d) { head.appendChild(el('th', '', d)); });
+      var thead = el('thead'); thead.appendChild(head); table.appendChild(thead);
+
+      var firstDow = new Date(year, month, 1).getDay();
+      var total = new Date(year, month + 1, 0).getDate();
+      var cells = Math.ceil((firstDow + total) / 7) * 7;
+      var tbody = el('tbody');
+      var tr;
+      for (var i = 0; i < cells; i++) {
+        if (i % 7 === 0) { tr = el('tr'); tbody.appendChild(tr); }
+        var td = el('td');
+        var day = i - firstDow + 1;
+        if (day >= 1 && day <= total) {
+          var date = new Date(year, month, day);
+          var k = toKey(date);
+          var events = dayMap[k];
+          var node;
+          if (events) {
+            var type = 'event';
+            for (var p = 0; p < PRIORITY.length; p++) {
+              if (events.some(function (e) { return e.type === PRIORITY[p]; })) { type = PRIORITY[p]; break; }
+            }
+            node = el('button', 'calendar__day is-' + type, String(day));
+            node.type = 'button';
+            node.setAttribute('aria-label', longDate(date) + ': ' + events.map(function (e) { return e.title; }).join('; '));
+            (function (n, d, ev) { n.addEventListener('click', function () { onPick(n, d, ev); }); })(node, date, events);
+          } else {
+            node = el('span', 'calendar__day', String(day));
+          }
+          if (k === toKey(today)) node.className += ' is-today';
+          td.appendChild(node);
+        }
+        tr.appendChild(td);
+      }
+      table.appendChild(tbody);
+      wrap.appendChild(table);
+      return wrap;
+    }
+
+    function initPanel(panel) {
+      var items = panel.querySelectorAll('[data-cal-item]');
+      var dayMap = {}, min = null, max = null;
+
+      Array.prototype.forEach.call(items, function (item) {
+        var type = item.getAttribute('data-type');
+        var title = item.getAttribute('data-title');
+        item.getAttribute('data-dates').split(',').forEach(function (part) {
+          var b = part.split('..');
+          if (!b[0]) return;
+          var s = toDate(b[0]), e = toDate(b[1] || b[0]);
+          if (!min || s < min) min = s;
+          if (!max || e > max) max = e;
+          for (var d = new Date(s); d <= e; d.setDate(d.getDate() + 1)) {
+            var k = toKey(d);
+            (dayMap[k] = dayMap[k] || []).push({ title: title, type: type });
+          }
+        });
+      });
+      panel._max = max;
+
+      /* Month grids */
+      var holder = panel.querySelector('[data-cal-months]');
+      var detail = panel.querySelector('[data-cal-detail]');
+      var selected = null;
+      function pick(node, date, events) {
+        if (selected) selected.classList.remove('is-selected');
+        selected = node;
+        node.classList.add('is-selected');
+        detail.textContent = '';
+        detail.appendChild(el('strong', '', longDate(date)));
+        detail.appendChild(document.createTextNode(': ' + events.map(function (e) { return e.title; }).join(' · ')));
+      }
+      var sAttr = panel.getAttribute('data-start');
+      var eAttr = panel.getAttribute('data-end');
+      var first = sAttr ? toDate(sAttr + '-01') : (min ? new Date(min.getFullYear(), min.getMonth(), 1) : null);
+      var last = eAttr ? toDate(eAttr + '-01') : (max ? new Date(max.getFullYear(), max.getMonth(), 1) : null);
+      if (first && last) {
+        for (var m = new Date(first); m <= last; m.setMonth(m.getMonth() + 1)) {
+          holder.appendChild(buildMonth(m.getFullYear(), m.getMonth(), dayMap, pick));
+        }
+      }
+
+      /* Filter the event list */
+      var heads = panel.querySelectorAll('[data-cal-month-head]');
+      var chips = panel.querySelectorAll('[data-cal-filter]');
+      function applyFilter(type) {
+        Array.prototype.forEach.call(items, function (it) {
+          it.hidden = !(type === 'all' || it.getAttribute('data-type') === type);
+        });
+        Array.prototype.forEach.call(heads, function (h) {
+          var n = h.nextElementSibling, any = false;
+          while (n && !n.hasAttribute('data-cal-month-head')) {
+            if (!n.hidden) any = true;
+            n = n.nextElementSibling;
+          }
+          h.hidden = !any;
+        });
+      }
+      Array.prototype.forEach.call(chips, function (chip) {
+        chip.addEventListener('click', function () {
+          Array.prototype.forEach.call(chips, function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+          applyFilter(chip.getAttribute('data-cal-filter'));
+        });
+      });
+    }
+
+    var panels = root.querySelectorAll('[data-cal-panel]');
+    var switches = root.querySelectorAll('[data-cal-sem]');
+    Array.prototype.forEach.call(panels, initPanel);
+
+    function show(index) {
+      Array.prototype.forEach.call(panels, function (p, i) { p.hidden = i !== index; });
+      Array.prototype.forEach.call(switches, function (s, i) { s.setAttribute('aria-pressed', i === index ? 'true' : 'false'); });
+    }
+    Array.prototype.forEach.call(switches, function (s, i) { s.addEventListener('click', function () { show(i); }); });
+
+    /* Open the semester that is current (or the last one if the year is over) */
+    var start = panels.length - 1;
+    for (var i = 0; i < panels.length; i++) {
+      if (panels[i]._max && panels[i]._max >= today) { start = i; break; }
+    }
+    show(start);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "School calendar",
+  "tag": "section",
+  "class": "section-school-calendar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small label above heading",
+      "default": "Academic calendar"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "School Calendar AY 2026–2027"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Key dates for enrollment, classes, exams, holidays and deadlines. Tap any highlighted date to see what is happening."
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*Late enrollment will be allowed, but counting of absences will start on the first day of classes."
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default (cream)" },
+        { "value": "cream", "label": "Darker cream" },
+        { "value": "paper", "label": "White" },
+        { "value": "navy", "label": "Navy" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "header",
+      "content": "First semester"
+    },
+    {
+      "type": "text",
+      "id": "sem1_label",
+      "label": "Label",
+      "default": "First Semester"
+    },
+    {
+      "type": "text",
+      "id": "sem1_summary",
+      "label": "Summary badge",
+      "default": "111 class days"
+    },
+    {
+      "type": "text",
+      "id": "sem1_start",
+      "label": "First month shown (YYYY-MM)",
+      "info": "Leave blank to start at the earliest event.",
+      "default": "2026-06"
+    },
+    {
+      "type": "text",
+      "id": "sem1_end",
+      "label": "Last month shown (YYYY-MM)",
+      "info": "Leave blank to end at the latest event.",
+      "default": "2026-11"
+    },
+    {
+      "type": "textarea",
+      "id": "sem1_events",
+      "label": "Events (date | title | type)",
+      "info": "One per line, e.g. 2026-12-14..2026-12-17 | Prelim Exams | exam. Types: class, exam, holiday, deadline, event. Leave blank to use the built-in AY 2026–2027 first semester."
+    },
+    {
+      "type": "header",
+      "content": "Second semester"
+    },
+    {
+      "type": "text",
+      "id": "sem2_label",
+      "label": "Label",
+      "default": "Second Semester"
+    },
+    {
+      "type": "text",
+      "id": "sem2_summary",
+      "label": "Summary badge",
+      "default": "107 class days"
+    },
+    {
+      "type": "text",
+      "id": "sem2_start",
+      "label": "First month shown (YYYY-MM)",
+      "info": "Leave blank to start at the earliest event.",
+      "default": "2026-11"
+    },
+    {
+      "type": "text",
+      "id": "sem2_end",
+      "label": "Last month shown (YYYY-MM)",
+      "info": "Leave blank to end at the latest event.",
+      "default": "2027-04"
+    },
+    {
+      "type": "textarea",
+      "id": "sem2_events",
+      "label": "Events (date | title | type)",
+      "info": "One per line, same format as above. Leave blank to use the built-in AY 2026–2027 second semester."
+    }
+  ],
+  "presets": [
+    {
+      "name": "School calendar"
+    }
+  ]
+}
+{% endschema %}

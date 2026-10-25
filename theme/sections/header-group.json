@@ -1,9 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header group",
   "sections": {
-    "announcement": { "type": "announcement-bar", "settings": { "use_featured_campaign": true, "tag": "Enrollment", "text": "Enrollment for the coming school year is open", "link": "/pages/advertisements" } },
-    "header": { "type": "header", "settings": { "menu": "main-menu", "cta_label": "Inquire now", "cta_link": "/pages/contact" } }
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "use_featured_campaign": true,
+        "tag": "Enrollment",
+        "text": "Enrollment for the coming school year is open",
+        "link": "/pages/advertisements"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "max_visible": 5,
+        "more_label": "More",
+        "cta_label": "Inquire now",
+        "cta_link": "/pages/contact",
+        "show_cart": true
+      }
+    }
   },
-  "order": ["announcement", "header"]
+  "order": [
+    "announcement",
+    "header"
+  ]
 }
