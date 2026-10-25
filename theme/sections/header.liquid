@@ -74,6 +74,12 @@
         <a class="button button--primary button--small header-cta" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
       {%- endif -%}
       <button type="button" class="icon-button menu-toggle" data-open="drawer" aria-expanded="false" aria-controls="MenuDrawer" aria-label="Open menu">{% render 'icon', name: 'menu' %}</button>
+      {%- if section.settings.show_cart -%}
+        <a class="icon-button header-cart" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.7l2.4 11.2a1.6 1.6 0 0 0 1.6 1.3h8.6a1.6 1.6 0 0 0 1.6-1.2L21 7H6.2"/></svg>
+          <span class="header-cart__count{% if cart.item_count == 0 %} is-empty{% endif %}" data-cart-count>{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
     </div>
   </div>
 </header>
@@ -123,6 +129,10 @@
   .nav__item--more.is-open > .nav__sub { opacity: 1; visibility: visible; transform: none; }
   .nav__sub a[aria-current='page'] { color: var(--navy-900); font-weight: 600; background: var(--cream-100); }
   .nav__sub .nav__sub-child a { padding-left: 1.6rem; font-size: 0.88rem; color: var(--slate); }
+
+  .header-cart { position: relative; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: inherit; }
+  .header-cart__count { position: absolute; top: -2px; right: -4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--gold-500); color: var(--navy-900); font-size: 0.7rem; font-weight: 700; line-height: 18px; text-align: center; }
+  .header-cart__count.is-empty { display: none; }
 {% endstylesheet %}
 
 <script>
@@ -163,7 +173,8 @@
     },
     { "type": "text", "id": "more_label", "label": "More button label", "default": "More" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Inquire now" },
-    { "type": "url", "id": "cta_link", "label": "Button link" }
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "checkbox", "id": "show_cart", "label": "Show cart icon", "default": true }
   ]
 }
 {% endschema %}
