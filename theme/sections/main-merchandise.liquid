@@ -11,7 +11,9 @@
               {% render 'placeholder-media', image: product.featured_image, label: product.title, ratio: '1 / 1', sizes: '(min-width: 900px) 30vw, 100vw' %}
             </div>
             <div class="merchandise-card__content">
-              <h2 class="merchandise-card__title">{{ product.title }}</h2>
+              <a href="{{ product.url }}">
+                <h2 class="merchandise-card__title">{{ product.title }}</h2>
+              </a>
               {%- if product.description != blank -%}
                 <div class="rte merchandise-card__description">{{ product.description | strip_html | truncate: 120 }}</div>
               {%- endif -%}
@@ -43,6 +45,12 @@
     {%- endpaginate -%}
   </div>
 </section>
+
+{% stylesheet %}
+.merchandise-card__content a {
+  text-decoration: none;
+}
+{% endstylesheet %}
 
 {% schema %}
 {
