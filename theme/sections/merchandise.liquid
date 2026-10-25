@@ -1,0 +1,295 @@
+{%- comment -%}
+  T-shirt Spotlight section
+  Place in /sections/merchandise.liquid
+  Uses the CPU CBA theme classes (section, page-width, split, eyebrow, badge,
+  button, field, quantity-input, feature-list, ph, media, etc.)
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.product
+  assign bg = section.settings.background
+  assign section_class = 'section'
+  if bg == 'cream'
+    assign section_class = 'section section--cream'
+  elsif bg == 'paper'
+    assign section_class = 'section section--paper'
+  elsif bg == 'navy'
+    assign section_class = 'section section--navy on-dark'
+  endif
+  assign features = section.settings.features | newline_to_br | split: '<br />'
+-%}
+
+<section class="{{ section_class }} tshirt-spotlight" id="tshirt-{{ section.id }}">
+  <div class="page-width">
+    {%- if product == blank -%}
+      <div class="empty">
+        <h3>Choose a T-shirt</h3>
+        <p>Select a product in the section settings to display it here.</p>
+      </div>
+    {%- else -%}
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+      {%- assign layout_class = 'split split--wide-left' -%}
+      {%- if section.settings.image_position == 'right' -%}
+        {%- assign layout_class = 'split split--wide-right' -%}
+      {%- endif -%}
+
+      <div class="{{ layout_class }} tshirt-spotlight__layout{% if section.settings.image_position == 'right' %} tshirt-spotlight__layout--flip{% endif %}">
+
+        {%- comment -%} ---------- Images ---------- {%- endcomment -%}
+        <div class="tshirt-spotlight__gallery">
+          {%- if product.featured_image -%}
+            <div class="media tshirt-spotlight__main" style="--ratio: 1 / 1;">
+              {{
+                product.featured_image
+                | image_url: width: 1000
+                | image_tag:
+                  widths: '500, 700, 1000',
+                  sizes: '(min-width: 900px) 50vw, 100vw',
+                  alt: product.featured_image.alt,
+                  id: 'tshirt-main-' | append: section.id
+              }}
+            </div>
+
+            {%- if product.images.size > 1 -%}
+              <ul class="tshirt-spotlight__thumbs" role="list">
+                {%- for image in product.images limit: 5 -%}
+                  <li>
+                    <button
+                      type="button"
+                      class="tshirt-spotlight__thumb{% if forloop.first %} is-active{% endif %}"
+                      data-image="{{ image | image_url: width: 1000 }}"
+                      data-alt="{{ image.alt | escape }}"
+                      aria-label="Show photo {{ forloop.index }} of {{ product.images.size }}"
+                    >
+                      {{ image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+                    </button>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          {%- else -%}
+            <div class="ph" style="--ratio: 1 / 1;">
+              <div class="ph__label">
+                <strong>T-shirt photo</strong>
+                Add an image to this product in Shopify.
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} ---------- Details ---------- {%- endcomment -%}
+        <div class="tshirt-spotlight__details stack">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+
+          <h2>{{ section.settings.heading | default: product.title }}</h2>
+
+          <p class="tshirt-spotlight__price">
+            {%- if current_variant.compare_at_price > current_variant.price -%}
+              <s class="tshirt-spotlight__was">{{ current_variant.compare_at_price | money }}</s>
+              <span class="badge badge--navy">Sale</span>
+            {%- endif -%}
+            <strong>{{ current_variant.price | money }}</strong>
+            {%- unless product.available -%}
+              <span class="badge badge--outline">Sold out</span>
+            {%- endunless -%}
+          </p>
+
+          {%- if section.settings.description != blank -%}
+            <div class="lede">{{ section.settings.description }}</div>
+          {%- elsif product.description != blank -%}
+            <div class="lede">{{ product.description | strip_html | truncatewords: 40 }}</div>
+          {%- endif -%}
+
+          {%- if features.size > 0 and section.settings.features != blank -%}
+            <ul class="feature-list">
+              {%- for feature in features -%}
+                {%- assign line = feature | strip -%}
+                {%- if line != blank -%}
+                  <li>{{ line }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- form 'product', product, id: product_form_id, class: 'tshirt-spotlight__form' -%}
+            {%- if product.has_only_default_variant -%}
+              <input type="hidden" name="id" value="{{ current_variant.id }}">
+            {%- else -%}
+              <div class="field">
+                <label for="tshirt-variant-{{ section.id }}">
+                  {{ product.options_with_values | map: 'name' | join: ' / ' }}
+                </label>
+                <select id="tshirt-variant-{{ section.id }}" name="id">
+                  {%- for variant in product.variants -%}
+                    <option
+                      value="{{ variant.id }}"
+                      data-price="{{ variant.price | money }}"
+                      {% if variant == current_variant %}selected{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                      {{ variant.title }}{% unless variant.available %} (sold out){% endunless %} — {{ variant.price | money }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endif -%}
+
+            <div class="merchandise-card__form">
+              {%- if section.settings.show_quantity -%}
+                <label class="visually-hidden" for="tshirt-qty-{{ section.id }}">Quantity</label>
+                <input
+                  class="quantity-input"
+                  id="tshirt-qty-{{ section.id }}"
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  max="20"
+                  inputmode="numeric"
+                >
+              {%- else -%}
+                <input type="hidden" name="quantity" value="1">
+              {%- endif -%}
+
+              <button
+                type="submit"
+                class="button {% if bg == 'navy' %}button--gold{% else %}button--primary{% endif %}"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                {%- if product.available -%}
+                  {{ section.settings.button_label | default: 'Add to cart' }}
+                {%- else -%}
+                  Sold out
+                {%- endif -%}
+              </button>
+            </div>
+          {%- endform -%}
+
+          <p>
+            <a class="link-arrow" href="{{ product.url }}">View full details</a>
+          </p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .tshirt-spotlight__gallery { display: grid; gap: var(--space-3); }
+  .tshirt-spotlight__main { box-shadow: var(--shadow); background: var(--cream-100); border-radius: var(--radius-lg); }
+  .tshirt-spotlight__thumbs { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-2); flex-wrap: wrap; }
+  .tshirt-spotlight__thumb { width: 68px; height: 68px; padding: 0; border: 2px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--paper); }
+  .tshirt-spotlight__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .tshirt-spotlight__thumb:hover { border-color: var(--gold-300); }
+  .tshirt-spotlight__thumb.is-active { border-color: var(--gold-500); }
+  .tshirt-spotlight__price { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); font-size: var(--step-2); font-family: var(--font-display); color: var(--navy-900); margin: 0; }
+  .section--navy .tshirt-spotlight__price { color: var(--gold-500); }
+  .tshirt-spotlight__was { font-size: var(--step-0); color: var(--slate); font-family: var(--font-body); }
+  .tshirt-spotlight__form { display: grid; gap: var(--space-4); max-width: 420px; }
+  .tshirt-spotlight__form .field label { color: inherit; }
+  .section--navy .tshirt-spotlight__form .field select { color: var(--ink); }
+  .section--navy .tshirt-spotlight .lede { color: #C9D5EC; }
+  .tshirt-spotlight .button[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+  @media (min-width: 900px) {
+    .tshirt-spotlight__layout--flip .tshirt-spotlight__gallery { order: 2; }
+  }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    var root = document.getElementById('tshirt-{{ section.id }}');
+    if (!root) return;
+    var main = root.querySelector('.tshirt-spotlight__main img');
+    var thumbs = root.querySelectorAll('.tshirt-spotlight__thumb');
+    if (!main || !thumbs.length) return;
+    thumbs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        main.removeAttribute('srcset');
+        main.src = btn.getAttribute('data-image');
+        main.alt = btn.getAttribute('data-alt') || '';
+        thumbs.forEach(function (t) { t.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "T-shirt spotlight",
+  "tag": "section",
+  "class": "section-tshirt-spotlight",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "T-shirt product"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small label above heading",
+      "default": "Official merchandise"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank to use the product title."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "info": "Leave blank to use the product description."
+    },
+    {
+      "type": "textarea",
+      "id": "features",
+      "label": "Highlights (one per line)",
+      "default": "100% soft cotton\nDurable screen-printed design\nAvailable in sizes S to XL"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity box",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "default", "label": "Default (cream)" },
+        { "value": "cream", "label": "Darker cream" },
+        { "value": "paper", "label": "White" },
+        { "value": "navy", "label": "Navy" }
+      ],
+      "default": "default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "T-shirt spotlight"
+    }
+  ]
+}
+{% endschema %}
